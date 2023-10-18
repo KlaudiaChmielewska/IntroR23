@@ -1,0 +1,1850 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Klaudia Chmielewska" />
+
+
+<title>Introduction to R</title>
+
+<script src="site_libs/header-attrs-2.21/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/darkly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  background-color: #f8f8f8; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #204a87; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #8f5902; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #204a87; font-weight: bold; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #ce5c00; font-weight: bold; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">My Website</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li>
+  <a href="one1.html">Lesson 1</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore"><strong>Introduction to R</strong></h1>
+<h3 class="subtitle"><em>Lesson 1</em></h3>
+<h4 class="author"><strong><em>Klaudia Chmielewska</em></strong></h4>
+
+</div>
+
+
+<p><br />
+</p>
+<div id="how-do-i-start" class="section level1">
+<h1><em><span style="text-decoration:underline">How do I
+start?</span></em></h1>
+<p><br />
+</p>
+<div id="instalation" class="section level2">
+<h2>Instalation</h2>
+<p><br />
+</p>
+<ul>
+<li>First, you need to download R through one of the mirrors <a
+href="https://cran.r-project.org/mirrors.html"><em>here</em></a> or
+directly use the Polish mirror <a
+href="https://cran.mi2.ai"><em>here</em></a></li>
+</ul>
+<p><br />
+</p>
+<div class="float">
+<img src="R_download.png"
+alt="Fig. 1. A look inside the R download link." />
+<div class="figcaption"><strong><em>Fig. 1. A look inside the R download
+link.</em></strong></div>
+</div>
+<p><br />
+</p>
+<ul>
+<li>Now, we need to install IDE (integrated development environment)
+allowing us to send prompts to the computer, thus activating our code.
+That IDE in our case is <em>RStudio</em>, the most popular choice for
+handling R code. You can click <a
+href="https://posit.co/download/rstudio-desktop/"><em>here</em></a> to
+download RStudio for your operating system.<br />
+
+<ul>
+<li>RStudio can also be run online via <a
+href="https://rstudio.cloud/">RStudio Cloud</a>, although it’s a paid
+service</li>
+<li>You can also use an online sandbox service, although keep in mind
+that it will make your data public, so you should avoid that if the data
+belongs to a company, is supposed to be patented or simply is private to
+you.<br />
+</li>
+</ul></li>
+<li>IDE alternatives to RStudio: <a
+href="https://code.visualstudio.com">Visual Studio Code</a>, <a
+href="https://rkward.kde.org">RKWard</a></li>
+</ul>
+<p><br />
+<br />
+</p>
+<hr />
+</div>
+<div id="understanding-rstudio" class="section level2">
+<h2>Understanding RStudio</h2>
+<p><br />
+</p>
+<ul>
+<li>RStudio looks like a bunch of programs fused into one - hence you’ll
+have to get used to operating on its 4 different sections. For your
+convenience, a figure below explains what are those sections for.</li>
+</ul>
+<p><br />
+</p>
+<div class="float">
+<img src="RStudio_screen.png" alt="Fig. 2. A first glance at RStudio" />
+<div class="figcaption"><strong><em>Fig. 2. A first glance at
+RStudio</em></strong></div>
+</div>
+<p><br />
+</p>
+<hr />
+</div>
+<div id="setting-up-your-workspace" class="section level2">
+<h2>Setting up your workspace</h2>
+<p><br />
+</p>
+<ul>
+<li>First, we need to adjust RStudio to our needs. To do so, find Global
+Options and check what options are adjustable. Keep in mind that
+everyone has different preferences, hence you need to find what works
+best for you!</li>
+</ul>
+<p><br />
+</p>
+<div class="float">
+<img src="global_options.png"
+alt="Fig. 3. Adjust settings by clicking on Global Options " />
+<div class="figcaption"><strong><em>Fig. 3. Adjust settings by clicking
+on Global Options </em></strong></div>
+</div>
+<p><br />
+</p>
+<ul>
+<li><p>Now you can see General Options, which are the most
+crucial.<br />
+</p>
+<ul>
+<li><p>Here you can decide on where all your edited files should be
+saved to, unless otherwise stated (like inside a Project - we’ll go over
+them in minute!) - this is called a working directory, so a specified
+path you work in. <br> Further, you can decide whether the files you
+worked on last time you opened RStudio should reopen again for your
+convenience, or do you rather want to control it yourself!</p></li>
+<li><p>Next General Option is quite important for those who tend to
+forget about saving their files! You can make RStudio save files for you
+by clicking ‘Save workspace to .RData on exit:’ on either ‘Ask’ or
+‘Always’ (as Snape used to say)</p></li>
+</ul></li>
+</ul>
+<p><br />
+</p>
+<div class="float">
+<img src="global_options2.png" alt="Fig. 4. General Settings" />
+<div class="figcaption"><strong><em>Fig. 4. General
+Settings</em></strong></div>
+</div>
+<p><br />
+</p>
+<ul>
+<li>Another interesting thing you can adjust is how is the code
+presented in the console, so in that left-down corner of RStudio.
+<ul>
+<li>For your convenience, it’s possible to keep the code highlighted
+with colors, same as in the Code Editor window (left-up corner of
+RStudio).</li>
+<li>You can also decide on whether the error messages should be
+displayed in a different color (to allow you to spot them easily) or
+not.</li>
+<li>Another thing to change is limiting the output length. This is
+useful while working with huge sets of data. Think about it - if you had
+a data set from clinical trials, you’d have data on thousands of
+patients. If you were to open that data set for analysis in R with a
+command, the output in the console would not only be unreadable, but
+also would take a lot of time. Hence, you can decide on limiting the
+output length to for example 1000. This way, if you load a data set as a
+table and open it in the console, it will only print the result up until
+the 1000th line/row in the table. This can save you time in the
+future!</li>
+</ul></li>
+</ul>
+<p><br />
+</p>
+<div class="float">
+<img src="global_options3.png"
+alt="Fig. 5. Decide on console aesthetics" />
+<div class="figcaption"><strong><em>Fig. 5. Decide on console
+aesthetics</em></strong></div>
+</div>
+<p><br />
+</p>
+<ul>
+<li>Appearance changes are not a necessity, <em><span
+style="text-decoration:underline">but are something I very much
+recommend you to adjust!</span></em> <br> I myself prefer dark modes,
+with colors allowing me to easily distinguish the most important
+elements of the code. <br> You can also decide on the font type as well
+as size! The latter can be useful when you’re discussing your code in an
+online meeting and want your audience to focus on the code!</li>
+</ul>
+<p><br />
+</p>
+<div class="float">
+<img src="global_options4.png"
+alt="Fig. 6. Define Code Editor aesthetics" />
+<div class="figcaption"><strong><em>Fig. 6. Define Code Editor
+aesthetics</em></strong></div>
+</div>
+<p><br />
+</p>
+<ul>
+<li>Last, but not least, you can adjust <strong>RMarkdown</strong>
+settings!
+<ul>
+<li>RMarkdown (.Rmd) is a complex file type with text-based formatting,
+allowing the storage of the code in so called executable chunks and its
+comments, descriptions, outside, as a code that is not meant to be
+activated.</li>
+<li>RMarkdown files enable us to create dynamic documents with R.</li>
+<li><em><span style="text-decoration:underline">This page was first
+prepared as an RMarkdown file and later converted to
+HTML!</span></em></li>
+<li>R allows such conversion to .pdf or .docx as well, so R can allow
+you to create your student assignments in a great style!</li>
+</ul></li>
+</ul>
+<div class="float">
+<img src="global_options5.png"
+alt="Fig. 7. Define Code Editor aesthetics" />
+<div class="figcaption"><strong><em>Fig. 7. Define Code Editor
+aesthetics</em></strong></div>
+</div>
+<hr />
+<p><br />
+</p>
+</div>
+<div id="creating-your-first-project" class="section level2">
+<h2>Creating your first project</h2>
+<p><br />
+</p>
+<ul>
+<li>First thing you need to do is set up a new project now. Treat a
+project as your organisational unit for the Project you work on - keep
+every file related to that project there! For example, if you wanted to
+create an R program, you could create a project to store the executable
+.R file, together with the .Rmd file, providing more insights into the
+work.</li>
+<li>This seems like a boring necessity now - you might feel the urge of
+skipping this part. Find the power within you to oppose that
+feeling!</li>
+</ul>
+<p><br />
+</p>
+<div class="row">
+<div class="col-md-6">
+<div class="float">
+<img src="Project11.png"
+alt="Fig. 8. Start a new project to work in!" />
+<div class="figcaption"><strong><em>Fig. 8. Start a new project to work
+in!</em></strong></div>
+</div>
+</div>
+<div class="col-md-6">
+<p>Being in a project helps you to be more organised! It’ll help you
+avoid loosing your files. If you earlier set Global Options to save your
+workspace after closing, your project will be updated automatically!</p>
+</div>
+</div>
+<p><br />
+</p>
+<div class="row">
+<div class="col-md-8">
+<div class="float">
+<img src="project2.png" alt="Fig. 9. Pick the type of the project." />
+<div class="figcaption"><strong><em>Fig. 9. Pick the type of the
+project.</em></strong></div>
+</div>
+</div>
+<div class="col-md-4">
+<p>This might be more important when you’re more comfortable with
+R!<br />
+Not only can you create a project out of already existing directory, but
+also start a GitHub-related project - this might be useful if you wanted
+to create a small website with R!<br />
+You could link your project to a repository in GitHub and further render
+your RMarkdown file into HTML and publish it!<br />
+<em><span style="text-decoration:underline">Just as the site you see
+right now!</span></em></p>
+</div>
+</div>
+<br />
+<br />
+
+<div class="row">
+<div class="col-md-8">
+<div class="float">
+<img src="project3.png" alt="Fig. 10. Pick the type of the project." />
+<div class="figcaption"><strong><em>Fig. 10. Pick the type of the
+project.</em></strong></div>
+</div>
+</div>
+<div class="col-md-4">
+<p>If you were to link your project to GitHub, next window you’d see
+would be asking you to put the link and the name of the repository
+related to this project. This allows you not only to have an online copy
+of your work, but also to create your GitHub Pages site.</p>
+</div>
+</div>
+<p><br />
+<br />
+</p>
+</div>
+<div id="setting-up-your-working-directory" class="section level2">
+<h2>Setting up your working directory</h2>
+<p><br />
+</p>
+<p>Similarly to a project, <strong>a working directory</strong> is a
+must-have! It is the place where you’ll store all your files during your
+wok. Files will be created and saved in that specified path.</p>
+<p><br />
+Do not use basic directories, like <em>‘Documents’</em> or
+<em>‘Downloads’</em>!! This creates a mess and makes finding your files
+difficult.</p>
+<p><br />
+Beware of opening files from a different directory than the one you work
+with! If the names are similar, you might get confused and overwrite the
+wrong file!</p>
+<p><br />
+</p>
+<p>Create a new directory/folder. You can do so in Files section with
+clicking the icon <img src="newfolder.png" />. Open it and set as
+working directory. First find <img src="More.png" /> icon, click on it
+and further choose <img src="wdir.png" />.</p>
+<p><br />
+<br />
+</p>
+</div>
+<div id="creating-your-first-file" class="section level2">
+<h2>Creating your first file</h2>
+<p><br />
+</p>
+<blockquote>
+<p><em>Formats to choose from</em></p>
+</blockquote>
+<p>Click on the formats below to understand what will suit your work
+best.</p>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+.collapsible {
+  background-color: #073973;
+  color: #ffffff;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+
+.active, .collapsible:hover {
+  background-color: #073973;
+}
+
+.content {
+  padding: 0 18px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+  background-color: #2074d4;
+}
+</style>
+</head>
+<body>
+<button class="collapsible">
+R Script [ .R ]
+</button>
+<div class="content">
+<p>
+<br />
+<em>Most suitable for scripting. It is the simplest format and its lines
+are all read when the file is activated.</em>
+</p>
+</div>
+<button class="collapsible">
+R Markdown [ .Rmd ] —<em><strong>Recommended option!</strong></em>
+</button>
+<div class="content">
+<p>
+<br />
+<em>R Markdown allows you to put both the code and its explanation in 1
+file. It introduces so called chunks, parts of the file specifically for
+the code. This means whatever you put inside, will be activated and
+processed. </em><br />
+<em>Outside chunks you can write your comments in an elegant way, decide
+on the look of the titles, define whether you want the text
+<strong>highlighted</strong> <em>in a manner that</em> <em><span
+style="text-decoration:underline">suits you best!</span></em>.
+</em><br />
+<em>When you gain more experience, you’ll be able to create interactive
+reports in R, with graphs, tables and other data attached.</em><br />
+<br />
+<em>Additionally, R Markdown allows you to include scripts written in
+other languages than R - for example in JavaScript, Python or SQL! This
+means you can add interactive buttons (like the one you just clicked to
+see this definition!), create a database or include a small program/game
+on your site. </em><br />
+<em>R Markdown is a format allowing you to create basic websites, by
+translating your file to HTML. This allows you to get into Web
+Development without the need to understand the basics of HTML and
+CSS.</em>
+</p>
+</div>
+<button class="collapsible">
+R Notebook [ also .Rmd ]
+</button>
+<div class="content">
+<p>
+<br />
+<em>Every R Notebook is an R Markdown file - and the two are almost
+identical. However, R Notebook allows you to check how your file looks,
+without the need to save it to HTML/DOC/PDF.</em><br />
+<em>Whereas R Markdown has a <strong>Knit</strong> button allowing to
+save the file with a new extension (.html, .doc, .pdf), R Notebook
+additionally has a <strong>Preview</strong> option, allowing you to
+check the output before saving.</em>
+</p>
+</div>
+<button class="collapsible">
+R Sweave [ .Rnw ]
+</button>
+<div class="content">
+<p>
+<br />
+<em>Framework for LaTeX + R, for automatic report generation. Not only
+are the Sweave reports dynamic, but also can update themselves
+automatically. </em><br />
+<em>More on that file type <a
+href="https://rpubs.com/YaRrr/SweaveIntro"><strong>here</strong></a>, <a
+href="https://ds.dfci.harvard.edu/~aedin/courses/ReproducibleResearch/Workshop-reproducible-research_pgf.pdf"><strong>here</strong></a>
+and <a
+href="https://journal.r-project.org/news/RN-2002-3-sweave-part-i-mixing-r-and-l/RN-2002-3-sweave-part-i-mixing-r-and-l.pdf"><strong>there</strong></a>.
+</em>
+</p>
+</div>
+<button class="collapsible">
+R Shiny
+</button>
+<div class="content">
+<p>
+<br />
+<em>Powerful package (more on them soon!) for web app development
+without requiring HTML, CSS or JavaScript knowledge. If you want to
+create interactive graphs with multiple filter arguments this is the
+best way to do that!</em><br />
+<em>Best tutorial on Shiny is available <a
+href="https://shiny.posit.co/r/getstarted/shiny-basics/lesson1/index.html"><strong>here</strong></a>.</em>
+</p>
+</div>
+<script>
+var coll = document.getElementsByClassName("collapsible");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.maxHeight){
+      content.style.maxHeight = null;
+    } else {
+      content.style.maxHeight = content.scrollHeight + "px";
+    } 
+  });
+}
+</script>
+</body>
+</html>
+<p><br />
+During our classes I advise you to use <em>R Markdown files</em>, as
+they are enabling us to be precise which part of the file is text and
+which is code.<br />
+Also, this type of files allows you further translation of the file to
+HTML, DOC or PDF, which means you can easily learn how to make
+nice-looking reports on anything you like! Whether it’s job, university
+or hobby -related!</p>
+<hr />
+</div>
+</div>
+<div id="lets-code" class="section level1">
+<h1><em><span style="text-decoration:underline">Let’s
+code!</span></em></h1>
+<p><br />
+</p>
+<div id="activate-the-code" class="section level2">
+<h2>Activate the code</h2>
+<p><br />
+</p>
+<p>The easiest, fastest and most recommended method to do that is using
+<strong>a key shortcut</strong>:</p>
+<html>
+<head>
+<style>
+.button {
+  background-color: #073973;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-decoration: none;
+  display: block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+</style>
+</head>
+<body>
+<button class="button">
+Ctrl
+</button>
+<p>+ <button class="button">Enter</button></p>
+</body>
+</html>
+<p><br />
+</p>
+<p>The combination of these two will result in the activation of either
+a line in which we currently write or of a specific selection we choose
+(highlight).</p>
+<p><br />
+<br />
+Additional options:<br />
+</p>
+<ul>
+<li>You can use the <strong>Console</strong> (left-down part of RStudio)
+to write prompts directly or to paste code written beforehand in a
+file.</li>
+<li>If you’re using .Rmd (R Markdown/Notebook) files with executable
+code <strong>chunks</strong>, you can find the <strong>green triangle
+icon</strong> to click on in the <strong>right-up corner of the
+chunk</strong> <img src="Run2.png" /> , if you want <strong>all the code
+in the chunk to be activated</strong>. This will however <strong><span
+style="text-decoration:underline">print the result of the code right at
+the end of the activated chunk! </span></strong> To change that, click
+on <img src="settings.png" /> right next to <img src="knit.png" /> in
+the Code Editor section and choose <img src="chunk_console.png" />. If
+you however want to see the output right under the activated chunk,
+click <img src="chunk_inline.png" />.</li>
+<li>Select the line of code in the Code Editor, being in your file. Find
+<img src="Run.png" /> <strong>button</strong> and click on it. You’ll
+see the effect in the Console.</li>
+</ul>
+<p><br />
+</p>
+<p>Let’s try and activate our first line of code! The easiest thing we
+can ask the computer to calculate for us is a sum of two numbers. Below,
+in the first line you can see what you need to write (5 + 13) and in the
+next line, with ‘## [1]’ prefix you see the result of that
+calculation.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="dv">5</span> <span class="sc">+</span> <span class="dv">13</span></span></code></pre></div>
+<pre><code>## [1] 18</code></pre>
+<p><br />
+</p>
+<hr />
+</div>
+<div id="exercise-1" class="section level2">
+<h2>Exercise 1</h2>
+<p><br />
+Given that you already made a project, defined a working directory and
+created your first .Rmd file, you’re ready to start your notes!<br />
+</p>
+<p>Now copy the code from the white space below to your first chunk in
+the .Rmd file and activate it to see how to perform basic arithmetic
+tasks in R. To add a new chunk use a shortcut Alt+Ctrl+I.<br />
+</p>
+<p>Remember R respects the order of math equations, hence sometimes
+parenthesis might be necessary. Define whether the last 2 equations have
+the same output and write the answer outside the chunk, as a text.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="dv">5</span> <span class="sc">+</span> <span class="dv">13</span></span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="dv">24</span> <span class="sc">-</span> <span class="dv">8</span></span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="dv">24</span><span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a><span class="dv">24</span><span class="sc">*</span><span class="dv">2</span></span>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a><span class="dv">35</span><span class="sc">/</span><span class="dv">5</span></span>
+<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a><span class="dv">6</span><span class="sc">+</span><span class="dv">3</span><span class="sc">/</span><span class="dv">3</span></span>
+<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="#cb3-13" tabindex="-1"></a>(<span class="dv">6</span><span class="sc">+</span><span class="dv">3</span>)<span class="sc">/</span><span class="dv">3</span></span></code></pre></div>
+<p><br />
+</p>
+<hr />
+<p>Let’s take a look at the last equation again.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>(<span class="dv">6</span><span class="sc">+</span><span class="dv">3</span>)<span class="sc">/</span><span class="dv">3</span></span></code></pre></div>
+<p>Let’s suppose you have 9 candies in your backpack and you’re taking a
+walk with your 2 friends. You’ve decided you do not feel like eating
+sugar and gave one friend 6 candies, and 3 to the other.<br />
+Now with this setting, our equation allows us to count the mean amount
+of candies you and your 2 friends had.<br />
+However, with the amount of candies to give, comes the amount of numbers
+we’d need to add to our equation. Instead, to make it easier for each
+time we would need to count the mean, we could define a set of rules and
+clarifications allowing the computer to understand what a mean actually
+is. This way, the next time we’d need the mean, we’d only have to
+provide a list of numbers of candies, and computer will evaluate how
+many numbers we provided and what is its sum, by itself.</p>
+<p>This is exemplified by the code below, where we define that one
+person got 6 candies, 2nd person 3 and the third (ourselves) - 0 :</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">c</span>(<span class="dv">6</span>,<span class="dv">3</span>,<span class="dv">0</span>))</span></code></pre></div>
+<pre><code>## [1] 3</code></pre>
+<p>As you can see the output is the same. We’ll now focus a bit more on
+functions and just how much they improve our coding experience.</p>
+<p><br />
+</p>
+<hr />
+<p><br />
+</p>
+</div>
+<div id="functions" class="section level2">
+<h2>Functions</h2>
+<p><br />
+</p>
+<p>While summing two numbers together was an easy task to understand for
+a computer, other jobs might need more explanation.<br />
+</p>
+<p>Functions are containing such sets of rules and clarifications,
+dividing bigger jobs into smaller parts.<br />
+<br />
+</p>
+<p>Click on the button below to view a list of useful arithmetic
+functions.</p>
+<p><br />
+</p>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+.collapsible2 {
+  background-color: #073973;
+  color: #ffffff;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+
+.active, .collapsible2:hover {
+  background-color: #073973;
+}
+
+.content {
+  padding: 0 18px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+  background-color: #2074d4;
+}
+</style>
+</head>
+<body>
+<button class="collapsible2">
+Arithmetic functions
+</button>
+<div class="content">
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="fu">min</span>(x)        <span class="co"># minimal value from a given set &#39;x&#39;</span></span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a><span class="fu">max</span>(x)        <span class="co"># maximum value from a given set &#39;x&#39;</span></span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a><span class="fu">mean</span>(x)       <span class="co"># the mean value from a given set &#39;x&#39;</span></span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a><span class="fu">sum</span>(x)        <span class="co"># sum of all (numerical) values from a given set &#39;x&#39;</span></span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a><span class="fu">sd</span>(x)         <span class="co"># standard deviation from a given set &#39;x&#39;</span></span>
+<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a><span class="fu">var</span>(x)        <span class="co"># variance from a given set &#39;x&#39; [how different are our data in a given set]</span></span>
+<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a><span class="fu">median</span>(x)     <span class="co"># median from a given set &#39;x&#39;</span></span>
+<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a><span class="fu">range</span>(x)      <span class="co"># range of set &#39;x&#39; </span></span>
+<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a><span class="fu">abs</span>(x)        <span class="co"># absolute value of x [this means that R will bring us distance from 0 to a given value, regardless of the direction - so value &#39;-1.5&#39; will be printed as &quot;1.5&quot; because it&#39;s length from 0 on the linear graph is 1.5]</span></span>
+<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a><span class="fu">log</span>(x)        <span class="co"># natural logarithm of &#39;x&#39;, where base is &#39;e&#39;</span></span>
+<span id="cb7-11"><a href="#cb7-11" tabindex="-1"></a><span class="fu">log</span>(x, base)  <span class="co"># logarithm of &#39;x&#39; with the base different than &#39;e&#39;</span></span>
+<span id="cb7-12"><a href="#cb7-12" tabindex="-1"></a><span class="fu">log10</span>(x)      <span class="co"># logarithm of &#39;x&#39; with the base 10</span></span>
+<span id="cb7-13"><a href="#cb7-13" tabindex="-1"></a><span class="fu">sqrt</span>(x)       <span class="co"># square root of &#39;x&#39;</span></span></code></pre></div>
+</div>
+<button class="collapsible2">
+Trigonometric functions
+</button>
+<div class="content">
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="fu">cos</span>(x)  <span class="co"># cosinus of x</span></span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="fu">sin</span>(x)  <span class="co"># sinus of x</span></span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a><span class="fu">tan</span>(x)  <span class="co"># tangens of x</span></span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="fu">acos</span>(x) <span class="co"># arcus cosinus of x</span></span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a><span class="fu">asin</span>(x) <span class="co"># arcus sinus of x</span></span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a><span class="fu">atan</span>(x) <span class="co"># arcus tangens of x</span></span></code></pre></div>
+</div>
+<button class="collapsible2">
+Statistical functions
+</button>
+<div class="content">
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="fu">lm</span>()      <span class="co"># Determine the least-squares regression line</span></span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a><span class="fu">anova</span>()   <span class="co"># Analysis of variance (can use on results of lm())</span></span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a><span class="fu">predict</span>() <span class="co"># Obtain predicted values from linear model</span></span>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a><span class="fu">nls</span>()     <span class="co"># Estimate parameters of a nonlinear model</span></span>
+<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a><span class="fu">cor</span>(x,y) <span class="co"># Correlation coefficient between contents of x and of y</span></span></code></pre></div>
+</div>
+<button class="collapsible2">
+Basic functions
+</button>
+<div class="content">
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="fu">setwd</span>()            <span class="co"># set a working directory</span></span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a><span class="fu">getwd</span>()            <span class="co"># &quot;find and show me my working directory&quot;</span></span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a><span class="fu">install.packages</span>() <span class="co"># for installing packages with defined functions</span></span>
+<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a><span class="fu">library</span>()          <span class="co"># load the package in order to use it</span></span>
+<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a><span class="fu">sessionInfo</span>()      <span class="co"># check what is your R version, what packages are loaded and what are your pc and operatic system specifics</span></span></code></pre></div>
+</div>
+<script>
+var coll = document.getElementsByClassName("collapsible2");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.maxHeight){
+      content.style.maxHeight = null;
+    } else {
+      content.style.maxHeight = content.scrollHeight + "px";
+    } 
+  });
+}
+</script>
+</body>
+</html>
+<p><br />
+Let’s explore that last section, basic functions.<br />
+</p>
+<p>A moment ago, you set a new folder as a working directory, but you
+could have asked the computer to do that for you! You’d have to divide
+that into understandable tasks:<br />
+</p>
+<ol style="list-style-type: decimal">
+<li>Click on ‘More’</li>
+<li>Click on ‘Set As Working Directory’<br />
+</li>
+</ol>
+<p>The function to do that was already written by somebody, and is
+called <strong>setwd()</strong>.<br />
+<br />
+</p>
+<p>Try it out yourself!<br />
+First, copy the following snippet to RStudio:</p>
+<pre class="r2"><code>setwd(&quot;C:/Write-Path-Here&quot;)</code></pre>
+<p>… and paste the path to your new folder inside parenthesis (““).</p>
+<p><br />
+</p>
+<blockquote>
+<p>Make sure the function did its job!<br />
+</p>
+</blockquote>
+<p>In Files Tab again, find <img src="More.png" /> icon, click on it and
+further choose <img src="gowd.png" />.<br />
+</p>
+<p>OR you can use a dedicated function instead:<br />
+</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="fu">getwd</span>()</span></code></pre></div>
+<p>You might’ve noticed that each of the functions we discussed had
+parenthesis () present. Keep that in mind.<br />
+<br />
+</p>
+<p>If you find a phrase or function you don’t understand, it’s best to
+put a question mark on the left, select the whole phrase with it and
+activate the code. The explanation will appear in the ‘Help’ section of
+RStudio (right-down window).</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a>?help</span>
+<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a>?<span class="fu">download.file</span>()</span></code></pre></div>
+<p>If you don’t know the specific name of a given function you want to
+use but know what it’s supposed to be doing, you can use
+<strong>help.search(““)</strong></p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="fu">help.search</span>(<span class="st">&quot;download&quot;</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a><span class="fu">help.search</span>(<span class="st">&quot;graphs&quot;</span>)</span></code></pre></div>
+<p>These functions are all installed automatically with R, but as you
+might imagine, they cannot meet the expectations of each and every
+user.<br />
+That’s why people started writing their own functions - and luckily many
+of them release it later for free!<br />
+Such a set of user-defined functions available for download is called a
+<strong>package</strong>.<br />
+Let’s briefly discuss them before we go any further.</p>
+<p><br />
+<br />
+</p>
+<hr />
+<p><br />
+</p>
+</div>
+<div id="packages" class="section level2">
+<h2>Packages</h2>
+<p>To check what kind of <strong>packages</strong> you have installed
+and loaded onto your current R session, you can use:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code></pre></div>
+<p>This will also print details on your operating system.</p>
+<p>If the package you want to use is not on the list, its functions will
+not work. Hence, if we wanted to load a package called
+<strong>tidyverse</strong>, we can execute:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;tidyverse&quot;</span>)</span></code></pre></div>
+<p>If you don’t have tidyverse installed, you can do it with:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;tidyverse&quot;</span>)</span></code></pre></div>
+<p>If you want to browse the Packages you have and might have, you can
+do so in the Tab ‘Packages’ (right-down window in RStudio).</p>
+<p>We’ll use several packages in the next classes to come.<br />
+Now, let’s understand data types in R.</p>
+<p><br />
+</p>
+<hr />
+<p><br />
+</p>
+</div>
+<div id="data-types" class="section level2">
+<h2>Data types</h2>
+<p>You already saw that R can take up numeric values, but it’s not the
+only data type there is!</p>
+<p>Each of them can be stored and remembered by our current R session,
+for later consideration.<br />
+</p>
+<hr />
+<p><br />
+</p>
+</div>
+</div>
+<div id="variables-and-operators" class="section level1">
+<h1>Variables and operators</h1>
+<p><br />
+</p>
+<p>You can ask the computer to remember given values, like numeric
+values as a given phrase.<br />
+For example, I can say I need the computer to remember the age of my
+sister, who is 23 years old. Hence I can state that every time I
+activate the word ‘Anna_age’, I want the output to show her age - 23. To
+do that, copy the code lines below to your working file and look on what
+is the output.</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a>Anna_age <span class="ot">&lt;-</span> <span class="dv">23</span></span>
+<span id="cb18-2"><a href="#cb18-2" tabindex="-1"></a>Anna_age</span></code></pre></div>
+<p><strong>Anna_age</strong> is the name of the variable now
+stored/remembered by our current R session.<br />
+What you might have noticed while running the code is that what you
+wrote on the left became the name of what was on the right. So Anna_age
+is the name indicating a number 23, just like in high school x indicated
+a specific number.<br />
+Between those values you see an arrow pointing from right to left. This
+is an <strong>assignment operator</strong>, used to assign values, for
+example to given variables.</p>
+<p>This means you can now see the new variable in the up-right window of
+RStudio, <img src="environment.png" />.<br />
+Here’s what you should see after activating that Anna code:<br />
+</p>
+<div class="float">
+<img src="environment2.png" alt="Fig 11. Environment Tab." />
+<div class="figcaption"><em>Fig 11. Environment Tab.</em></div>
+</div>
+<p>You might be surprised, as in Python assigning a value required a
+more intuitive ‘=’ sign. Although accepted in some cases, ‘=’ does not
+mean the same as ‘&lt;-’ in R. Equal sign ‘=’ can be understood not only
+as an assigning operator, but also as a syntax token that signals named
+argument passing in a function call.<br />
+This means that it can define not the variable meaning but rather how
+many arguments a given element has.<br />
+For example, copy and execute line below:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a><span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>, <span class="at">nrow =</span> <span class="dv">2</span>)</span></code></pre></div>
+<p>Check the Environment again - do you see ‘nrow’ as a newly added
+value?<br />
+</p>
+<p>Now, let’s try with an arrow as an assigning operator:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a><span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>, nrow <span class="ot">&lt;-</span><span class="dv">2</span>)</span></code></pre></div>
+<p>Both will print you a matrix with 2 rows, but only ‘&lt;-’ will
+assign the value to the Environment. You can make sure by using ‘=’
+again. Copy the next line:<br />
+</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a><span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>, <span class="at">nrow =</span> <span class="dv">3</span>)</span></code></pre></div>
+<p>Did the value of ‘nrow’ change?<br />
+</p>
+<p>Write an answer in your file.<br />
+<br />
+</p>
+<p>Generally, although there are more assignment operators available,
+the most recommended is an ‘&lt;-’ arrow.</p>
+<p><br />
+</p>
+<hr />
+<p><br />
+</p>
+<div id="variable-name-rules" class="section level2">
+<h2>Variable name rules</h2>
+<p><br />
+</p>
+<ul>
+<li>Don’t use spaces or dots in the names!!</li>
+<li>Don’t start with a number! (2x NO; x2 YES) R differentiates between
+upper and lower case (“W” and “w”, respectively) [is case
+sensitive]</li>
+<li>So remember a value “new_variables” will be different than
+“New_Variables”)</li>
+<li>Do not use the function names! Remember that the name should be
+clear to you! It’s not a good practice to name your variables “x/y/z”
+and such!</li>
+</ul>
+<p>Example 1</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a><span class="co">#Anna is 10. Define how old is Anna as a variable</span></span></code></pre></div>
+<p>#Answer:</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a>Anna <span class="ot">&lt;-</span> <span class="dv">10</span></span></code></pre></div>
+<p>#If we had more data on age, we could make it into a list #Separate
+on age and separate on the names of the kids #Such could possibly be
+turned into a table with R. #We’ll do such analysis later on!</p>
+<p>#Use Environment Tab!</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" tabindex="-1"></a><span class="co">#If you run the line, you&#39;ll see that in the &#39;Environment&#39; Tab in the right-up part of RStudio</span></span>
+<span id="cb24-2"><a href="#cb24-2" tabindex="-1"></a><span class="co">#that a value with its name has been saved &#39;Environment&#39; Tab helps you navigate when you have much more</span></span>
+<span id="cb24-3"><a href="#cb24-3" tabindex="-1"></a><span class="co">#variables to consider!</span></span></code></pre></div>
+<p>#Unfinished variables</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" tabindex="-1"></a><span class="co">#If the next variable is &#39;new_variable2&quot;, you can write the start of the name &#39;new_&quot; and click Tab. You&#39;ll see the suggestions of what you could fill in. It is also useful with functions.</span></span>
+<span id="cb25-2"><a href="#cb25-2" tabindex="-1"></a></span>
+<span id="cb25-3"><a href="#cb25-3" tabindex="-1"></a><span class="co">#If you however not finish defining a given variable and click Run:</span></span>
+<span id="cb25-4"><a href="#cb25-4" tabindex="-1"></a>new_variable2 <span class="ot">&lt;-</span> </span>
+<span id="cb25-5"><a href="#cb25-5" tabindex="-1"></a><span class="co">#you&#39;ll notice that the console won&#39;t start with &quot; &gt; &quot; anymore! It starts with: &quot; + &quot; because the system is asking for the end of the line!</span></span>
+<span id="cb25-6"><a href="#cb25-6" tabindex="-1"></a>  </span>
+<span id="cb25-7"><a href="#cb25-7" tabindex="-1"></a><span class="co">#If you now simply add the value, without repeating the whole line:</span></span>
+<span id="cb25-8"><a href="#cb25-8" tabindex="-1"></a><span class="dv">4</span></span>
+<span id="cb25-9"><a href="#cb25-9" tabindex="-1"></a><span class="co">#...you&#39;ll notice that in &#39;Environment&#39; a new value had been added and console again has &quot; &gt; &quot; instead of &quot; + &quot;. If you accidentaly Run a given part of the script and you don&#39;t want to finish defining a variable - just click &quot;Esc&quot;. </span></span></code></pre></div>
+<p>#Printing the variable we want to set</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" tabindex="-1"></a><span class="co">#After you set a variable, it isn&#39;t automatically printed in the Console</span></span>
+<span id="cb26-2"><a href="#cb26-2" tabindex="-1"></a><span class="co">#If you do however want to see it in console while defining the variable - use parenthesis to call it (while defining a variable):</span></span>
+<span id="cb26-3"><a href="#cb26-3" tabindex="-1"></a></span>
+<span id="cb26-4"><a href="#cb26-4" tabindex="-1"></a>(new_variable3 <span class="ot">&lt;-</span> <span class="dv">3</span>)</span>
+<span id="cb26-5"><a href="#cb26-5" tabindex="-1"></a></span>
+<span id="cb26-6"><a href="#cb26-6" tabindex="-1"></a><span class="co"># to see the value of a previously set variable, use a function:</span></span>
+<span id="cb26-7"><a href="#cb26-7" tabindex="-1"></a></span>
+<span id="cb26-8"><a href="#cb26-8" tabindex="-1"></a><span class="fu">print</span>(new_variable)</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" tabindex="-1"></a><span class="co">#Of course, you can also do math on the variables you created:</span></span>
+<span id="cb27-2"><a href="#cb27-2" tabindex="-1"></a></span>
+<span id="cb27-3"><a href="#cb27-3" tabindex="-1"></a>new_variable<span class="sc">*</span><span class="dv">2</span></span>
+<span id="cb27-4"><a href="#cb27-4" tabindex="-1"></a></span>
+<span id="cb27-5"><a href="#cb27-5" tabindex="-1"></a>new_variable<span class="sc">/</span><span class="dv">2</span></span>
+<span id="cb27-6"><a href="#cb27-6" tabindex="-1"></a></span>
+<span id="cb27-7"><a href="#cb27-7" tabindex="-1"></a>new_variable<span class="sc">/</span>new_variable2</span></code></pre></div>
+<p>##Example 2</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" tabindex="-1"></a><span class="co">#What is the value of &#39;var_index&#39; after running </span></span>
+<span id="cb28-2"><a href="#cb28-2" tabindex="-1"></a><span class="co"># all the next 4 lines and why?</span></span>
+<span id="cb28-3"><a href="#cb28-3" tabindex="-1"></a></span>
+<span id="cb28-4"><a href="#cb28-4" tabindex="-1"></a>new_variable <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb28-5"><a href="#cb28-5" tabindex="-1"></a>(var_index <span class="ot">&lt;-</span> new_variable <span class="sc">/</span> <span class="dv">2</span>)</span>
+<span id="cb28-6"><a href="#cb28-6" tabindex="-1"></a>new_variable <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb28-7"><a href="#cb28-7" tabindex="-1"></a>(var_index <span class="ot">&lt;-</span> new_variable <span class="sc">/</span> <span class="dv">2</span>)</span></code></pre></div>
+<p>###Answer</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" tabindex="-1"></a><span class="co">#If we overwrite the value of &#39;new_variable&#39; it will now forget the old value.</span></span>
+<span id="cb29-2"><a href="#cb29-2" tabindex="-1"></a><span class="co">#This is important when we have a lot of values to consider.</span></span></code></pre></div>
+<p>##However, not all math can be done so easily!</p>
+<p>#Sometimes we need to call a function which will allow us to do
+several operations at once! #In the directory you should have the script
+“Functions.R” to help you out with the basic functions!</p>
+<p>##Example 3</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" tabindex="-1"></a><span class="co"># Define math equations proposed in &quot;R1_math_example.pdf&quot;</span></span>
+<span id="cb30-2"><a href="#cb30-2" tabindex="-1"></a><span class="co"># Calculate them and write down the results.</span></span>
+<span id="cb30-3"><a href="#cb30-3" tabindex="-1"></a><span class="co">#Find the right function for example 2.</span></span></code></pre></div>
+<p>###Answer</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb31-2"><a href="#cb31-2" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="dv">49</span></span>
+<span id="cb31-3"><a href="#cb31-3" tabindex="-1"></a></span>
+<span id="cb31-4"><a href="#cb31-4" tabindex="-1"></a></span>
+<span id="cb31-5"><a href="#cb31-5" tabindex="-1"></a><span class="co">#1</span></span>
+<span id="cb31-6"><a href="#cb31-6" tabindex="-1"></a><span class="dv">2</span><span class="sc">*</span>y<span class="sc">/</span>x</span></code></pre></div>
+<pre><code>## [1] 49</code></pre>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" tabindex="-1"></a><span class="co">#2</span></span>
+<span id="cb33-2"><a href="#cb33-2" tabindex="-1"></a><span class="dv">2</span><span class="sc">*</span><span class="fu">sqrt</span>(y)<span class="sc">/</span>x<span class="sc">^</span><span class="dv">3</span></span></code></pre></div>
+<pre><code>## [1] 1.75</code></pre>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" tabindex="-1"></a><span class="co">#3</span></span>
+<span id="cb35-2"><a href="#cb35-2" tabindex="-1"></a>(y<span class="sc">+</span><span class="dv">1</span>)<span class="sc">/</span>x <span class="co">#GOOD</span></span></code></pre></div>
+<pre><code>## [1] 25</code></pre>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" tabindex="-1"></a>y<span class="sc">+</span><span class="dv">1</span><span class="sc">/</span>x <span class="co">#BAD</span></span></code></pre></div>
+<pre><code>## [1] 49.5</code></pre>
+</div>
+<div id="example-4" class="section level2">
+<h2>Example 4</h2>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" tabindex="-1"></a><span class="co">#Difference between &#39;round&#39; and &#39;signif&#39;</span></span>
+<span id="cb39-2"><a href="#cb39-2" tabindex="-1"></a></span>
+<span id="cb39-3"><a href="#cb39-3" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fl">23.45</span></span>
+<span id="cb39-4"><a href="#cb39-4" tabindex="-1"></a></span>
+<span id="cb39-5"><a href="#cb39-5" tabindex="-1"></a></span>
+<span id="cb39-6"><a href="#cb39-6" tabindex="-1"></a><span class="fu">round</span>(x)              <span class="co">#23 rounds up to the next natural number </span></span></code></pre></div>
+<pre><code>## [1] 23</code></pre>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" tabindex="-1"></a><span class="fu">round</span>(x, <span class="at">digits =</span> <span class="dv">0</span>)  <span class="co">#23</span></span></code></pre></div>
+<pre><code>## [1] 23</code></pre>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" tabindex="-1"></a><span class="fu">round</span>(x, <span class="at">digits =</span> <span class="dv">1</span>)  <span class="co">#23.4 rounds up until first place after &quot;.&quot;</span></span></code></pre></div>
+<pre><code>## [1] 23.4</code></pre>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" tabindex="-1"></a><span class="fu">round</span>(x, <span class="at">digits =</span> <span class="dv">2</span>)  <span class="co">#23.45 rounds up until 2nd place</span></span></code></pre></div>
+<pre><code>## [1] 23.45</code></pre>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" tabindex="-1"></a><span class="fu">signif</span>(x, <span class="dv">1</span>) <span class="co">#20 full digits</span></span></code></pre></div>
+<pre><code>## [1] 20</code></pre>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" tabindex="-1"></a><span class="fu">signif</span>(x, <span class="dv">2</span>) <span class="co">#23</span></span></code></pre></div>
+<pre><code>## [1] 23</code></pre>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" tabindex="-1"></a><span class="fu">signif</span>(x, <span class="dv">3</span>) <span class="co">#23.4 until 0.1 (23.4)</span></span></code></pre></div>
+<pre><code>## [1] 23.4</code></pre>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" tabindex="-1"></a><span class="fu">signif</span>(x, <span class="dv">4</span>) <span class="co">#23.45</span></span></code></pre></div>
+<pre><code>## [1] 23.45</code></pre>
+<p>###Perform the same test for the variable ‘y’. How were the numbers
+rounded?</p>
+<p>y = -23.54</p>
+<p>###Answer</p>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fl">23.54</span></span>
+<span id="cb55-2"><a href="#cb55-2" tabindex="-1"></a></span>
+<span id="cb55-3"><a href="#cb55-3" tabindex="-1"></a><span class="fu">round</span>(y)              <span class="co"># -24 </span></span></code></pre></div>
+<pre><code>## [1] -24</code></pre>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" tabindex="-1"></a><span class="fu">round</span>(y, <span class="at">digits =</span> <span class="dv">0</span>)  <span class="co"># -24</span></span></code></pre></div>
+<pre><code>## [1] -24</code></pre>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" tabindex="-1"></a><span class="fu">round</span>(y, <span class="at">digits =</span> <span class="dv">1</span>)  <span class="co"># -23.5</span></span></code></pre></div>
+<pre><code>## [1] -23.5</code></pre>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" tabindex="-1"></a><span class="fu">round</span>(y, <span class="at">digits =</span> <span class="dv">2</span>)  <span class="co"># -23.54</span></span></code></pre></div>
+<pre><code>## [1] -23.54</code></pre>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" tabindex="-1"></a><span class="fu">signif</span>(y, <span class="dv">1</span>) <span class="co"># -20 </span></span></code></pre></div>
+<pre><code>## [1] -20</code></pre>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" tabindex="-1"></a><span class="fu">signif</span>(y, <span class="dv">2</span>) <span class="co"># -24</span></span></code></pre></div>
+<pre><code>## [1] -24</code></pre>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" tabindex="-1"></a><span class="fu">signif</span>(y, <span class="dv">3</span>) <span class="co"># -23.5</span></span></code></pre></div>
+<pre><code>## [1] -23.5</code></pre>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" tabindex="-1"></a><span class="fu">signif</span>(y, <span class="dv">4</span>) <span class="co"># -23.54</span></span></code></pre></div>
+<pre><code>## [1] -23.54</code></pre>
+<p>##Vectors</p>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" tabindex="-1"></a><span class="co">#A function can also combine arguments into a list or a vector:</span></span>
+<span id="cb71-2"><a href="#cb71-2" tabindex="-1"></a></span>
+<span id="cb71-3"><a href="#cb71-3" tabindex="-1"></a><span class="co"># c(value1, value2, ...)</span></span>
+<span id="cb71-4"><a href="#cb71-4" tabindex="-1"></a></span>
+<span id="cb71-5"><a href="#cb71-5" tabindex="-1"></a><span class="do">## c() is actually nesting our list into 1 variable</span></span>
+<span id="cb71-6"><a href="#cb71-6" tabindex="-1"></a><span class="co">#This allows us to assign a series of values to a given vector.</span></span>
+<span id="cb71-7"><a href="#cb71-7" tabindex="-1"></a>value1 <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb71-8"><a href="#cb71-8" tabindex="-1"></a>value2 <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb71-9"><a href="#cb71-9" tabindex="-1"></a>vector1 <span class="ot">&lt;-</span> <span class="fu">c</span>(value1, value2)</span>
+<span id="cb71-10"><a href="#cb71-10" tabindex="-1"></a></span>
+<span id="cb71-11"><a href="#cb71-11" tabindex="-1"></a></span>
+<span id="cb71-12"><a href="#cb71-12" tabindex="-1"></a><span class="co">#Vector can be represented by numbers and/or characters.</span></span></code></pre></div>
+<p>#Let’s set a new variable:</p>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" tabindex="-1"></a>grades <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="fl">5.0</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">3</span>)</span>
+<span id="cb72-2"><a href="#cb72-2" tabindex="-1"></a></span>
+<span id="cb72-3"><a href="#cb72-3" tabindex="-1"></a><span class="co">#now if you call:</span></span>
+<span id="cb72-4"><a href="#cb72-4" tabindex="-1"></a></span>
+<span id="cb72-5"><a href="#cb72-5" tabindex="-1"></a>grades</span></code></pre></div>
+<pre><code>## [1] 4 5 3 4 3</code></pre>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" tabindex="-1"></a><span class="co">#you&#39;ll see the values of the set</span></span>
+<span id="cb74-2"><a href="#cb74-2" tabindex="-1"></a><span class="co">#you can also make lists from characters.</span></span>
+<span id="cb74-3"><a href="#cb74-3" tabindex="-1"></a></span>
+<span id="cb74-4"><a href="#cb74-4" tabindex="-1"></a><span class="co">#Run next 2 lines (SEPARATELY)!</span></span>
+<span id="cb74-5"><a href="#cb74-5" tabindex="-1"></a><span class="co">#Look at the error occurring after you run the 2nd line</span></span>
+<span id="cb74-6"><a href="#cb74-6" tabindex="-1"></a></span>
+<span id="cb74-7"><a href="#cb74-7" tabindex="-1"></a>students <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Anna&quot;</span>, <span class="st">&quot;Martin&quot;</span>, <span class="st">&quot;Cassidy&quot;</span>, <span class="st">&quot;Elle&quot;</span>, <span class="st">&quot;Peter&quot;</span>) <span class="co">#GOOD</span></span>
+<span id="cb74-8"><a href="#cb74-8" tabindex="-1"></a><span class="co"># students &lt;- c(Martin, Cassidy, Elle, Peter)                 #BAD</span></span>
+<span id="cb74-9"><a href="#cb74-9" tabindex="-1"></a></span>
+<span id="cb74-10"><a href="#cb74-10" tabindex="-1"></a><span class="co">#If you&#39;re unsure whether the list/vector is numeric or character based</span></span>
+<span id="cb74-11"><a href="#cb74-11" tabindex="-1"></a></span>
+<span id="cb74-12"><a href="#cb74-12" tabindex="-1"></a><span class="fu">class</span>(grades)     <span class="co">#should be &quot;numeric&quot;</span></span></code></pre></div>
+<pre><code>## [1] &quot;numeric&quot;</code></pre>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" tabindex="-1"></a><span class="fu">class</span>(students)   <span class="co">#should be &quot;character&quot;</span></span></code></pre></div>
+<pre><code>## [1] &quot;character&quot;</code></pre>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" tabindex="-1"></a><span class="co">#You can also both visualize the first records in a given list,</span></span>
+<span id="cb78-2"><a href="#cb78-2" tabindex="-1"></a><span class="co">#together with the information on whether it&#39;s numeric/character</span></span>
+<span id="cb78-3"><a href="#cb78-3" tabindex="-1"></a><span class="co">#and how many elements does the list/vector have</span></span>
+<span id="cb78-4"><a href="#cb78-4" tabindex="-1"></a></span>
+<span id="cb78-5"><a href="#cb78-5" tabindex="-1"></a><span class="co">#Try running:</span></span>
+<span id="cb78-6"><a href="#cb78-6" tabindex="-1"></a></span>
+<span id="cb78-7"><a href="#cb78-7" tabindex="-1"></a><span class="fu">str</span>(grades)</span></code></pre></div>
+<pre><code>##  num [1:5] 4 5 3 4 3</code></pre>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" tabindex="-1"></a><span class="fu">str</span>(students)</span></code></pre></div>
+<pre><code>##  chr [1:5] &quot;Anna&quot; &quot;Martin&quot; &quot;Cassidy&quot; &quot;Elle&quot; &quot;Peter&quot;</code></pre>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" tabindex="-1"></a><span class="co">#It is useful when dealing with large sets of data.</span></span>
+<span id="cb82-2"><a href="#cb82-2" tabindex="-1"></a><span class="co">#You can see the same type of data presentation in the Environment Tab</span></span>
+<span id="cb82-3"><a href="#cb82-3" tabindex="-1"></a></span>
+<span id="cb82-4"><a href="#cb82-4" tabindex="-1"></a></span>
+<span id="cb82-5"><a href="#cb82-5" tabindex="-1"></a><span class="do">###If you want to call the name &#39;Martin&#39; out from the list of &#39;students&#39;:</span></span>
+<span id="cb82-6"><a href="#cb82-6" tabindex="-1"></a></span>
+<span id="cb82-7"><a href="#cb82-7" tabindex="-1"></a>students[<span class="fu">c</span>(<span class="dv">2</span>)]</span></code></pre></div>
+<pre><code>## [1] &quot;Martin&quot;</code></pre>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" tabindex="-1"></a><span class="co">#If you run this you&#39;ll see that the name we obtained is &quot;Martin&quot;, not &quot;Cassidy&quot;</span></span>
+<span id="cb84-2"><a href="#cb84-2" tabindex="-1"></a><span class="co">#It is because R indices start at 1, same as in Fortran.</span></span>
+<span id="cb84-3"><a href="#cb84-3" tabindex="-1"></a><span class="co">#IT IS DIFFERENT THAN IN PYTHON! Because Python, same as other languages in</span></span>
+<span id="cb84-4"><a href="#cb84-4" tabindex="-1"></a><span class="co">#the C family, starts with 0!</span></span></code></pre></div>
+</div>
+</div>
+<div id="example-5" class="section level1">
+<h1>Example 5</h1>
+<p>#How would you ask the program to print you “Anna” from the list of
+students? ##Answer:</p>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" tabindex="-1"></a>students[<span class="fu">c</span>(<span class="dv">1</span>)]</span></code></pre></div>
+<pre><code>## [1] &quot;Anna&quot;</code></pre>
+<div id="you-can-also-add-information-to-already-existing-vector-with-c"
+class="section level3">
+<h3>You can also add information to already existing vector with
+c()!</h3>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" tabindex="-1"></a>grades <span class="ot">&lt;-</span> <span class="fu">c</span>(grades, <span class="fl">3.5</span>) <span class="co">#to add the grade to the </span><span class="re">END</span><span class="co"> of the list</span></span>
+<span id="cb87-2"><a href="#cb87-2" tabindex="-1"></a>grades <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">5</span>, grades) <span class="co">#to add to the BEGGINING of the list</span></span>
+<span id="cb87-3"><a href="#cb87-3" tabindex="-1"></a></span>
+<span id="cb87-4"><a href="#cb87-4" tabindex="-1"></a><span class="co">#Look at the Environment Tab to check if the changes are done.</span></span>
+<span id="cb87-5"><a href="#cb87-5" tabindex="-1"></a><span class="co">#Eventually you can just call the variable. Do you remember how can you do it? This addition commands are very useful when we deal with huge systems.</span></span></code></pre></div>
+<p>###Conditional subsetting</p>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" tabindex="-1"></a><span class="co">#We can use a logical operator (Boolean value TRUE or FALSE) to determine whether a given value was enough to meet our requirements. It&#39;s usually a value estimated by the function, not us, because it would be inconvenient to call out the value one by one. However in QSAR, there are requirements a given substance have to meet in order to be able to possess a given activity.</span></span>
+<span id="cb88-2"><a href="#cb88-2" tabindex="-1"></a></span>
+<span id="cb88-3"><a href="#cb88-3" tabindex="-1"></a><span class="co">#For example, in cancer drug in vitro testing, a substance has to kill at least 50% of cancer cell population in a test in order to be potentially useful as cancer drugs.</span></span>
+<span id="cb88-4"><a href="#cb88-4" tabindex="-1"></a><span class="co">#If we were preparing a meta-analysis, we could upload the data from many publications and put it all into one data set, out of which we can call a function stating that if a substance was killing more than 50% of cells, it can have the TRUE value and be attributed to the next tests.</span></span></code></pre></div>
+<p>###Example 6</p>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1" tabindex="-1"></a><span class="co">#Consider an MTT cytotoxicity test for 5 proposed anticancer substances. </span></span>
+<span id="cb89-2"><a href="#cb89-2" tabindex="-1"></a><span class="co">#Let&#39;s suppose a given substance has to kill at least 50% of cell population</span></span>
+<span id="cb89-3"><a href="#cb89-3" tabindex="-1"></a><span class="co">#in order to be effective enough, as stated above.</span></span>
+<span id="cb89-4"><a href="#cb89-4" tabindex="-1"></a><span class="co">#The data we have in our data set is composed of % of cells remaining in the well</span></span>
+<span id="cb89-5"><a href="#cb89-5" tabindex="-1"></a><span class="co">#after the administration of the drug.</span></span>
+<span id="cb89-6"><a href="#cb89-6" tabindex="-1"></a><span class="co">#5 substances were checked, hence we have 5 records on the list.</span></span>
+<span id="cb89-7"><a href="#cb89-7" tabindex="-1"></a><span class="co">#If a drug left 30% of cells intact, then it killed more than 50%</span></span>
+<span id="cb89-8"><a href="#cb89-8" tabindex="-1"></a><span class="co">#and according to our delimiters, is supposedly useful against cancer.</span></span></code></pre></div>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1" tabindex="-1"></a>anticancer_substances <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">20</span>, <span class="dv">39</span>, <span class="dv">56</span>, <span class="dv">70</span>, <span class="dv">45</span>)</span></code></pre></div>
+<p>#6.1 Which the substances meet the requirement of killing at least
+50% of cells? #Use function calling out boolean values.</p>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1" tabindex="-1"></a>anticancer_substances <span class="sc">&lt;</span> <span class="dv">50</span></span></code></pre></div>
+<pre><code>## [1]  TRUE  TRUE FALSE FALSE  TRUE</code></pre>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1" tabindex="-1"></a><span class="co">#You&#39;ll see a TRUE if the substance killed at least 50% of cell population</span></span>
+<span id="cb93-2"><a href="#cb93-2" tabindex="-1"></a><span class="co">#and FALSE if the substance didn&#39;t kill enough cells to call it effective enough.</span></span></code></pre></div>
+<p>#6.2 List only the data lower than 50%.</p>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1" tabindex="-1"></a>anticancer_substances[anticancer_substances<span class="sc">&lt;</span><span class="dv">50</span>]</span></code></pre></div>
+<pre><code>## [1] 20 39 45</code></pre>
+<p>#6.3 List only data lower than 35% OR higher than 56% (not equal
+to!)</p>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1" tabindex="-1"></a>anticancer_substances[anticancer_substances <span class="sc">&lt;</span><span class="dv">35</span> <span class="sc">|</span> anticancer_substances <span class="sc">&gt;</span> <span class="dv">56</span>]</span></code></pre></div>
+<pre><code>## [1] 20 70</code></pre>
+<p>#6.4 or higher or equal to 19% AND lower or equal than 56%</p>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1" tabindex="-1"></a>anticancer_substances[anticancer_substances <span class="sc">&gt;=</span> <span class="dv">19</span> <span class="sc">&amp;</span> anticancer_substances <span class="sc">&lt;=</span> <span class="dv">56</span>]</span></code></pre></div>
+<pre><code>## [1] 20 39 56 45</code></pre>
+<div class="sourceCode" id="cb100"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="#cb100-1" tabindex="-1"></a><span class="co"># acknowledge that &#39; &gt;= &#39; means higher or equal</span></span>
+<span id="cb100-2"><a href="#cb100-2" tabindex="-1"></a><span class="co">#             and  &#39; &lt;= &#39; means lower or equal</span></span></code></pre></div>
+<p>#Remember than if none of the data fits the requirement, you’ll
+obtain ’numeric(0)” in the console.</p>
+<p>anticancer_substances[anticancer_substances &lt; 20 &amp;
+anticancer_substances &gt; 56]</p>
+<p>#6.5 List only measurement that fit the delimiters of “less than 39”
+and “less than 56</p>
+<div class="sourceCode" id="cb101"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="#cb101-1" tabindex="-1"></a>anticancer_substances[anticancer_substances <span class="sc">&lt;</span> <span class="dv">39</span> <span class="sc">&amp;</span> anticancer_substances <span class="sc">&lt;</span> <span class="dv">56</span>]</span></code></pre></div>
+<pre><code>## [1] 20</code></pre>
+<p>#6.6 Round the % to the full digits ```{r]}
+signif(anticancer_substances, 1)</p>
+<p>#Notice that in the Environment Tab the data set wasn’t changed!</p>
+<pre><code>
+
+#6.7 If you wanted to round the % and save it as a new list:
+
+```r
+anticancer_substances_fulldigits &lt;-  signif(anticancer_substances, 1) </code></pre>
+</div>
+<div id="example-7" class="section level3">
+<h3>Example 7</h3>
+<div class="sourceCode" id="cb104"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="#cb104-1" tabindex="-1"></a><span class="co">#pH was measured for several solutions.</span></span>
+<span id="cb104-2"><a href="#cb104-2" tabindex="-1"></a><span class="co">#pH=7 was attributed to 0</span></span>
+<span id="cb104-3"><a href="#cb104-3" tabindex="-1"></a><span class="co">#pH&lt;7 was flagged as 1:7, meaning pH=8 is 1, pH=10 is 3</span></span>
+<span id="cb104-4"><a href="#cb104-4" tabindex="-1"></a><span class="co">#pH&gt;7 was flagged as (-1):(-7) meaning pH=6 is -1 pH=3 is -4</span></span></code></pre></div>
+<p>#7.1 Create a list ‘pH_data’ containing the data as follows:</p>
+<div class="sourceCode" id="cb105"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="#cb105-1" tabindex="-1"></a><span class="co">#pH of sea water = 8</span></span>
+<span id="cb105-2"><a href="#cb105-2" tabindex="-1"></a><span class="co">#pH of soap = 10</span></span>
+<span id="cb105-3"><a href="#cb105-3" tabindex="-1"></a><span class="co">#pH of Ca(OH)2 solution = 12</span></span>
+<span id="cb105-4"><a href="#cb105-4" tabindex="-1"></a><span class="co">#pH of coffee = 5</span></span>
+<span id="cb105-5"><a href="#cb105-5" tabindex="-1"></a><span class="co">#pH of beer = 4</span></span>
+<span id="cb105-6"><a href="#cb105-6" tabindex="-1"></a><span class="co">#pH of wine = 4</span></span>
+<span id="cb105-7"><a href="#cb105-7" tabindex="-1"></a><span class="co">#pH of baking soda solution = 9</span></span>
+<span id="cb105-8"><a href="#cb105-8" tabindex="-1"></a><span class="co">#pH of blood = 8</span></span></code></pre></div>
+<p>#Answer:</p>
+<div class="sourceCode" id="cb106"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="#cb106-1" tabindex="-1"></a>pH_data <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="sc">-</span><span class="dv">2</span>, <span class="sc">-</span><span class="dv">3</span>, <span class="sc">-</span><span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">1</span>)</span></code></pre></div>
+<p>#7.2 Prove (check by a command) whether our measurement data is
+numeric or character-based</p>
+<div class="sourceCode" id="cb107"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="#cb107-1" tabindex="-1"></a><span class="fu">class</span>(pH_data)</span></code></pre></div>
+<pre><code>## [1] &quot;numeric&quot;</code></pre>
+<div class="sourceCode" id="cb109"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="#cb109-1" tabindex="-1"></a><span class="co">#or eventually</span></span>
+<span id="cb109-2"><a href="#cb109-2" tabindex="-1"></a></span>
+<span id="cb109-3"><a href="#cb109-3" tabindex="-1"></a><span class="fu">str</span>(pH_data)</span></code></pre></div>
+<pre><code>##  num [1:8] 1 3 5 -2 -3 -3 2 1</code></pre>
+<p>#7.3 Without counting yourself, how can you measure how many
+measurements were taken?</p>
+<div class="sourceCode" id="cb111"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="#cb111-1" tabindex="-1"></a><span class="fu">length</span>(pH_data)</span></code></pre></div>
+<pre><code>## [1] 8</code></pre>
+<p>#7.4 Additional measurement was taken (pH=6). Add it to the end of
+the pH_data.</p>
+<div class="sourceCode" id="cb113"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="#cb113-1" tabindex="-1"></a>pH_data <span class="ot">&lt;-</span> <span class="fu">c</span>(pH_data, <span class="sc">-</span><span class="dv">1</span>)</span></code></pre></div>
+<p>#7.5 Call out the 3rd measurment from ‘pH_data’. What is its pH?</p>
+<div class="sourceCode" id="cb114"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="#cb114-1" tabindex="-1"></a>students[<span class="fu">c</span>(<span class="dv">2</span>)]</span></code></pre></div>
+<pre><code>## [1] &quot;Martin&quot;</code></pre>
+<p>#7.6 List out only the data for basic (not acidic) substances</p>
+<div class="sourceCode" id="cb116"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="#cb116-1" tabindex="-1"></a>pH_data[pH_data <span class="sc">&gt;</span> <span class="dv">0</span>]</span></code></pre></div>
+<pre><code>## [1] 1 3 5 2 1</code></pre>
+<p>#7.7 Are there any the basic substances with pH=11 or more? call out
+with a function.</p>
+<div class="sourceCode" id="cb118"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="#cb118-1" tabindex="-1"></a>pH_data <span class="sc">&gt;=</span><span class="dv">4</span> <span class="co">#3rd argument meets the requirement</span></span></code></pre></div>
+<pre><code>## [1] FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE</code></pre>
+<p>#7.8 Do any data differs from pH=7 of more than 4 pH points?</p>
+<div class="sourceCode" id="cb120"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="#cb120-1" tabindex="-1"></a><span class="fu">abs</span>(pH_data <span class="sc">&gt;=</span><span class="dv">4</span>) <span class="co">#0 no 1 yes</span></span></code></pre></div>
+<pre><code>## [1] 0 0 1 0 0 0 0 0 0</code></pre>
+<p>#7.8 Do any data meet the requirement of pH=4?</p>
+<div class="sourceCode" id="cb122"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="#cb122-1" tabindex="-1"></a>pH_data <span class="sc">==</span> <span class="sc">-</span><span class="dv">3</span> <span class="co"># double &#39;=&#39; means &#39;exactly&#39;</span></span></code></pre></div>
+<pre><code>## [1] FALSE FALSE FALSE FALSE  TRUE  TRUE FALSE FALSE FALSE</code></pre>
+<div class="sourceCode" id="cb124"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="#cb124-1" tabindex="-1"></a><span class="co"># so that statement means &quot;show values from &#39;pH_data&#39; which have the value of -3.</span></span></code></pre></div>
+</div>
+<div id="missing-data" class="section level3">
+<h3>Missing data</h3>
+<div class="sourceCode" id="cb125"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="#cb125-1" tabindex="-1"></a><span class="co">#A great aspect of R is that differently than many other languages</span></span>
+<span id="cb125-2"><a href="#cb125-2" tabindex="-1"></a><span class="co">#it accepts the occurrence of missing data</span></span>
+<span id="cb125-3"><a href="#cb125-3" tabindex="-1"></a><span class="co">#this is very important in the concept of meta-analysis and QSAR!</span></span>
+<span id="cb125-4"><a href="#cb125-4" tabindex="-1"></a><span class="co">#Because many times, when we gather data from publications, </span></span>
+<span id="cb125-5"><a href="#cb125-5" tabindex="-1"></a><span class="co">#They do not give the same types of data</span></span>
+<span id="cb125-6"><a href="#cb125-6" tabindex="-1"></a><span class="co">#Hence we may find a publication with enzymatic activity data</span></span>
+<span id="cb125-7"><a href="#cb125-7" tabindex="-1"></a><span class="co">#But not cytotoxicity data</span></span></code></pre></div>
+<p>#Example 8 Missing data #Consider that a group of students performed
+a chemical synthesis during classes #Although 6 students attend this
+class, only 5 of them finished the synthesis #during classes. #The yield
+% results were put into a variable:</p>
+<div class="sourceCode" id="cb126"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="#cb126-1" tabindex="-1"></a>synthesis_yield <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">70</span>, <span class="dv">80</span>, <span class="dv">65</span>, <span class="cn">NA</span>, <span class="dv">73</span>, <span class="dv">79</span>)</span></code></pre></div>
+<p>#Definition of NA</p>
+<div class="sourceCode" id="cb127"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="#cb127-1" tabindex="-1"></a>?<span class="cn">NA</span></span>
+<span id="cb127-2"><a href="#cb127-2" tabindex="-1"></a></span>
+<span id="cb127-3"><a href="#cb127-3" tabindex="-1"></a><span class="co">#simply, it is &quot;Data Not Available&#39; Sign</span></span></code></pre></div>
+<p>#We can ignore that NA value for calculations, by telling the
+computer to do so #with an argument ’ na.rm = TRUE ’</p>
+<div class="sourceCode" id="cb128"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="#cb128-1" tabindex="-1"></a><span class="fu">mean</span>(synthesis_yield) <span class="co"># BAD : this will print &#39;NA&#39; in the console</span></span></code></pre></div>
+<pre><code>## [1] NA</code></pre>
+<div class="sourceCode" id="cb130"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="#cb130-1" tabindex="-1"></a><span class="fu">mean</span>(synthesis_yield, <span class="at">na.rm =</span> <span class="cn">NA</span>) <span class="co"># GOOD</span></span></code></pre></div>
+<pre><code>## [1] NA</code></pre>
+<p>#If we want to extract elements which are NOT missing values (not
+NA):</p>
+<div class="sourceCode" id="cb132"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="#cb132-1" tabindex="-1"></a>synthesis_yield[<span class="sc">!</span><span class="fu">is.na</span>(synthesis_yield)]</span></code></pre></div>
+<pre><code>## [1] 70 80 65 73 79</code></pre>
+<p>#This function can be useful when we deal with lists of data where a
+char value is attributed to a given numeric and we want to create a
+loop, where if a value is not a number but a char - it should be encoded
+into a number attributed to it in the list.</p>
+<p>#What I mean by that is[do not run this!]: #
+if(is.na(as.numeric(x))){ # and then do something I write here # } ##so
+by ‘is.na(as.numeric(x))’ we mean that as.numeric checks whether a given
+char has an attributed num or not and if so, we then call a function
+‘is.na’ to check whether we have that number for said char value or
+not.</p>
+<p>#and if we want to extract ONLY the missing values, to see how many
+of them we have:</p>
+<div class="sourceCode" id="cb134"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="#cb134-1" tabindex="-1"></a>synthesis_yield[<span class="fu">is.na</span>(synthesis_yield)]</span></code></pre></div>
+<pre><code>## [1] NA</code></pre>
+<p>#Again, counting all records, so here, the number of students:</p>
+<div class="sourceCode" id="cb136"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="#cb136-1" tabindex="-1"></a><span class="fu">length</span>(synthesis_yield)</span></code></pre></div>
+<pre><code>## [1] 6</code></pre>
+<p>#But if we wanted to exclude NA (missing values) we can use ‘is.na’
+again!</p>
+<div class="sourceCode" id="cb138"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="#cb138-1" tabindex="-1"></a><span class="fu">length</span>(synthesis_yield[<span class="sc">!</span><span class="fu">is.na</span>(synthesis_yield)])</span></code></pre></div>
+<pre><code>## [1] 5</code></pre>
+<p>#in the same manner we can count how many NA we have in the list</p>
+<div class="sourceCode" id="cb140"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="#cb140-1" tabindex="-1"></a><span class="fu">length</span>(synthesis_yield[<span class="fu">is.na</span>(synthesis_yield)])</span></code></pre></div>
+<pre><code>## [1] 1</code></pre>
+<p>#We can also use ‘na.omit’ to ommit/not count the NAs or
+‘complete.cases’</p>
+<div class="sourceCode" id="cb142"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="#cb142-1" tabindex="-1"></a><span class="fu">length</span>(synthesis_yield[<span class="fu">na.omit</span>(synthesis_yield)])</span></code></pre></div>
+<pre><code>## [1] 5</code></pre>
+<div class="sourceCode" id="cb144"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="#cb144-1" tabindex="-1"></a><span class="fu">length</span>(synthesis_yield[<span class="fu">complete.cases</span>(synthesis_yield)])</span></code></pre></div>
+<pre><code>## [1] 5</code></pre>
+</div>
+</div>
+<div id="how-many-students-obtained-more-than-75-yield"
+class="section level1">
+<h1>How many students obtained more than 75% yield?</h1>
+<div class="sourceCode" id="cb146"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="#cb146-1" tabindex="-1"></a>synthesis_no_na <span class="ot">&lt;-</span> synthesis_yield[<span class="sc">!</span><span class="fu">is.na</span>(synthesis_yield)]</span>
+<span id="cb146-2"><a href="#cb146-2" tabindex="-1"></a>synthesis_75 <span class="ot">&lt;-</span> synthesis_no_na[synthesis_no_na<span class="sc">&gt;</span><span class="dv">75</span>]</span>
+<span id="cb146-3"><a href="#cb146-3" tabindex="-1"></a><span class="fu">length</span>(synthesis_75)</span></code></pre></div>
+<pre><code>## [1] 2</code></pre>
+<div id="matrices-and-creating-tables-and-data-frames"
+class="section level3">
+<h3>Matrices and creating tables and data frames</h3>
+<p>#Example 9</p>
+<p>#To convert a vector into a matrix we can use a ‘dim()’ function.
+This also means we obtain a table of data represented in a given
+variable. Let’s again consider the set from example 7:</p>
+<div class="sourceCode" id="cb148"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="#cb148-1" tabindex="-1"></a>pH_data <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="sc">-</span><span class="dv">2</span>, <span class="sc">-</span><span class="dv">3</span>, <span class="sc">-</span><span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">1</span>)</span></code></pre></div>
+<p>#Let’s convert it into a table/matrix!</p>
+<div class="sourceCode" id="cb149"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="#cb149-1" tabindex="-1"></a><span class="fu">dim</span>(pH_data) <span class="ot">&lt;-</span><span class="fu">c</span>(<span class="dv">8</span>,<span class="dv">1</span>)</span></code></pre></div>
+<p>#Double-click on the name of the variable in the Environment Tab.
+Look at the created table. It has 1 column and 8 rows, for 8 records. As
+we know the data in our set are being the same descriptor, hence they
+shall create 1 column only, But in case you needed the opposite - just
+reverse the numbers in parenthesis.</p>
+<p>#Now we should state which data belongs to which tested probe! Hence
+we should create a new variable which will be the list of substances for
+which the pH was measured:</p>
+<div class="sourceCode" id="cb150"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="#cb150-1" tabindex="-1"></a>pH_names <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;sea water&quot;</span>, <span class="st">&quot;soap&quot;</span>, <span class="st">&quot;Ca(OH)2&quot;</span>, <span class="st">&quot;coffee&quot;</span>, <span class="st">&quot;beer&quot;</span>, <span class="st">&quot;wine&quot;</span>, <span class="st">&quot;baking soda&quot;</span>, <span class="st">&quot;blood&quot;</span>)</span></code></pre></div>
+<p>#Now after we set said variable, let’s bind it to our previously
+created table! #First we use dim function to transfer ‘pH_names’ into a
+function, same as we did with the pH_data.</p>
+<div class="sourceCode" id="cb151"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="#cb151-1" tabindex="-1"></a><span class="fu">dim</span>(pH_names) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">8</span>,<span class="dv">1</span>)</span></code></pre></div>
+<p>#Now we bind it together into a new variable we call ‘pH_table’:</p>
+<div class="sourceCode" id="cb152"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="#cb152-1" tabindex="-1"></a>pH_table <span class="ot">&lt;-</span> <span class="fu">cbind</span>(pH_names, pH_data)</span></code></pre></div>
+<p>#‘cbind’ works for binding COLUMNS #to bind ROWS use ‘rbind’ in the
+same manner</p>
+<p>#To see the table you created by combining 2 columns, simply look it
+up at the Environment Tab and click on its name and the file will open
+in the code editor tab.</p>
+<p>#If you however want to see it in the console, you need to transform
+it into a data frame with a function:</p>
+<div class="sourceCode" id="cb153"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="#cb153-1" tabindex="-1"></a><span class="fu">data.frame</span>(pH_table)</span></code></pre></div>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["X1"],"name":[1],"type":["chr"],"align":["left"]},{"label":["X2"],"name":[2],"type":["chr"],"align":["left"]}],"data":[{"1":"sea water","2":"1"},{"1":"soap","2":"3"},{"1":"Ca(OH)2","2":"5"},{"1":"coffee","2":"-2"},{"1":"beer","2":"-3"},{"1":"wine","2":"-3"},{"1":"baking soda","2":"2"},{"1":"blood","2":"1"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<div class="sourceCode" id="cb154"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="#cb154-1" tabindex="-1"></a><span class="co">#Now if you execute &#39;data.frame()&#39; you will see the created data frame in the console. Let&#39;s save it as a new variable</span></span>
+<span id="cb154-2"><a href="#cb154-2" tabindex="-1"></a></span>
+<span id="cb154-3"><a href="#cb154-3" tabindex="-1"></a>pH_frame <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(pH_table)</span></code></pre></div>
+<p>#Look at the Environment Tab. You can see that the new variable has
+been added and there is a small arrow pointing dow, on the left. If you
+click on it, you’ll see how many variables and 8 data points, you also
+have the names of columns (now X1 and X2) which are in that data frame,
+as well as first arguments.</p>
+<p>#We do however not want the names of the columns to be X1 and X2!
+Let’s go with something more descriptive!</p>
+<div class="sourceCode" id="cb155"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="#cb155-1" tabindex="-1"></a><span class="fu">names</span>(pH_frame) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Substances&quot;</span>, <span class="st">&quot;converted pH&quot;</span>)</span></code></pre></div>
+<p>#Notice the names had to be done in “” ! #If instead of columns we
+wanted to name rows:</p>
+<div class="sourceCode" id="cb156"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="#cb156-1" tabindex="-1"></a><span class="fu">row.names</span>(pH_frame) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Substance 1&quot;</span>, <span class="st">&quot;Substance 2&quot;</span>,<span class="st">&quot;Substance 3&quot;</span>,<span class="st">&quot;Substance 4&quot;</span>,<span class="st">&quot;Substance 5&quot;</span>,<span class="st">&quot;Substance 6&quot;</span>,<span class="st">&quot;Substance 7&quot;</span>,<span class="st">&quot;Substance 8&quot;</span>)</span></code></pre></div>
+<p>#Notice that the number of row names has to be equal to the total
+number of rows. Same goes with the columns.</p>
+<script>
+$(document).ready(function() {
+  $("#reveal-button").click(function() {
+    $("#hidden-text").toggle();
+    if ($("#hidden-text").is(":visible")) {
+      $(this).text("Show less");
+    } else {
+      $(this).text("Show more");
+    }
+  });
+});
+</script>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

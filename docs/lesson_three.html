@@ -1,0 +1,1610 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Klaudia Chmielewska" />
+
+
+<title>Introduction to R</title>
+
+<script src="site_libs/header-attrs-2.21/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/darkly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  background-color: #f8f8f8; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #204a87; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #8f5902; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #204a87; font-weight: bold; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #ce5c00; font-weight: bold; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Introduction to R</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Main</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li>
+  <a href="Lesson1_KChmielewska_UG.html">Lesson 1 &amp; 2</a>
+</li>
+<li>
+  <a href="lesson_two.html">Lesson 3</a>
+</li>
+<li>
+  <a href="lesson_three.html">Lesson 4</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore"><strong>Introduction to R</strong></h1>
+<h3 class="subtitle"><em>Lesson 3</em></h3>
+<h4 class="author"><strong><em>Klaudia Chmielewska</em></strong></h4>
+
+</div>
+
+
+<p><br />
+</p>
+<blockquote>
+<p>R for Data Analysis</p>
+</blockquote>
+<p><br />
+</p>
+<p>Now that you’re more advanced in R, we can start analyzing sets of
+data! Both Python and R are commonly used for data analysis, given their
+powerful possibilities of data visualisation, enabeling to not only
+create beautiful graphs, but also make them interactive!<br />
+</p>
+<p>You’lll however need to remember that everyone takes notes a little
+bit differently! This means you’ll encounter different types of data
+set, organized in their own way! The clue is to sort your data and keep
+it tidy! … and to be patient!<br />
+</p>
+<p>How to keep your data organized?<br />
+</p>
+<p><a href="https://kbroman.org/dataorg/">here</a>, <a
+href="http://vita.had.co.nz/papers/tidy-data.pdf">here</a></p>
+<hr />
+<p><br />
+<br />
+</p>
+<div id="data-analysis-in-r" class="section level1">
+<h1><em><span style="text-decoration:underline">Data Analysis in
+R</span></em></h1>
+<p><br />
+<br />
+</p>
+<div id="save-your-first-data-set" class="section level2">
+<h2>Save your first data set</h2>
+<p><br />
+<br />
+</p>
+<p>Let’s again consider the data frame you prepared in Lesson 1,
+Exercise 6.<br />
+</p>
+<p>Activate this code snippet to create a new variable.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>data_mice <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>  <span class="at">Mice_name =</span> <span class="fu">c</span>(<span class="st">&quot;Albert&quot;</span>, <span class="st">&quot;Minnie&quot;</span>, <span class="st">&quot;Mario&quot;</span>, <span class="st">&quot;Betty&quot;</span>, <span class="st">&quot;Elliot&quot;</span>, <span class="st">&quot;Albert&quot;</span>, <span class="st">&quot;Mario&quot;</span>, <span class="st">&quot;Minnie&quot;</span>, <span class="st">&quot;Elliot&quot;</span>, <span class="st">&quot;Clara&quot;</span>, <span class="st">&quot;Teddy&quot;</span>, <span class="st">&quot;Elliot&quot;</span>),</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>  <span class="at">travel =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">12</span>, <span class="sc">-</span><span class="fl">7.5</span>, <span class="dv">12</span>, <span class="fl">7.5</span>, <span class="dv">12</span>, <span class="dv">12</span>, <span class="sc">-</span><span class="dv">15</span>, <span class="sc">-</span><span class="fl">7.5</span>, <span class="fl">7.5</span>, <span class="sc">-</span><span class="dv">12</span>, <span class="fl">7.5</span>, <span class="dv">12</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>)</span></code></pre></div>
+<p><br />
+<br />
+</p>
+<p>Now, the variable will be gone the next time someone clears the
+objects from the workspace. To save your work, you’d need to store your
+data frame inside a file. Let’s try it out! Activate the code snippet
+below and View each file you created to see the differences.<br />
+</p>
+<p>What is the data points separator for the table? And for the csv? And
+csv2?<br />
+</p>
+<p>And what does ‘row.names’ change?<br />
+</p>
+<p>Write the answers in your working file.<br />
+</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="fu">write.table</span>(data_mice, <span class="st">&quot;mice_table.csv&quot;</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="fu">write.csv</span>(data_mice, <span class="st">&quot;mice_csv.csv&quot;</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="fu">write.csv2</span>(data_mice, <span class="st">&quot;mice_csv2.csv&quot;</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a><span class="fu">write.table</span>(data_mice, <span class="st">&quot;mice_table_rows.csv&quot;</span>, <span class="at">row.names=</span> <span class="cn">TRUE</span>)</span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a><span class="fu">write.csv</span>(data_mice, <span class="st">&quot;mice_csv_rows.csv&quot;</span>, <span class="at">row.names=</span> <span class="cn">TRUE</span>)</span>
+<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a><span class="fu">write.csv2</span>(data_mice, <span class="st">&quot;mice_csv_rows.csv&quot;</span>, <span class="at">row.names=</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<p><br />
+<br />
+</p>
+<p>If you automate your workflow, you might get unsure whether the file
+was properly created. You can check it with a function! If you implement
+it as part of your program, it would print you a logical answer TRUE if
+the file was created properly.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="fu">file.exists</span>(<span class="st">&quot;mice_table.csv&quot;</span>)</span></code></pre></div>
+<p><br />
+<br />
+</p>
+<hr />
+<p><br />
+</p>
+<p><br />
+</p>
+</div>
+<div id="read-your-first-csv" class="section level2">
+<h2>Read your first csv</h2>
+<p><br />
+</p>
+<p>Now, we can read our newly created files into a new variable in our
+work space! Again, we can use different functions, dependent on the type
+of file we want to open.<br />
+<br />
+</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>table1 <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">&quot;mice_table.csv&quot;</span>)  <span class="co"># for space-separated data</span></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>csv1 <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;mice_csv.csv&quot;</span>)        <span class="co"># for comma-separated data</span></span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a>csv2 <span class="ot">&lt;-</span> <span class="fu">read.csv2</span>(<span class="st">&quot;mice_csv2.csv&quot;</span>)      <span class="co"># for semicolon-separated data</span></span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a><span class="co"># for space-separated text files to be formatted into tables</span></span>
+<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a><span class="co"># with dot as a decimal point</span></span>
+<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a></span>
+<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a>text_file1 <span class="ot">&lt;-</span> <span class="fu">read.delim</span>(<span class="st">&quot;textfile.txt&quot;</span>)      </span>
+<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a></span>
+<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a><span class="co"># for space-separated text files to be formatted into tables</span></span>
+<span id="cb4-14"><a href="#cb4-14" tabindex="-1"></a><span class="co"># with comma as a decimal point</span></span>
+<span id="cb4-15"><a href="#cb4-15" tabindex="-1"></a></span>
+<span id="cb4-16"><a href="#cb4-16" tabindex="-1"></a>text_file1 <span class="ot">&lt;-</span> <span class="fu">read.delim2</span>(<span class="st">&quot;textfile.txt&quot;</span>)      </span></code></pre></div>
+<p><br />
+<br />
+</p>
+<p>We can further specify the details of those functions and read the
+semicolon-separated data with read.csv function too!</p>
+<p><br />
+</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>next_csv <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;mice_csv.csv&quot;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="at">sep =</span> <span class="st">&quot;,&quot;</span>, <span class="at">dec =</span> <span class="st">&quot;.&quot;</span>)</span></code></pre></div>
+<p><br />
+<br />
+</p>
+<p>Header is the question of whether the first row of the table/csv file
+should be treated as column names or not. By default, this option is
+TRUE, so csv1 and next_csv variables should be looking the same
+way!<br />
+</p>
+<p>sep is a data points separating value, while dec is a decimal
+point<br />
+<br />
+</p>
+<p>Always make sure what delimiter and decimal point your data set has!!
+If you won’t - some data points might be transformed, being wrongly
+treated by the function. This might result in the computer wrongly
+understanding your data set and slicing it into columns in the wrong
+manner, which will later lead to the wrong conclusions from our
+analysis.<br />
+</p>
+<p>Keep in mind that the standard international data decimal point is a
+dot ‘.’, whereas Polish decimal point is a comma ‘,’!!!!!</p>
+<p><br />
+<br />
+</p>
+<hr />
+<p><br />
+<br />
+</p>
+</div>
+<div id="basic-details" class="section level2">
+<h2>Basic details</h2>
+<p><br />
+</p>
+<p>Let’s now check the basic details about our small data set.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="fu">class</span>(next_csv)  <span class="co"># type of data</span></span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="fu">class</span>(table1)    <span class="co"># for comparison, check the class of your table</span></span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="fu">str</span>(next_csv)</span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="fu">summary</span>(next_csv)</span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a><span class="fu">ncol</span>(next_csv)   <span class="co"># number of columns</span></span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a><span class="fu">nrow</span>(next_csv)   <span class="co"># number of rows </span></span>
+<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a></span>
+<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a><span class="fu">dim</span>(next_csv)    <span class="co"># dimensions of our data frame</span></span>
+<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a></span>
+<span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a><span class="co"># Let&#39;s check the beginning and the end of the set:</span></span>
+<span id="cb6-14"><a href="#cb6-14" tabindex="-1"></a></span>
+<span id="cb6-15"><a href="#cb6-15" tabindex="-1"></a><span class="fu">head</span>(next_csv)</span>
+<span id="cb6-16"><a href="#cb6-16" tabindex="-1"></a></span>
+<span id="cb6-17"><a href="#cb6-17" tabindex="-1"></a><span class="fu">tail</span>(next_csv)</span>
+<span id="cb6-18"><a href="#cb6-18" tabindex="-1"></a></span>
+<span id="cb6-19"><a href="#cb6-19" tabindex="-1"></a><span class="co"># how many data points are inside the column Mice_name?</span></span>
+<span id="cb6-20"><a href="#cb6-20" tabindex="-1"></a></span>
+<span id="cb6-21"><a href="#cb6-21" tabindex="-1"></a><span class="fu">length</span>(next_csv<span class="sc">$</span>Mice_name) </span>
+<span id="cb6-22"><a href="#cb6-22" tabindex="-1"></a></span>
+<span id="cb6-23"><a href="#cb6-23" tabindex="-1"></a><span class="co"># Does the distance column contains Not Available (Missing) Data?</span></span>
+<span id="cb6-24"><a href="#cb6-24" tabindex="-1"></a></span>
+<span id="cb6-25"><a href="#cb6-25" tabindex="-1"></a><span class="fu">is.na</span>(next_csv<span class="sc">$</span>travel)</span>
+<span id="cb6-26"><a href="#cb6-26" tabindex="-1"></a></span>
+<span id="cb6-27"><a href="#cb6-27" tabindex="-1"></a><span class="fu">mean</span>(next_csv<span class="sc">$</span>travel)</span>
+<span id="cb6-28"><a href="#cb6-28" tabindex="-1"></a></span>
+<span id="cb6-29"><a href="#cb6-29" tabindex="-1"></a><span class="fu">mean</span>(next_csv<span class="sc">$</span>travel, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="co"># disregard NA values while counting mean</span></span>
+<span id="cb6-30"><a href="#cb6-30" tabindex="-1"></a></span>
+<span id="cb6-31"><a href="#cb6-31" tabindex="-1"></a><span class="fu">sum</span>(next_csv<span class="sc">$</span>travel)</span>
+<span id="cb6-32"><a href="#cb6-32" tabindex="-1"></a></span>
+<span id="cb6-33"><a href="#cb6-33" tabindex="-1"></a><span class="fu">min</span>(next_csv<span class="sc">$</span>travel)</span>
+<span id="cb6-34"><a href="#cb6-34" tabindex="-1"></a></span>
+<span id="cb6-35"><a href="#cb6-35" tabindex="-1"></a><span class="fu">max</span>(next_csv<span class="sc">$</span>travel)<span class="dv">0</span></span></code></pre></div>
+<p><br />
+<br />
+</p>
+<hr />
+<p><br />
+<br />
+</p>
+</div>
+<div id="name-your-columns" class="section level2">
+<h2>Name your columns</h2>
+<p><br />
+</p>
+<p>You can further check and change the names of the columns in your
+data set.<br />
+</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="fu">colnames</span>(next_csv)   <span class="co"># names of columns</span></span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a><span class="co"># You can change those names:</span></span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a><span class="fu">names</span>(next_csv) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Here&quot;</span>, <span class="st">&quot;Put&quot;</span>, <span class="st">&quot;Names&quot;</span>)</span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a><span class="fu">names</span>(next_csv) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;No.&quot;</span>, <span class="st">&quot;Mice Name&quot;</span>, <span class="st">&quot;Distance&quot;</span>)</span>
+<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a><span class="fu">colnames</span>(next_csv)</span></code></pre></div>
+<p><br />
+<br />
+</p>
+<hr />
+<p><br />
+<br />
+</p>
+</div>
+<div id="create-subsets" class="section level2">
+<h2>Create subsets</h2>
+<p><br />
+</p>
+<p>Now we can divide our data set into smaller subsections.<br />
+Numeric indexing:<br />
+</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a>subsection1 <span class="ot">&lt;-</span> next_csv[,<span class="dv">2</span>]      <span class="co"># mice names only</span></span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>subsection2 <span class="ot">&lt;-</span> next_csv[<span class="dv">2</span>,<span class="dv">2</span>]     <span class="co"># only 2nd name of the mouse = Minnie</span></span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a>subsection3 <span class="ot">&lt;-</span> next_csv[<span class="dv">2</span>,]      <span class="co"># 1 row with Minnie data</span></span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a>subsection4 <span class="ot">&lt;-</span> next_csv[<span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>,]    <span class="co"># rows with Minnie, Mario and Betty data</span></span></code></pre></div>
+<p><br />
+</p>
+<p>Name indexing:<br />
+</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a>subsection11 <span class="ot">&lt;-</span> next_csv[,<span class="st">&quot;Mice Name&quot;</span>]      <span class="co"># mice names only</span></span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>subsection22 <span class="ot">&lt;-</span> next_csv[<span class="dv">2</span>,<span class="dv">2</span>]     <span class="co"># only 2nd name of the mouse = Minnie</span></span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a>subsection33 <span class="ot">&lt;-</span> next_csv[<span class="st">&quot;2&quot;</span>,]      <span class="co"># 1 row with Minnie data</span></span>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a>subsection44 <span class="ot">&lt;-</span> next_csv[<span class="st">&quot;2&quot;</span>,<span class="st">&quot;Mice Name&quot;</span>]    <span class="co"># only the name of the 2nd mouse</span></span>
+<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a>subsection55 <span class="ot">&lt;-</span> next_csv[<span class="st">&quot;2&quot;</span><span class="sc">:</span><span class="st">&quot;4&quot;</span>,<span class="st">&quot;Mice Name&quot;</span>] <span class="co"># only names of 2nd-4th mouse</span></span></code></pre></div>
+<p><br />
+</p>
+<p>Logical indexing:<br />
+</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a>subsection111 <span class="ot">&lt;-</span> next_csv[,next_csv<span class="sc">$</span><span class="st">`</span><span class="at">Mice Name</span><span class="st">`</span>]  <span class="co"># mice names only</span></span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a>subsection222 <span class="ot">&lt;-</span> next_csv[next_csv<span class="sc">$</span>No. <span class="sc">==</span> <span class="dv">2</span>,next_csv<span class="sc">$</span><span class="st">`</span><span class="at">Mice Name</span><span class="st">`</span>]     <span class="co"># only 2nd mouse name = Minnie</span></span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a>subsection333 <span class="ot">&lt;-</span> next_csv[next_csv<span class="sc">$</span>No. <span class="sc">==</span> <span class="dv">2</span>,]      <span class="co"># 1 row with Minnie data</span></span>
+<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a>subsection444 <span class="ot">&lt;-</span> next_csv[next_csv<span class="sc">$</span><span class="st">`</span><span class="at">Mice Name</span><span class="st">`</span><span class="sc">==</span><span class="st">&quot;Minnie&quot;</span>,]    <span class="co"># all rows for Minnie</span></span>
+<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a>subsection555 <span class="ot">&lt;-</span> next_csv[next_csv<span class="sc">$</span>No. <span class="sc">==</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>,<span class="st">&quot;Mice Name&quot;</span>] <span class="co"># only names of 2nd-4th mouse</span></span></code></pre></div>
+<p><br />
+<br />
+</p>
+<p>Did you notice that indexing requires square parenthesis ‘[]’, while
+functions used ‘()’?</p>
+<p><br />
+<br />
+</p>
+<hr />
+<p><br />
+<br />
+</p>
+</div>
+<div id="reminder-on-factors" class="section level2">
+<h2>Reminder on factors</h2>
+<p>Let’s remind you about factors! Look inside the Environment Tab -
+does ‘Mice Name’ appear as class character or rather a factor?<br />
+</p>
+<p>You might’ve noticed, some of the mice names come twice in the data
+set. We can distinguish it as a factors, in order to group the column of
+mice names into categories dependent on the name. We could also create
+an additional column specifying the gender of a mouse. This way we can
+further assess whether the group of male mice liked brie more than the
+female mice! We can also define another column, which would be a factor
+- we could define a group “Brie” and group “Gouda”. This way we could
+also get rid of the values below zero and only work on absolute
+values!<br />
+<br />
+</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="fu">is.factor</span>(next_csv<span class="sc">$</span><span class="st">`</span><span class="at">Mice Name</span><span class="st">`</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a>next_csv<span class="sc">$</span><span class="st">`</span><span class="at">Mice Name</span><span class="st">`</span> <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(next_csv<span class="sc">$</span><span class="st">`</span><span class="at">Mice Name</span><span class="st">`</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a><span class="co"># create a new column</span></span>
+<span id="cb11-5"><a href="#cb11-5" tabindex="-1"></a></span>
+<span id="cb11-6"><a href="#cb11-6" tabindex="-1"></a>mice_gender <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Male&quot;</span>, <span class="st">&quot;Female&quot;</span>, <span class="st">&quot;Male&quot;</span>, <span class="st">&quot;Female&quot;</span>,<span class="st">&quot;Male&quot;</span>, <span class="st">&quot;Male&quot;</span>, <span class="st">&quot;Male&quot;</span>, <span class="st">&quot;Female&quot;</span>, <span class="st">&quot;Male&quot;</span>, <span class="st">&quot;Female&quot;</span>, <span class="st">&quot;Female&quot;</span>, <span class="st">&quot;Male&quot;</span>)</span>
+<span id="cb11-7"><a href="#cb11-7" tabindex="-1"></a>next_csv <span class="ot">&lt;-</span> <span class="fu">cbind</span>(next_csv, mice_gender)  <span class="co"># (what to update, what to put in)</span></span>
+<span id="cb11-8"><a href="#cb11-8" tabindex="-1"></a></span>
+<span id="cb11-9"><a href="#cb11-9" tabindex="-1"></a><span class="fu">is.factor</span>(next_csv<span class="sc">$</span>mice_gender)</span>
+<span id="cb11-10"><a href="#cb11-10" tabindex="-1"></a>next_csv<span class="sc">$</span>mice_gender <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(next_csv<span class="sc">$</span>mice_gender)</span></code></pre></div>
+<p><br />
+<br />
+</p>
+<hr />
+<p><br />
+<br />
+</p>
+</div>
+<div id="delete-columns" class="section level2">
+<h2>Delete columns</h2>
+<p><br />
+</p>
+<p>Now, although now we work on a limited set of data, later we’ll work
+on much bigger sets, which will make us need to delete several parts of
+the table, in order to focus only on the elements of the table that
+interests us.<br />
+</p>
+<p>If any of the following gives you an error, you might want to
+reconsider creating data frame ‘next_csv’ once again and redo renaming
+the columns.<br />
+</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="co"># all 4 lines below perform the same action but with a different code</span></span>
+<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a>next_csv<span class="sc">$</span>No. <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a>next_csv <span class="ot">&lt;-</span> next_csv[,<span class="sc">-</span><span class="dv">1</span>] </span>
+<span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a>next_csv <span class="ot">&lt;-</span> next_csv[, <span class="sc">!</span><span class="fu">names</span>(next_csv) <span class="sc">==</span> <span class="st">&quot;No.&quot;</span>] </span>
+<span id="cb12-6"><a href="#cb12-6" tabindex="-1"></a>next_csv <span class="ot">&lt;-</span> next_csv[, <span class="sc">!</span><span class="fu">names</span>(next_csv) <span class="sc">%in%</span> <span class="st">&quot;No.&quot;</span>] </span>
+<span id="cb12-7"><a href="#cb12-7" tabindex="-1"></a></span>
+<span id="cb12-8"><a href="#cb12-8" tabindex="-1"></a></span>
+<span id="cb12-9"><a href="#cb12-9" tabindex="-1"></a><span class="co"># delete fragments of columns </span></span>
+<span id="cb12-10"><a href="#cb12-10" tabindex="-1"></a></span>
+<span id="cb12-11"><a href="#cb12-11" tabindex="-1"></a>next_csv <span class="ot">&lt;-</span> next_csv[<span class="sc">-</span><span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>, ]  <span class="co"># delete data for mice 2 to 4th </span></span>
+<span id="cb12-12"><a href="#cb12-12" tabindex="-1"></a>next_csv <span class="ot">&lt;-</span> next_csv[<span class="sc">-</span><span class="fu">c</span>(<span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>), ]  <span class="co"># delete data for mice 2 to 4th </span></span></code></pre></div>
+<p><br />
+<br />
+</p>
+<hr />
+<p><br />
+</p>
+</div>
+<div id="check-your-data-set" class="section level2">
+<h2>Check your data set</h2>
+<p><br />
+</p>
+<p>Reload the data frame again, so that it contains three columns : Mice
+Name, Distance and Mice Gender. Make that last one a factor and now
+let’s check and analyze our subsections of data!</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="co"># how many mice went after cheese which was located 12cm away from them?</span></span>
+<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a><span class="fu">length</span>(next_csv<span class="sc">$</span>Distance[next_csv<span class="sc">$</span>Distance <span class="sc">==</span> <span class="dv">12</span>])</span>
+<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a><span class="co"># how many mice were female?</span></span>
+<span id="cb13-5"><a href="#cb13-5" tabindex="-1"></a><span class="fu">length</span>(next_csv<span class="sc">$</span>mice_gender[next_csv<span class="sc">$</span>mice_gender <span class="sc">==</span> <span class="st">&quot;Female&quot;</span>])</span>
+<span id="cb13-6"><a href="#cb13-6" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" tabindex="-1"></a><span class="co"># how many mice were male?</span></span>
+<span id="cb13-8"><a href="#cb13-8" tabindex="-1"></a><span class="fu">length</span>(next_csv<span class="sc">$</span>mice_gender[next_csv<span class="sc">$</span>mice_gender <span class="sc">==</span> <span class="st">&quot;Male&quot;</span>])</span>
+<span id="cb13-9"><a href="#cb13-9" tabindex="-1"></a></span>
+<span id="cb13-10"><a href="#cb13-10" tabindex="-1"></a><span class="co"># how many mice were male AND went after cheese 12cm away?</span></span>
+<span id="cb13-11"><a href="#cb13-11" tabindex="-1"></a><span class="co"># this will show only data points where both conditions are met</span></span>
+<span id="cb13-12"><a href="#cb13-12" tabindex="-1"></a><span class="fu">length</span>(next_csv<span class="sc">$</span>mice_gender[next_csv<span class="sc">$</span>mice_gender <span class="sc">==</span> <span class="st">&quot;Male&quot;</span> <span class="sc">&amp;</span> next_csv<span class="sc">$</span>Distance <span class="sc">==</span> <span class="dv">12</span>])</span>
+<span id="cb13-13"><a href="#cb13-13" tabindex="-1"></a></span>
+<span id="cb13-14"><a href="#cb13-14" tabindex="-1"></a><span class="co"># how many mice were male OR went after cheese 12cm away?</span></span>
+<span id="cb13-15"><a href="#cb13-15" tabindex="-1"></a><span class="co"># this will show only data points where EITHER condition is met</span></span>
+<span id="cb13-16"><a href="#cb13-16" tabindex="-1"></a><span class="fu">length</span>(next_csv<span class="sc">$</span>mice_gender[next_csv<span class="sc">$</span>mice_gender <span class="sc">==</span> <span class="st">&quot;Male&quot;</span> <span class="sc">|</span> next_csv<span class="sc">$</span>Distance <span class="sc">==</span> <span class="dv">12</span>])</span>
+<span id="cb13-17"><a href="#cb13-17" tabindex="-1"></a></span>
+<span id="cb13-18"><a href="#cb13-18" tabindex="-1"></a><span class="co"># sort from smallest value to highest</span></span>
+<span id="cb13-19"><a href="#cb13-19" tabindex="-1"></a>next_csv<span class="sc">$</span>Distance <span class="ot">&lt;-</span> <span class="fu">sort</span>(next_csv<span class="sc">$</span>Distance) </span>
+<span id="cb13-20"><a href="#cb13-20" tabindex="-1"></a></span>
+<span id="cb13-21"><a href="#cb13-21" tabindex="-1"></a><span class="co"># sorts from highest to smallest value</span></span>
+<span id="cb13-22"><a href="#cb13-22" tabindex="-1"></a>next_csv<span class="sc">$</span>Distance <span class="ot">&lt;-</span> <span class="fu">sort</span>(next_csv<span class="sc">$</span>Distance, <span class="at">decreasing =</span> <span class="cn">TRUE</span>) </span>
+<span id="cb13-23"><a href="#cb13-23" tabindex="-1"></a></span>
+<span id="cb13-24"><a href="#cb13-24" tabindex="-1"></a><span class="co"># Check the order  of the values in &#39;Distance&#39;</span></span>
+<span id="cb13-25"><a href="#cb13-25" tabindex="-1"></a><span class="co"># This values inform you about the rank of the value</span></span>
+<span id="cb13-26"><a href="#cb13-26" tabindex="-1"></a>order_variable <span class="ot">&lt;-</span> <span class="fu">order</span>(next_csv<span class="sc">$</span>Distance) </span>
+<span id="cb13-27"><a href="#cb13-27" tabindex="-1"></a>next_csv <span class="ot">&lt;-</span> <span class="fu">cbind</span>(next_csv, order_variable)</span>
+<span id="cb13-28"><a href="#cb13-28" tabindex="-1"></a></span>
+<span id="cb13-29"><a href="#cb13-29" tabindex="-1"></a><span class="co"># character matching</span></span>
+<span id="cb13-30"><a href="#cb13-30" tabindex="-1"></a><span class="co"># do we have a mice name &quot;Minnie&quot;?</span></span>
+<span id="cb13-31"><a href="#cb13-31" tabindex="-1"></a></span>
+<span id="cb13-32"><a href="#cb13-32" tabindex="-1"></a><span class="fu">match</span>(<span class="st">&quot;Minnie&quot;</span>, next_csv<span class="sc">$</span><span class="st">`</span><span class="at">Mice Name</span><span class="st">`</span>) <span class="co"># match only returns ONE, first match!!!!!</span></span>
+<span id="cb13-33"><a href="#cb13-33" tabindex="-1"></a><span class="fu">grep</span>(<span class="st">&quot;Minnie&quot;</span>, next_csv<span class="sc">$</span><span class="st">`</span><span class="at">Mice Name</span><span class="st">`</span>)  <span class="co"># grep will show you both no. rows for Minnie</span></span>
+<span id="cb13-34"><a href="#cb13-34" tabindex="-1"></a></span>
+<span id="cb13-35"><a href="#cb13-35" tabindex="-1"></a><span class="co"># partial matching</span></span>
+<span id="cb13-36"><a href="#cb13-36" tabindex="-1"></a><span class="fu">grep</span>(<span class="st">&quot;Min&quot;</span>, next_csv<span class="sc">$</span><span class="st">`</span><span class="at">Mice Name</span><span class="st">`</span>) <span class="co"># all names containing &quot;Min&quot;</span></span>
+<span id="cb13-37"><a href="#cb13-37" tabindex="-1"></a><span class="fu">grep</span>(<span class="st">&quot;M&quot;</span>, next_csv<span class="sc">$</span><span class="st">`</span><span class="at">Mice Name</span><span class="st">`</span>)  <span class="co"># all names with capital M</span></span>
+<span id="cb13-38"><a href="#cb13-38" tabindex="-1"></a></span>
+<span id="cb13-39"><a href="#cb13-39" tabindex="-1"></a><span class="co"># which rows have a value of &quot;Minnie&quot; inside column &quot;Mice Name&quot;</span></span>
+<span id="cb13-40"><a href="#cb13-40" tabindex="-1"></a><span class="co"># returns a whole column of logical answers</span></span>
+<span id="cb13-41"><a href="#cb13-41" tabindex="-1"></a><span class="co"># This means it can help you deeply while analyzing data!!</span></span>
+<span id="cb13-42"><a href="#cb13-42" tabindex="-1"></a><span class="co"># Because you could redefine it to say &quot;Is this pH acidic?&quot;</span></span>
+<span id="cb13-43"><a href="#cb13-43" tabindex="-1"></a><span class="co"># or &quot;is my substance lipophilic enough to make that action in the cell?&quot;</span></span>
+<span id="cb13-44"><a href="#cb13-44" tabindex="-1"></a><span class="co"># or any other descriptor delimiting whether there&#39;s a visible action</span></span>
+<span id="cb13-45"><a href="#cb13-45" tabindex="-1"></a></span>
+<span id="cb13-46"><a href="#cb13-46" tabindex="-1"></a>next_csv<span class="sc">$</span><span class="st">`</span><span class="at">Mice Name</span><span class="st">`</span> <span class="sc">%in%</span> <span class="st">&quot;Minnie&quot;</span></span></code></pre></div>
+<p><br />
+<br />
+</p>
+<hr />
+<p><br />
+<br />
+</p>
+</div>
+<div id="tidyverse" class="section level2">
+<h2>tidyverse</h2>
+<p><br />
+<br />
+</p>
+<p>As earlier implied, functions available in the basic version of R
+might not be sufficient enough to answer all problems a user could
+have.<br />
+</p>
+<p>In Lesson 3 you were introduced to the creation of your own
+functions. If you made more than 10, it might be useful to consider
+taking them all together into a package. This way, instead of loading
+our 10+ functions to our Environment each time we start working, we can
+simply call ‘library()’ function and call all of our functions at
+once!<br />
+</p>
+<p>This course will not teach you how to make your own package, but will
+introduce you to the already existing ones, heavily recommended by data
+analysts.<br />
+<br />
+</p>
+<p>This package is <strong>Tidyverse</strong>, which includes several
+other packages inside - it’s like a Matryoshka doll! You can also think
+of it as a series of books, out of which all enable you to tidy your
+data set, but each will do so in a different manner.<br />
+</p>
+<p>You can check out the core tidyverse packages <a
+href="https://www.tidyverse.org/packages/">here</a>.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a>Mice_time <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Time1&quot;</span>, <span class="st">&quot;Time1&quot;</span>, <span class="st">&quot;Time2&quot;</span>, <span class="st">&quot;Time1&quot;</span>, <span class="st">&quot;Time3&quot;</span>, <span class="st">&quot;Time2&quot;</span>, <span class="st">&quot;Time1&quot;</span>, <span class="st">&quot;Time2&quot;</span>, <span class="st">&quot;Time1&quot;</span>, <span class="st">&quot;Time1&quot;</span>, <span class="st">&quot;Time1&quot;</span>, <span class="st">&quot;Time2&quot;</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a>next_csv5 <span class="ot">&lt;-</span> <span class="fu">cbind</span>(next_csv, Mice_time)</span>
+<span id="cb14-4"><a href="#cb14-4" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" tabindex="-1"></a>next_csv5<span class="sc">$</span>Mice_time <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(next_csv5<span class="sc">$</span>Mice_time)</span>
+<span id="cb14-6"><a href="#cb14-6" tabindex="-1"></a></span>
+<span id="cb14-7"><a href="#cb14-7" tabindex="-1"></a>logical_time1 <span class="ot">&lt;-</span> next_csv5<span class="sc">$</span>Mice_time <span class="sc">==</span> <span class="st">&quot;Time1&quot;</span></span>
+<span id="cb14-8"><a href="#cb14-8" tabindex="-1"></a></span>
+<span id="cb14-9"><a href="#cb14-9" tabindex="-1"></a>logical_time2 <span class="ot">&lt;-</span> next_csv5<span class="sc">$</span>Mice_time <span class="sc">==</span> <span class="st">&quot;Time2&quot;</span></span>
+<span id="cb14-10"><a href="#cb14-10" tabindex="-1"></a></span>
+<span id="cb14-11"><a href="#cb14-11" tabindex="-1"></a>logical_time3 <span class="ot">&lt;-</span> next_csv5<span class="sc">$</span>Mice_time <span class="sc">==</span> <span class="st">&quot;Time3&quot;</span></span>
+<span id="cb14-12"><a href="#cb14-12" tabindex="-1"></a></span>
+<span id="cb14-13"><a href="#cb14-13" tabindex="-1"></a>next_csv5 <span class="ot">&lt;-</span> <span class="fu">cbind</span>(next_csv5, logical_time1)</span>
+<span id="cb14-14"><a href="#cb14-14" tabindex="-1"></a></span>
+<span id="cb14-15"><a href="#cb14-15" tabindex="-1"></a>next_csv5 <span class="ot">&lt;-</span> <span class="fu">cbind</span>(next_csv5, logical_time2)</span>
+<span id="cb14-16"><a href="#cb14-16" tabindex="-1"></a></span>
+<span id="cb14-17"><a href="#cb14-17" tabindex="-1"></a>next_csv5 <span class="ot">&lt;-</span> <span class="fu">cbind</span>(next_csv5, logical_time3)</span>
+<span id="cb14-18"><a href="#cb14-18" tabindex="-1"></a>next_csv5<span class="sc">$</span>logical_time3 <span class="ot">&lt;-</span> <span class="fu">replace</span>(next_csv5<span class="sc">$</span>logical_time3, <span class="st">&quot;FALSE&quot;</span>, <span class="cn">NULL</span>)</span>
+<span id="cb14-19"><a href="#cb14-19" tabindex="-1"></a>next_csv5<span class="sc">$</span>logical_time3[next_csv5<span class="sc">$</span>logical_time3 <span class="sc">==</span> <span class="st">&quot;FALSE&quot;</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb14-20"><a href="#cb14-20" tabindex="-1"></a>next_csv5<span class="sc">$</span>logical_time2[next_csv5<span class="sc">$</span>logical_time2 <span class="sc">==</span> <span class="st">&quot;FALSE&quot;</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb14-21"><a href="#cb14-21" tabindex="-1"></a></span>
+<span id="cb14-22"><a href="#cb14-22" tabindex="-1"></a></span>
+<span id="cb14-23"><a href="#cb14-23" tabindex="-1"></a>next_csv5<span class="sc">$</span>Mice_time2 <span class="ot">&lt;-</span> <span class="fu">gather</span>(next_csv5, Distance, Mice_time, <span class="fu">c</span>(logical_time2, logical_time3))</span>
+<span id="cb14-24"><a href="#cb14-24" tabindex="-1"></a>next_csv5<span class="sc">$</span>logical_time3 <span class="ot">&lt;-</span> <span class="fu">as.character</span>(next_csv5<span class="sc">$</span>logical_time3)</span>
+<span id="cb14-25"><a href="#cb14-25" tabindex="-1"></a>next_csv5<span class="sc">$</span>logical_time2 <span class="ot">&lt;-</span> <span class="fu">as.character</span>(next_csv5<span class="sc">$</span>logical_time2)</span>
+<span id="cb14-26"><a href="#cb14-26" tabindex="-1"></a>DPLYR</span>
+<span id="cb14-27"><a href="#cb14-27" tabindex="-1"></a></span>
+<span id="cb14-28"><a href="#cb14-28" tabindex="-1"></a></span>
+<span id="cb14-29"><a href="#cb14-29" tabindex="-1"></a></span>
+<span id="cb14-30"><a href="#cb14-30" tabindex="-1"></a></span>
+<span id="cb14-31"><a href="#cb14-31" tabindex="-1"></a>Exclude Mice Name columns out of the data set</span>
+<span id="cb14-32"><a href="#cb14-32" tabindex="-1"></a></span>
+<span id="cb14-33"><a href="#cb14-33" tabindex="-1"></a>ext_csv3 <span class="ot">&lt;-</span> next_csv3[, <span class="fu">setdiff</span>(<span class="fu">colnames</span>(next_csv3), <span class="st">&quot;Mice Name&quot;</span>)]</span>
+<span id="cb14-34"><a href="#cb14-34" tabindex="-1"></a></span>
+<span id="cb14-35"><a href="#cb14-35" tabindex="-1"></a></span>
+<span id="cb14-36"><a href="#cb14-36" tabindex="-1"></a><span class="fu">select</span>(next_csv, <span class="st">&quot;Mice Name&quot;</span>) select only one column</span>
+<span id="cb14-37"><a href="#cb14-37" tabindex="-1"></a></span>
+<span id="cb14-38"><a href="#cb14-38" tabindex="-1"></a><span class="fu">select</span>(next_csv, <span class="sc">-</span><span class="st">&quot;Mice Name&quot;</span>) select everything BUT that one column</span>
+<span id="cb14-39"><a href="#cb14-39" tabindex="-1"></a></span>
+<span id="cb14-40"><a href="#cb14-40" tabindex="-1"></a><span class="fu">select</span>(next_csv, <span class="st">&quot;Mice Name&quot;</span><span class="sc">:</span><span class="st">&quot;mice_gender&quot;</span>) select everything from names to <span class="fu">gender</span> (<span class="dv">3</span> columns)</span>
+<span id="cb14-41"><a href="#cb14-41" tabindex="-1"></a></span>
+<span id="cb14-42"><a href="#cb14-42" tabindex="-1"></a><span class="fu">select</span>(next_csv, <span class="fu">starts_with</span>(<span class="st">&quot;M&quot;</span>)) <span class="co"># select only the columns with names starting with M</span></span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="fu">split</span>(next_csv, <span class="at">f =</span> next_csv<span class="sc">$</span><span class="st">&#39;Mice Name&#39;</span>)</span></code></pre></div>
+</div>
+<div id="functions" class="section level2">
+<h2>Functions</h2>
+<p><br />
+</p>
+<p><br />
+</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="co"># function_name &lt;- function(here you specify whether the function has arguments it needs to work, like specifying a number of times a function runs, or a set the function should use)</span></span>
+<span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" tabindex="-1"></a>my_function <span class="ot">&lt;-</span> <span class="cf">function</span>() { </span>
+<span id="cb16-5"><a href="#cb16-5" tabindex="-1"></a>  <span class="co"># here you&#39;d write instructions for what would your function do</span></span>
+<span id="cb16-6"><a href="#cb16-6" tabindex="-1"></a>  <span class="co"># it can be automating mathematical operations, like printing the mean of a given set and further presenting minimum, maximum of the set etc.</span></span>
+<span id="cb16-7"><a href="#cb16-7" tabindex="-1"></a>} </span></code></pre></div>
+<p><br />
+</p>
+<p>So consider that if you put any of the following statements, they can
+be automatized in a function, which small programs will exemplify you
+more.<br />
+<br />
+</p>
+<p>You can add a function, which means now you’d only have to write
+function(a,b) to get the result.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a>is_a_bigger <span class="ot">&lt;-</span> <span class="cf">function</span>(a,b) { </span>
+<span id="cb17-2"><a href="#cb17-2" tabindex="-1"></a>  <span class="cf">if</span> (a <span class="sc">&lt;</span> b) {</span>
+<span id="cb17-3"><a href="#cb17-3" tabindex="-1"></a>    <span class="fu">print</span>(<span class="st">&quot;b is greater than a &quot;</span>)</span>
+<span id="cb17-4"><a href="#cb17-4" tabindex="-1"></a>    } <span class="cf">else</span> {</span>
+<span id="cb17-5"><a href="#cb17-5" tabindex="-1"></a>      <span class="fu">print</span>(<span class="st">&quot;a is greater than b &quot;</span>)</span>
+<span id="cb17-6"><a href="#cb17-6" tabindex="-1"></a>    }</span>
+<span id="cb17-7"><a href="#cb17-7" tabindex="-1"></a>}</span>
+<span id="cb17-8"><a href="#cb17-8" tabindex="-1"></a></span>
+<span id="cb17-9"><a href="#cb17-9" tabindex="-1"></a><span class="fu">is_a_bigger</span>(a,b)</span>
+<span id="cb17-10"><a href="#cb17-10" tabindex="-1"></a><span class="fu">is_a_bigger</span>(<span class="dv">5</span>,<span class="dv">10</span>)</span>
+<span id="cb17-11"><a href="#cb17-11" tabindex="-1"></a><span class="fu">is_a_bigger</span>(<span class="dv">10</span>,<span class="dv">5</span>)</span></code></pre></div>
+<p><br />
+<br />
+</p>
+<hr />
+</div>
+<div id="infinite-loop-programs" class="section level2">
+<h2>Infinite loop programs</h2>
+<p><br />
+</p>
+<p>We can avoid having to write anything else than the value of a and b
+- by adding small elements to our code in order to allow us to see the
+prompt automatically coming back, asking to <img
+src="Lesson2_R/value_a.png" /> and further - <img
+src="Lesson2_R/value_b.png" /> and print us which value is greater
+than the other. You can see however that instead if print() function
+now, I used cat() in order to print both the string and the values
+attributed both to a and b.</p>
+<p><br />
+</p>
+<p>You can also see a ‘while’ (TRUE) which in this particular situation
+means the console will ask you to provide ‘a’ and ‘b’ all the time, in
+an infinite loop, not stopping until you click Esc.<br />
+<br />
+</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a>is_a_bigger <span class="ot">&lt;-</span> <span class="cf">function</span>(a,b) { </span>
+<span id="cb18-2"><a href="#cb18-2" tabindex="-1"></a>  <span class="cf">if</span> (a <span class="sc">&lt;</span> b) {</span>
+<span id="cb18-3"><a href="#cb18-3" tabindex="-1"></a>    <span class="fu">cat</span>(<span class="st">&quot;b (equal to &quot;</span>, b, <span class="st">&quot;)&quot;</span>, <span class="st">&quot; is greater than a (equal to &quot;</span>, a, <span class="st">&quot;)&quot;</span>)</span>
+<span id="cb18-4"><a href="#cb18-4" tabindex="-1"></a>    } <span class="cf">else</span> {</span>
+<span id="cb18-5"><a href="#cb18-5" tabindex="-1"></a>      <span class="fu">cat</span>(<span class="st">&quot;a (equal to &quot;</span>, a, <span class="st">&quot;)&quot;</span>, <span class="st">&quot; is greater than b (equal to &quot;</span>, b, <span class="st">&quot;)&quot;</span>)</span>
+<span id="cb18-6"><a href="#cb18-6" tabindex="-1"></a>    }</span>
+<span id="cb18-7"><a href="#cb18-7" tabindex="-1"></a>}</span>
+<span id="cb18-8"><a href="#cb18-8" tabindex="-1"></a></span>
+<span id="cb18-9"><a href="#cb18-9" tabindex="-1"></a><span class="cf">while</span> (<span class="cn">TRUE</span>){</span>
+<span id="cb18-10"><a href="#cb18-10" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">readline</span>(<span class="st">&quot;Enter value a:&quot;</span>))</span>
+<span id="cb18-11"><a href="#cb18-11" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">readline</span>(<span class="st">&quot;Enter value b:&quot;</span>))</span>
+<span id="cb18-12"><a href="#cb18-12" tabindex="-1"></a></span>
+<span id="cb18-13"><a href="#cb18-13" tabindex="-1"></a><span class="fu">is_a_bigger</span>(a,b)</span>
+<span id="cb18-14"><a href="#cb18-14" tabindex="-1"></a></span>
+<span id="cb18-15"><a href="#cb18-15" tabindex="-1"></a>}</span></code></pre></div>
+<p><br />
+<br />
+</p>
+<hr />
+<p><br />
+<br />
+</p>
+</div>
+</div>
+<div id="examples-of-programs" class="section level1">
+<h1><em><span style="text-decoration:underline">Examples of
+programs</span></em></h1>
+<p><br />
+<br />
+</p>
+<hr />
+<p><br />
+<br />
+</p>
+<div id="ph-estimation" class="section level2">
+<h2>pH estimation</h2>
+<p><br />
+<br />
+</p>
+<p>A good representation of if/else statements inside of a program is
+defining whether a given pH value is acidic, neutral or basic. This has
+its simple rules, which we can write as:</p>
+<ul>
+<li>if it’s between 1-6 it’s acidic</li>
+<li>if it’s between 8-14 it’s basic</li>
+<li>if it’s 7 it’s neutral<br />
+</li>
+</ul>
+<p>We can implement these rules in our code!<br />
+</p>
+<p>You can see that in the next code snippet. Examine the lines and try
+to understand each of them. Focus on how the conditions are written.
+Which types of operators are used here?</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a><span class="cf">while</span> (<span class="cn">TRUE</span>) {</span>
+<span id="cb19-2"><a href="#cb19-2" tabindex="-1"></a>  pH <span class="ot">&lt;-</span> <span class="fu">readline</span>(<span class="at">prompt =</span> <span class="st">&quot;Enter pH value: &quot;</span>)</span>
+<span id="cb19-3"><a href="#cb19-3" tabindex="-1"></a>  pH <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(pH)</span>
+<span id="cb19-4"><a href="#cb19-4" tabindex="-1"></a>  </span>
+<span id="cb19-5"><a href="#cb19-5" tabindex="-1"></a><span class="co"># Check if pH is greater than 7, less than 7 or equal to 7 and give conditions</span></span>
+<span id="cb19-6"><a href="#cb19-6" tabindex="-1"></a>  </span>
+<span id="cb19-7"><a href="#cb19-7" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">is.numeric</span>(pH) <span class="sc">&amp;&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(pH)) {</span>
+<span id="cb19-8"><a href="#cb19-8" tabindex="-1"></a>    </span>
+<span id="cb19-9"><a href="#cb19-9" tabindex="-1"></a>    <span class="cf">if</span> (pH <span class="sc">&gt;</span> <span class="dv">14</span>) {</span>
+<span id="cb19-10"><a href="#cb19-10" tabindex="-1"></a>      </span>
+<span id="cb19-11"><a href="#cb19-11" tabindex="-1"></a>      <span class="fu">print</span>(<span class="st">&quot;pH can only have a value between 0 and 14. Please enter the value fitting such profile.&quot;</span>)</span>
+<span id="cb19-12"><a href="#cb19-12" tabindex="-1"></a>      </span>
+<span id="cb19-13"><a href="#cb19-13" tabindex="-1"></a>    } <span class="cf">else</span> <span class="cf">if</span> (pH <span class="sc">&lt;</span> <span class="dv">7</span> <span class="sc">&amp;&amp;</span> pH <span class="sc">&gt;=</span> <span class="dv">0</span>) {</span>
+<span id="cb19-14"><a href="#cb19-14" tabindex="-1"></a>      </span>
+<span id="cb19-15"><a href="#cb19-15" tabindex="-1"></a>      <span class="fu">print</span>(<span class="st">&quot;Your pH is acidic&quot;</span>)</span>
+<span id="cb19-16"><a href="#cb19-16" tabindex="-1"></a>      </span>
+<span id="cb19-17"><a href="#cb19-17" tabindex="-1"></a>    } <span class="cf">else</span> <span class="cf">if</span> (pH <span class="sc">&gt;</span> <span class="dv">7</span> <span class="sc">&amp;&amp;</span> pH <span class="sc">&lt;=</span> <span class="dv">14</span>) {</span>
+<span id="cb19-18"><a href="#cb19-18" tabindex="-1"></a>      </span>
+<span id="cb19-19"><a href="#cb19-19" tabindex="-1"></a>      <span class="fu">print</span>(<span class="st">&quot;Your pH is basic&quot;</span>)</span>
+<span id="cb19-20"><a href="#cb19-20" tabindex="-1"></a>      </span>
+<span id="cb19-21"><a href="#cb19-21" tabindex="-1"></a>    } <span class="cf">else</span> <span class="cf">if</span> (pH<span class="sc">==</span><span class="dv">7</span>) {</span>
+<span id="cb19-22"><a href="#cb19-22" tabindex="-1"></a>      </span>
+<span id="cb19-23"><a href="#cb19-23" tabindex="-1"></a>      <span class="fu">print</span>(<span class="st">&quot;Your pH is neutral&quot;</span>)</span>
+<span id="cb19-24"><a href="#cb19-24" tabindex="-1"></a>      </span>
+<span id="cb19-25"><a href="#cb19-25" tabindex="-1"></a>    } </span>
+<span id="cb19-26"><a href="#cb19-26" tabindex="-1"></a>  }   <span class="cf">else</span> {</span>
+<span id="cb19-27"><a href="#cb19-27" tabindex="-1"></a>    <span class="fu">print</span>(<span class="st">&quot;Invalid input. Please enter a numeric value for pH.&quot;</span>)</span>
+<span id="cb19-28"><a href="#cb19-28" tabindex="-1"></a>    }</span>
+<span id="cb19-29"><a href="#cb19-29" tabindex="-1"></a>}</span></code></pre></div>
+<p><br />
+</p>
+<p>This program doesn’t have a difficult task. Any chemist or bright
+highschooler can tell you whether a given pH value is acidic or
+basic.<br />
+</p>
+<p>However, such program can be useful if we have a table of data, where
+we have a certain biological effect occurring with severity dependent on
+the pH value. Then we could use our script to create an additional
+column stating whether the pH is acidic or not.<br />
+</p>
+<p>Such applicability might be <strong>identifying cancer cells</strong>
+- given that they happen to keep a more <strong>acidic pH</strong> in
+the extracellular matrix than healthy cells. Hence, if we had fragments
+of cancerous and healthy tissues, we could use a <em><span
+style="text-decoration:underline">program estimating whether the pH we
+measured is acidic or not, as it will help us identify which tissues
+might be cancerous!</span></em></p>
+<p><br />
+<br />
+</p>
+<hr />
+<p><br />
+<br />
+</p>
+</div>
+<div id="guessing-game" class="section level2">
+<h2>Guessing Game</h2>
+<blockquote>
+<p>What if we wanted our program to stop working while encountering a
+specific value?</p>
+</blockquote>
+<p><br />
+</p>
+<p>While we work, there are some situations which would make us stop. It
+might be our boss telling us it’s the end of the day or a stomach ache,
+reminding you it’s time for lunch.<br />
+</p>
+<p>In the same manner you can break the ‘while (TRUE)’ loop, in order to
+stop receiving a prompt in the console, asking us to provide a given
+value. We can do that with ‘break’.<br />
+<br />
+</p>
+<p>Let’s now consider another program running in the console. Copy the
+code to RStudio and check the output.<br />
+<br />
+</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a>random_number <span class="ot">&lt;-</span> <span class="dv">7</span></span>
+<span id="cb20-2"><a href="#cb20-2" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb20-3"><a href="#cb20-3" tabindex="-1"></a></span>
+<span id="cb20-4"><a href="#cb20-4" tabindex="-1"></a><span class="cf">while</span> (<span class="cn">TRUE</span>) {</span>
+<span id="cb20-5"><a href="#cb20-5" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">readline</span>(<span class="at">prompt =</span> <span class="st">&quot;Enter a number:&quot;</span>)</span>
+<span id="cb20-6"><a href="#cb20-6" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">as.integer</span>(x)</span>
+<span id="cb20-7"><a href="#cb20-7" tabindex="-1"></a></span>
+<span id="cb20-8"><a href="#cb20-8" tabindex="-1"></a><span class="cf">if</span> (x <span class="sc">!=</span> random_number) {</span>
+<span id="cb20-9"><a href="#cb20-9" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;Wrong number, try again.&quot;</span>)</span>
+<span id="cb20-10"><a href="#cb20-10" tabindex="-1"></a>}</span>
+<span id="cb20-11"><a href="#cb20-11" tabindex="-1"></a><span class="cf">else</span> <span class="cf">if</span> (x <span class="sc">==</span> random_number) {</span>
+<span id="cb20-12"><a href="#cb20-12" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;Bravo!&quot;</span>)</span>
+<span id="cb20-13"><a href="#cb20-13" tabindex="-1"></a>  <span class="cf">break</span></span>
+<span id="cb20-14"><a href="#cb20-14" tabindex="-1"></a>  </span>
+<span id="cb20-15"><a href="#cb20-15" tabindex="-1"></a>  }</span>
+<span id="cb20-16"><a href="#cb20-16" tabindex="-1"></a>}</span></code></pre></div>
+<p><br />
+<br />
+</p>
+<p>This program allows you to guess a number you stated before
+activating the while (TRUE) loop. However, if the input number is equal
+to the random number we want to guess, the program will stop, right
+after printing “Bravo!”.<br />
+</p>
+<p>Hence ‘break’ allows you to stop the infinite loop after you guess
+correctly!<br />
+<br />
+</p>
+<p>Now, just for fun, check out the next code:<br />
+<br />
+</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a><span class="cf">while</span> (<span class="cn">TRUE</span>) {</span>
+<span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb21-3"><a href="#cb21-3" tabindex="-1"></a>  random_number <span class="ot">&lt;-</span> <span class="fu">floor</span>(<span class="fu">runif</span>(<span class="dv">1</span>, <span class="at">min=</span><span class="dv">1</span>, <span class="at">max =</span> <span class="dv">99</span>))</span>
+<span id="cb21-4"><a href="#cb21-4" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">readline</span>(<span class="at">prompt =</span> <span class="st">&quot;Enter a number from 1 to 99:&quot;</span>)</span>
+<span id="cb21-5"><a href="#cb21-5" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">as.integer</span>(x)</span>
+<span id="cb21-6"><a href="#cb21-6" tabindex="-1"></a>  </span>
+<span id="cb21-7"><a href="#cb21-7" tabindex="-1"></a>  <span class="cf">if</span> (x <span class="sc">!=</span> random_number) {</span>
+<span id="cb21-8"><a href="#cb21-8" tabindex="-1"></a>    <span class="fu">cat</span>(<span class="st">&quot;Wrong number, it was&quot;</span>, random_number, <span class="st">&quot;, try again.&quot;</span>)</span>
+<span id="cb21-9"><a href="#cb21-9" tabindex="-1"></a>  }</span>
+<span id="cb21-10"><a href="#cb21-10" tabindex="-1"></a>  <span class="cf">else</span> <span class="cf">if</span> (x <span class="sc">==</span> random_number) {</span>
+<span id="cb21-11"><a href="#cb21-11" tabindex="-1"></a>    <span class="fu">print</span>(<span class="st">&quot;Bravo!&quot;</span>)</span>
+<span id="cb21-12"><a href="#cb21-12" tabindex="-1"></a>    <span class="cf">break</span></span>
+<span id="cb21-13"><a href="#cb21-13" tabindex="-1"></a>    </span>
+<span id="cb21-14"><a href="#cb21-14" tabindex="-1"></a>  }</span>
+<span id="cb21-15"><a href="#cb21-15" tabindex="-1"></a>}</span></code></pre></div>
+<p><br />
+</p>
+<p>Here you can see that random_number is not strictly defined before
+the program runs. Instead, we run ‘floor()’ and ‘runif()’ in order to
+generate a number each time we try to guess! You can try to run the
+program yourself and see whether you are lucky to guess at a glance!</p>
+<p><br />
+<br />
+</p>
+<hr />
+<p><br />
+<br />
+</p>
+</div>
+<div id="password-generator" class="section level2">
+<h2>Password Generator</h2>
+<p>Another interesting R program is the password generator. Analyze the
+code below to understand how such generator works. You can activate the
+code in RStudio if you want to try it out!</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a><span class="co"># we put everything in while TRUE in order to keep the console asking us for the prompt</span></span>
+<span id="cb22-2"><a href="#cb22-2" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" tabindex="-1"></a><span class="cf">while</span> (<span class="cn">TRUE</span>) {</span>
+<span id="cb22-4"><a href="#cb22-4" tabindex="-1"></a><span class="co"># now we set the function to generate passwords. We define that the only variable the function needs is the length of the password</span></span>
+<span id="cb22-5"><a href="#cb22-5" tabindex="-1"></a>  </span>
+<span id="cb22-6"><a href="#cb22-6" tabindex="-1"></a>generate_password <span class="ot">&lt;-</span> <span class="cf">function</span>(desired_password_length) {</span>
+<span id="cb22-7"><a href="#cb22-7" tabindex="-1"></a>  </span>
+<span id="cb22-8"><a href="#cb22-8" tabindex="-1"></a><span class="co"># we define the set of elements acceptable inside our password</span></span>
+<span id="cb22-9"><a href="#cb22-9" tabindex="-1"></a>  </span>
+<span id="cb22-10"><a href="#cb22-10" tabindex="-1"></a>  elements <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;d&quot;</span>, <span class="st">&quot;e&quot;</span>, <span class="st">&quot;f&quot;</span>, <span class="st">&quot;g&quot;</span>, <span class="st">&quot;h&quot;</span>, <span class="st">&quot;i&quot;</span>, <span class="st">&quot;j&quot;</span>, <span class="st">&quot;k&quot;</span>, <span class="st">&quot;l&quot;</span>,</span>
+<span id="cb22-11"><a href="#cb22-11" tabindex="-1"></a>             <span class="st">&quot;m&quot;</span>, <span class="st">&quot;n&quot;</span>, <span class="st">&quot;o&quot;</span>, <span class="st">&quot;p&quot;</span>, <span class="st">&quot;q&quot;</span>, <span class="st">&quot;r&quot;</span>, <span class="st">&quot;s&quot;</span>, <span class="st">&quot;t&quot;</span>, <span class="st">&quot;u&quot;</span>, <span class="st">&quot;v&quot;</span>, <span class="st">&quot;w&quot;</span>, <span class="st">&quot;x&quot;</span>,</span>
+<span id="cb22-12"><a href="#cb22-12" tabindex="-1"></a>             <span class="st">&quot;y&quot;</span>, <span class="st">&quot;z&quot;</span>, <span class="st">&quot;0&quot;</span>, <span class="st">&quot;1&quot;</span>, <span class="st">&quot;2&quot;</span>, <span class="st">&quot;3&quot;</span>, <span class="st">&quot;4&quot;</span>, <span class="st">&quot;5&quot;</span>, <span class="st">&quot;6&quot;</span>, <span class="st">&quot;7&quot;</span>, <span class="st">&quot;8&quot;</span>, <span class="st">&quot;9&quot;</span>)</span>
+<span id="cb22-13"><a href="#cb22-13" tabindex="-1"></a></span>
+<span id="cb22-14"><a href="#cb22-14" tabindex="-1"></a><span class="co"># we create an empty variable that the function will fill </span></span>
+<span id="cb22-15"><a href="#cb22-15" tabindex="-1"></a>  <span class="co"># and we treat that password as a string (character class)</span></span>
+<span id="cb22-16"><a href="#cb22-16" tabindex="-1"></a>  password <span class="ot">&lt;-</span> <span class="st">&quot;&quot;</span></span>
+<span id="cb22-17"><a href="#cb22-17" tabindex="-1"></a>  </span>
+<span id="cb22-18"><a href="#cb22-18" tabindex="-1"></a><span class="co"># now we state that until we reach the desired length of the password,</span></span>
+<span id="cb22-19"><a href="#cb22-19" tabindex="-1"></a>  <span class="co"># the function should generate each and every element</span></span>
+<span id="cb22-20"><a href="#cb22-20" tabindex="-1"></a>  <span class="co"># so this means &quot;while the length is not final yet, keep generating elements&quot;</span></span>
+<span id="cb22-21"><a href="#cb22-21" tabindex="-1"></a>  </span>
+<span id="cb22-22"><a href="#cb22-22" tabindex="-1"></a>  <span class="cf">while</span> (<span class="fu">nchar</span>(password) <span class="sc">&lt;</span> desired_password_length) {</span>
+<span id="cb22-23"><a href="#cb22-23" tabindex="-1"></a>    </span>
+<span id="cb22-24"><a href="#cb22-24" tabindex="-1"></a><span class="co"># elements generation with &#39;sample&#39; and updating the variable each time the loop is performed</span></span>
+<span id="cb22-25"><a href="#cb22-25" tabindex="-1"></a>    <span class="co"># you can see that sample uses elements variable in order to generate passwords</span></span>
+<span id="cb22-26"><a href="#cb22-26" tabindex="-1"></a>    <span class="co"># sep means separating element. Here we set it blankm, as we don&#39;t want any delimiters </span></span>
+<span id="cb22-27"><a href="#cb22-27" tabindex="-1"></a>    <span class="co"># between the letters</span></span>
+<span id="cb22-28"><a href="#cb22-28" tabindex="-1"></a>    </span>
+<span id="cb22-29"><a href="#cb22-29" tabindex="-1"></a>    password <span class="ot">&lt;-</span> <span class="fu">paste</span>(password, <span class="fu">sample</span>(elements, <span class="dv">1</span>), <span class="at">sep =</span> <span class="st">&quot;&quot;</span>)</span>
+<span id="cb22-30"><a href="#cb22-30" tabindex="-1"></a>  }</span>
+<span id="cb22-31"><a href="#cb22-31" tabindex="-1"></a>  </span>
+<span id="cb22-32"><a href="#cb22-32" tabindex="-1"></a>  <span class="fu">return</span>(password)</span>
+<span id="cb22-33"><a href="#cb22-33" tabindex="-1"></a>}</span>
+<span id="cb22-34"><a href="#cb22-34" tabindex="-1"></a></span>
+<span id="cb22-35"><a href="#cb22-35" tabindex="-1"></a><span class="co"># here, we closed all {} parenthesis BESIDES &#39;while(TRUE)&#39;</span></span>
+<span id="cb22-36"><a href="#cb22-36" tabindex="-1"></a><span class="co"># this means we closed of alll instructions besides</span></span>
+<span id="cb22-37"><a href="#cb22-37" tabindex="-1"></a><span class="co"># the one that keeps the prompt active</span></span>
+<span id="cb22-38"><a href="#cb22-38" tabindex="-1"></a></span>
+<span id="cb22-39"><a href="#cb22-39" tabindex="-1"></a></span>
+<span id="cb22-40"><a href="#cb22-40" tabindex="-1"></a><span class="co"># start the counter so that the function knows </span></span>
+<span id="cb22-41"><a href="#cb22-41" tabindex="-1"></a><span class="co"># how many passwords it generated</span></span>
+<span id="cb22-42"><a href="#cb22-42" tabindex="-1"></a></span>
+<span id="cb22-43"><a href="#cb22-43" tabindex="-1"></a>count <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb22-44"><a href="#cb22-44" tabindex="-1"></a></span>
+<span id="cb22-45"><a href="#cb22-45" tabindex="-1"></a><span class="co"># ask prompt about the length of the desired password:</span></span>
+<span id="cb22-46"><a href="#cb22-46" tabindex="-1"></a></span>
+<span id="cb22-47"><a href="#cb22-47" tabindex="-1"></a>password_length <span class="ot">&lt;-</span> <span class="fu">as.integer</span>(<span class="fu">readline</span>(<span class="st">&quot;Desired password length: &quot;</span>))</span>
+<span id="cb22-48"><a href="#cb22-48" tabindex="-1"></a></span>
+<span id="cb22-49"><a href="#cb22-49" tabindex="-1"></a><span class="co"># check whether provided number is a natural number, is it even stated is it NA? is it Not Available Data?</span></span>
+<span id="cb22-50"><a href="#cb22-50" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">is.na</span>(password_length) <span class="sc">||</span> password_length <span class="sc">&lt;=</span> <span class="dv">0</span>) {</span>
+<span id="cb22-51"><a href="#cb22-51" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">&quot;You have to provide a number higher than 0.</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb22-52"><a href="#cb22-52" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb22-53"><a href="#cb22-53" tabindex="-1"></a><span class="co"># ask prompt about the no. passwords to generate</span></span>
+<span id="cb22-54"><a href="#cb22-54" tabindex="-1"></a>  </span>
+<span id="cb22-55"><a href="#cb22-55" tabindex="-1"></a>  no_passwords <span class="ot">&lt;-</span> <span class="fu">as.integer</span>(<span class="fu">readline</span>(<span class="st">&quot;Desired number of generated passwords: &quot;</span>))</span>
+<span id="cb22-56"><a href="#cb22-56" tabindex="-1"></a>  </span>
+<span id="cb22-57"><a href="#cb22-57" tabindex="-1"></a><span class="co"># is the provided value bigger than 0?</span></span>
+<span id="cb22-58"><a href="#cb22-58" tabindex="-1"></a>  </span>
+<span id="cb22-59"><a href="#cb22-59" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">is.na</span>(no_passwords) <span class="sc">||</span> no_passwords <span class="sc">&lt;=</span> <span class="dv">0</span>) {</span>
+<span id="cb22-60"><a href="#cb22-60" tabindex="-1"></a>    <span class="fu">cat</span>(<span class="st">&quot;You have to provide a number higher than 0.</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb22-61"><a href="#cb22-61" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb22-62"><a href="#cb22-62" tabindex="-1"></a>    </span>
+<span id="cb22-63"><a href="#cb22-63" tabindex="-1"></a><span class="co"># state that the function should run until it has enough passwords</span></span>
+<span id="cb22-64"><a href="#cb22-64" tabindex="-1"></a>    <span class="co"># if after generating the next password the count is still lower than </span></span>
+<span id="cb22-65"><a href="#cb22-65" tabindex="-1"></a>    <span class="co"># desired number of passwords, the no. count should be updated</span></span>
+<span id="cb22-66"><a href="#cb22-66" tabindex="-1"></a>    <span class="co"># and the program should run until it provided enough passwords</span></span>
+<span id="cb22-67"><a href="#cb22-67" tabindex="-1"></a>    </span>
+<span id="cb22-68"><a href="#cb22-68" tabindex="-1"></a>    <span class="cf">while</span> (count <span class="sc">&lt;</span> no_passwords) {</span>
+<span id="cb22-69"><a href="#cb22-69" tabindex="-1"></a>      count <span class="ot">&lt;-</span> count <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb22-70"><a href="#cb22-70" tabindex="-1"></a>      </span>
+<span id="cb22-71"><a href="#cb22-71" tabindex="-1"></a><span class="co"># execute the password creation</span></span>
+<span id="cb22-72"><a href="#cb22-72" tabindex="-1"></a>      </span>
+<span id="cb22-73"><a href="#cb22-73" tabindex="-1"></a>      password <span class="ot">&lt;-</span> <span class="fu">generate_password</span>(password_length)</span>
+<span id="cb22-74"><a href="#cb22-74" tabindex="-1"></a>      </span>
+<span id="cb22-75"><a href="#cb22-75" tabindex="-1"></a><span class="co"># show created passwords in the console, with their respective indices</span></span>
+<span id="cb22-76"><a href="#cb22-76" tabindex="-1"></a>      </span>
+<span id="cb22-77"><a href="#cb22-77" tabindex="-1"></a>      <span class="fu">cat</span>(<span class="st">&quot;Passwords&quot;</span>, count, <span class="st">&quot;:&quot;</span>, password, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb22-78"><a href="#cb22-78" tabindex="-1"></a>    }</span>
+<span id="cb22-79"><a href="#cb22-79" tabindex="-1"></a>    </span>
+<span id="cb22-80"><a href="#cb22-80" tabindex="-1"></a><span class="co"># Show the count</span></span>
+<span id="cb22-81"><a href="#cb22-81" tabindex="-1"></a>    </span>
+<span id="cb22-82"><a href="#cb22-82" tabindex="-1"></a>    <span class="fu">cat</span>(<span class="st">&quot;The function run count:&quot;</span>, count, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb22-83"><a href="#cb22-83" tabindex="-1"></a>  }</span>
+<span id="cb22-84"><a href="#cb22-84" tabindex="-1"></a>}</span>
+<span id="cb22-85"><a href="#cb22-85" tabindex="-1"></a></span>
+<span id="cb22-86"><a href="#cb22-86" tabindex="-1"></a>}</span></code></pre></div>
+<p><br />
+<br />
+</p>
+<hr />
+<p><br />
+<br />
+</p>
+</div>
+<div id="atom-masses-provider" class="section level2">
+<h2>Atom masses provider</h2>
+<p><br />
+<br />
+</p>
+<p>You saw that functions can rely on variables and their content during
+their work. It means the function can also be a dictionary for
+you!<br />
+<br />
+</p>
+<p>You could create a program that would provide you a definition to a
+given word, like translate program allowing you to learn languages
+faster or… a program that prints you the mass of a single element in
+Mendeleyev’s Table!<br />
+</p>
+<p>No more do you have to check the Table again!</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a><span class="co"># Define a list of atomic masses from the Mendeleyev&#39;s Table</span></span>
+<span id="cb23-2"><a href="#cb23-2" tabindex="-1"></a></span>
+<span id="cb23-3"><a href="#cb23-3" tabindex="-1"></a>atomic_mass <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;H&quot;</span><span class="ot">=</span> <span class="fl">1.0079</span>, <span class="st">&quot;He&quot;</span><span class="ot">=</span> <span class="fl">4.0026</span>, <span class="st">&quot;Li&quot;</span><span class="ot">=</span> <span class="fl">6.941</span>, <span class="st">&quot;Be&quot;</span><span class="ot">=</span> <span class="fl">9.0122</span>,<span class="st">&quot;B&quot;</span><span class="ot">=</span> <span class="fl">10.811</span>, <span class="st">&quot;C&quot;</span><span class="ot">=</span> <span class="fl">12.011</span>, <span class="st">&quot;N&quot;</span><span class="ot">=</span> <span class="fl">14.007</span>, <span class="st">&quot;O&quot;</span><span class="ot">=</span> <span class="fl">15.999</span>, <span class="st">&quot;F&quot;</span><span class="ot">=</span> <span class="fl">18.998</span>,  <span class="st">&quot;Ne&quot;</span><span class="ot">=</span> <span class="fl">20.180</span>, <span class="st">&quot;Na&quot;</span><span class="ot">=</span> <span class="fl">22.990</span>, <span class="st">&quot;Mg&quot;</span><span class="ot">=</span> <span class="fl">24.305</span>, <span class="st">&quot;Al&quot;</span><span class="ot">=</span> <span class="fl">26.982</span>,  <span class="st">&quot;Si&quot;</span><span class="ot">=</span> <span class="fl">28.086</span>, <span class="st">&quot;P&quot;</span><span class="ot">=</span> <span class="fl">30.974</span>, <span class="st">&quot;S&quot;</span><span class="ot">=</span> <span class="fl">32.065</span>, <span class="st">&quot;Cl&quot;</span><span class="ot">=</span> <span class="fl">35.453</span>,  <span class="st">&quot;Ar&quot;</span><span class="ot">=</span> <span class="fl">39.948</span>, <span class="st">&quot;K&quot;</span><span class="ot">=</span> <span class="fl">39.098</span>, <span class="st">&quot;Ca&quot;</span><span class="ot">=</span> <span class="fl">40.078</span>, <span class="st">&quot;Sc&quot;</span><span class="ot">=</span> <span class="fl">44.956</span>,  <span class="st">&quot;Ti&quot;</span><span class="ot">=</span> <span class="fl">47.867</span>, <span class="st">&quot;V&quot;</span><span class="ot">=</span> <span class="fl">50.942</span>, <span class="st">&quot;Cr&quot;</span><span class="ot">=</span> <span class="fl">51.996</span>, <span class="st">&quot;Mn&quot;</span><span class="ot">=</span> <span class="fl">54.938</span>,  <span class="st">&quot;Fe&quot;</span><span class="ot">=</span> <span class="fl">55.845</span>, <span class="st">&quot;Co&quot;</span><span class="ot">=</span> <span class="fl">58.933</span>, <span class="st">&quot;Ni&quot;</span><span class="ot">=</span> <span class="fl">58.693</span>, <span class="st">&quot;Cu&quot;</span><span class="ot">=</span> <span class="fl">63.546</span>,  <span class="st">&quot;Zn&quot;</span><span class="ot">=</span> <span class="fl">65.39</span>, <span class="st">&quot;Ga&quot;</span><span class="ot">=</span> <span class="fl">69.723</span>, <span class="st">&quot;Ge&quot;</span><span class="ot">=</span> <span class="fl">72.61</span>, <span class="st">&quot;As&quot;</span><span class="ot">=</span> <span class="fl">74.922</span>,  <span class="st">&quot;Se&quot;</span><span class="ot">=</span><span class="fl">78.96</span>, <span class="st">&quot;Br&quot;</span><span class="ot">=</span> <span class="fl">79.904</span>, <span class="st">&quot;Kr&quot;</span><span class="ot">=</span> <span class="fl">83.80</span>, <span class="st">&quot;Rb&quot;</span><span class="ot">=</span> <span class="fl">85.468</span>, <span class="st">&quot;Sr&quot;</span><span class="ot">=</span> <span class="fl">87.62</span>,  <span class="st">&quot;Y&quot;</span><span class="ot">=</span> <span class="fl">88.906</span>, <span class="st">&quot;Zr&quot;</span><span class="ot">=</span> <span class="fl">91.224</span>, <span class="st">&quot;Nb&quot;</span><span class="ot">=</span> <span class="fl">92.906</span>, <span class="st">&quot;Mo&quot;</span><span class="ot">=</span> <span class="fl">95.94</span>,  <span class="st">&quot;Tc&quot;</span><span class="ot">=</span> <span class="fl">97.61</span>, <span class="st">&quot;Ru&quot;</span><span class="ot">=</span> <span class="fl">101.07</span>, <span class="st">&quot;Rh&quot;</span><span class="ot">=</span> <span class="fl">102.91</span>, <span class="st">&quot;Pd&quot;</span><span class="ot">=</span> <span class="fl">106.42</span>,  <span class="st">&quot;Ag&quot;</span><span class="ot">=</span> <span class="fl">107.87</span>, <span class="st">&quot;Cd&quot;</span><span class="ot">=</span> <span class="fl">112.41</span>, <span class="st">&quot;In&quot;</span><span class="ot">=</span> <span class="fl">114.82</span>, <span class="st">&quot;Sn&quot;</span><span class="ot">=</span> <span class="fl">118.71</span>,  <span class="st">&quot;Sb&quot;</span><span class="ot">=</span> <span class="fl">121.76</span>, <span class="st">&quot;Te&quot;</span><span class="ot">=</span> <span class="fl">127.60</span>, <span class="st">&quot;I&quot;</span><span class="ot">=</span> <span class="fl">126.90</span>, <span class="st">&quot;Xe&quot;</span><span class="ot">=</span> <span class="fl">131.29</span>,  <span class="st">&quot;Cs&quot;</span><span class="ot">=</span> <span class="fl">132.91</span>, <span class="st">&quot;Ba&quot;</span><span class="ot">=</span> <span class="fl">137.33</span>, <span class="st">&quot;La&quot;</span><span class="ot">=</span> <span class="fl">138.91</span>, <span class="st">&quot;Ce&quot;</span><span class="ot">=</span> <span class="fl">140.12</span>,  <span class="st">&quot;Pr&quot;</span><span class="ot">=</span> <span class="fl">140.91</span>, <span class="st">&quot;Nd&quot;</span><span class="ot">=</span> <span class="fl">144.24</span>, <span class="st">&quot;Pm&quot;</span><span class="ot">=</span> <span class="fl">145.0</span>, <span class="st">&quot;Sm&quot;</span><span class="ot">=</span> <span class="fl">150.36</span>, <span class="st">&quot;Eu&quot;</span><span class="ot">=</span> <span class="fl">151.96</span>,  <span class="st">&quot;Gd&quot;</span><span class="ot">=</span> <span class="fl">157.25</span>, <span class="st">&quot;Tb&quot;</span><span class="ot">=</span> <span class="fl">158.93</span>, <span class="st">&quot;Dy&quot;</span><span class="ot">=</span> <span class="fl">162.50</span>, <span class="st">&quot;Ho&quot;</span><span class="ot">=</span> <span class="fl">164.93</span>, <span class="st">&quot;Er&quot;</span><span class="ot">=</span> <span class="fl">167.26</span>,  <span class="st">&quot;Tm&quot;</span><span class="ot">=</span> <span class="fl">168.93</span>, <span class="st">&quot;Yb&quot;</span><span class="ot">=</span> <span class="fl">173.04</span>, <span class="st">&quot;Lu&quot;</span><span class="ot">=</span> <span class="fl">174.97</span>, <span class="st">&quot;Hf&quot;</span><span class="ot">=</span> <span class="fl">178.49</span>, <span class="st">&quot;Ta&quot;</span><span class="ot">=</span> <span class="fl">180.95</span>,  <span class="st">&quot;W&quot;</span><span class="ot">=</span> <span class="fl">183.84</span>, <span class="st">&quot;Re&quot;</span><span class="ot">=</span> <span class="fl">186.21</span>, <span class="st">&quot;Os&quot;</span><span class="ot">=</span> <span class="fl">190.23</span>, <span class="st">&quot;Ir&quot;</span><span class="ot">=</span> <span class="fl">192.22</span>, <span class="st">&quot;Pt&quot;</span><span class="ot">=</span> <span class="fl">196.08</span>,  <span class="st">&quot;Au&quot;</span><span class="ot">=</span> <span class="fl">196.08</span>, <span class="st">&quot;Hg&quot;</span><span class="ot">=</span> <span class="fl">200.59</span>, <span class="st">&quot;Tl&quot;</span><span class="ot">=</span> <span class="fl">204.38</span>, <span class="st">&quot;Pb&quot;</span><span class="ot">=</span> <span class="fl">207.2</span>, <span class="st">&quot;Bi&quot;</span><span class="ot">=</span> <span class="fl">208.98</span>,  <span class="st">&quot;Po&quot;</span><span class="ot">=</span> <span class="fl">209.0</span>, <span class="st">&quot;At&quot;</span><span class="ot">=</span> <span class="fl">210.0</span>, <span class="st">&quot;Rn&quot;</span><span class="ot">=</span> <span class="fl">222.0</span>, <span class="st">&quot;Fr&quot;</span><span class="ot">=</span> <span class="fl">223.0</span>, <span class="st">&quot;Ra&quot;</span><span class="ot">=</span> <span class="fl">226.0</span>,  <span class="st">&quot;Ac&quot;</span><span class="ot">=</span> <span class="fl">227.0</span>, <span class="st">&quot;Th&quot;</span><span class="ot">=</span> <span class="fl">232.04</span>, <span class="st">&quot;Pa&quot;</span><span class="ot">=</span> <span class="fl">231.04</span>, <span class="st">&quot;U&quot;</span><span class="ot">=</span> <span class="fl">238.03</span>, <span class="st">&quot;Np&quot;</span><span class="ot">=</span> <span class="fl">237.0</span>,  <span class="st">&quot;Pu&quot;</span><span class="ot">=</span> <span class="fl">244.0</span>, <span class="st">&quot;Am&quot;</span><span class="ot">=</span> <span class="fl">243.0</span>, <span class="st">&quot;Cm&quot;</span><span class="ot">=</span> <span class="fl">247.0</span>, <span class="st">&quot;Bk&quot;</span><span class="ot">=</span> <span class="fl">247.0</span>, <span class="st">&quot;Cf&quot;</span><span class="ot">=</span> <span class="fl">251.0</span>, <span class="st">&quot;Es&quot;</span><span class="ot">=</span> <span class="fl">252.0</span>,  <span class="st">&quot;Fm&quot;</span><span class="ot">=</span> <span class="fl">257.0</span>, <span class="st">&quot;Md&quot;</span><span class="ot">=</span> <span class="fl">258.0</span>, <span class="st">&quot;No&quot;</span><span class="ot">=</span> <span class="fl">259.0</span>, <span class="st">&quot;Lr&quot;</span><span class="ot">=</span> <span class="fl">262.0</span>, <span class="st">&quot;Rf&quot;</span><span class="ot">=</span> <span class="fl">261.0</span>, <span class="st">&quot;Db&quot;</span><span class="ot">=</span> <span class="fl">262.0</span>,<span class="st">&quot;Sg&quot;</span><span class="ot">=</span> <span class="fl">266.0</span>, <span class="st">&quot;Bh&quot;</span><span class="ot">=</span> <span class="fl">264.0</span>, <span class="st">&quot;Hs&quot;</span><span class="ot">=</span> <span class="fl">269.0</span>, <span class="st">&quot;Mt&quot;</span><span class="ot">=</span> <span class="fl">268.0</span>)</span>
+<span id="cb23-4"><a href="#cb23-4" tabindex="-1"></a></span>
+<span id="cb23-5"><a href="#cb23-5" tabindex="-1"></a></span>
+<span id="cb23-6"><a href="#cb23-6" tabindex="-1"></a></span>
+<span id="cb23-7"><a href="#cb23-7" tabindex="-1"></a><span class="cf">while</span> (<span class="cn">TRUE</span>) {</span>
+<span id="cb23-8"><a href="#cb23-8" tabindex="-1"></a></span>
+<span id="cb23-9"><a href="#cb23-9" tabindex="-1"></a><span class="co"># Read input atomic symbol</span></span>
+<span id="cb23-10"><a href="#cb23-10" tabindex="-1"></a>  </span>
+<span id="cb23-11"><a href="#cb23-11" tabindex="-1"></a>  atomic_symbol <span class="ot">&lt;-</span> <span class="fu">readline</span>(<span class="at">prompt =</span> <span class="st">&quot;Enter the atomic symbol: &quot;</span>)</span>
+<span id="cb23-12"><a href="#cb23-12" tabindex="-1"></a>  </span>
+<span id="cb23-13"><a href="#cb23-13" tabindex="-1"></a><span class="co"># Calculate the mass based on the atomic symbol</span></span>
+<span id="cb23-14"><a href="#cb23-14" tabindex="-1"></a>  <span class="co"># if the provided atomic symbol is inside atomic_mass vector then:</span></span>
+<span id="cb23-15"><a href="#cb23-15" tabindex="-1"></a>  <span class="co"># mass should be updated with the mass attributed to the atomic symbol prompted</span></span>
+<span id="cb23-16"><a href="#cb23-16" tabindex="-1"></a>  <span class="co"># and info should be printed to the console</span></span>
+<span id="cb23-17"><a href="#cb23-17" tabindex="-1"></a>  </span>
+<span id="cb23-18"><a href="#cb23-18" tabindex="-1"></a>  <span class="cf">if</span> (atomic_symbol <span class="sc">%in%</span> <span class="fu">names</span>(atomic_mass)) {</span>
+<span id="cb23-19"><a href="#cb23-19" tabindex="-1"></a>    mass <span class="ot">&lt;-</span> atomic_mass[[atomic_symbol]]</span>
+<span id="cb23-20"><a href="#cb23-20" tabindex="-1"></a>    <span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">&quot;The mass of 1 mole of&quot;</span>, atomic_symbol, <span class="st">&quot;is&quot;</span>, mass, <span class="st">&quot;g.&quot;</span>))</span>
+<span id="cb23-21"><a href="#cb23-21" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb23-22"><a href="#cb23-22" tabindex="-1"></a>    <span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">&quot;Error: Invalid atomic symbol.&quot;</span>))</span>
+<span id="cb23-23"><a href="#cb23-23" tabindex="-1"></a>  }</span>
+<span id="cb23-24"><a href="#cb23-24" tabindex="-1"></a>}</span></code></pre></div>
+<p><br />
+<br />
+</p>
+<hr />
+<p><br />
+<br />
+</p>
+</div>
+<div id="molecule-mass-calculator" class="section level2">
+<h2>Molecule Mass Calculator</h2>
+<p><br />
+<br />
+</p>
+<p>Next program is going to seem a little more complicated, but it will
+also allow us to get the mass of MOLECULES instead of atoms.<br />
+</p>
+<p>To do that, we have to consider explaining to out computer that: *
+numbers to the right of element name is the no. atoms of this element *
+everything inside parentheses should be multiplied by the first number
+to the right after the parenthesis closes * the molecular formula should
+be read like a pattern so we need regular expressions<br />
+<br />
+</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" tabindex="-1"></a>atomic_mass <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;H&quot;</span><span class="ot">=</span> <span class="fl">1.0079</span>, <span class="st">&quot;He&quot;</span><span class="ot">=</span> <span class="fl">4.0026</span>, <span class="st">&quot;Li&quot;</span><span class="ot">=</span> <span class="fl">6.941</span>, <span class="st">&quot;Be&quot;</span><span class="ot">=</span> <span class="fl">9.0122</span>,<span class="st">&quot;B&quot;</span><span class="ot">=</span> <span class="fl">10.811</span>, <span class="st">&quot;C&quot;</span><span class="ot">=</span> <span class="fl">12.011</span>, <span class="st">&quot;N&quot;</span><span class="ot">=</span> <span class="fl">14.007</span>, <span class="st">&quot;O&quot;</span><span class="ot">=</span> <span class="fl">15.999</span>, <span class="st">&quot;F&quot;</span><span class="ot">=</span> <span class="fl">18.998</span>,  <span class="st">&quot;Ne&quot;</span><span class="ot">=</span> <span class="fl">20.180</span>, <span class="st">&quot;Na&quot;</span><span class="ot">=</span> <span class="fl">22.990</span>, <span class="st">&quot;Mg&quot;</span><span class="ot">=</span> <span class="fl">24.305</span>, <span class="st">&quot;Al&quot;</span><span class="ot">=</span> <span class="fl">26.982</span>,  <span class="st">&quot;Si&quot;</span><span class="ot">=</span> <span class="fl">28.086</span>, <span class="st">&quot;P&quot;</span><span class="ot">=</span> <span class="fl">30.974</span>, <span class="st">&quot;S&quot;</span><span class="ot">=</span> <span class="fl">32.065</span>, <span class="st">&quot;Cl&quot;</span><span class="ot">=</span> <span class="fl">35.453</span>,  <span class="st">&quot;Ar&quot;</span><span class="ot">=</span> <span class="fl">39.948</span>, <span class="st">&quot;K&quot;</span><span class="ot">=</span> <span class="fl">39.098</span>, <span class="st">&quot;Ca&quot;</span><span class="ot">=</span> <span class="fl">40.078</span>, <span class="st">&quot;Sc&quot;</span><span class="ot">=</span> <span class="fl">44.956</span>,  <span class="st">&quot;Ti&quot;</span><span class="ot">=</span> <span class="fl">47.867</span>, <span class="st">&quot;V&quot;</span><span class="ot">=</span> <span class="fl">50.942</span>, <span class="st">&quot;Cr&quot;</span><span class="ot">=</span> <span class="fl">51.996</span>, <span class="st">&quot;Mn&quot;</span><span class="ot">=</span> <span class="fl">54.938</span>,  <span class="st">&quot;Fe&quot;</span><span class="ot">=</span> <span class="fl">55.845</span>, <span class="st">&quot;Co&quot;</span><span class="ot">=</span> <span class="fl">58.933</span>, <span class="st">&quot;Ni&quot;</span><span class="ot">=</span> <span class="fl">58.693</span>, <span class="st">&quot;Cu&quot;</span><span class="ot">=</span> <span class="fl">63.546</span>,  <span class="st">&quot;Zn&quot;</span><span class="ot">=</span> <span class="fl">65.39</span>, <span class="st">&quot;Ga&quot;</span><span class="ot">=</span> <span class="fl">69.723</span>, <span class="st">&quot;Ge&quot;</span><span class="ot">=</span> <span class="fl">72.61</span>, <span class="st">&quot;As&quot;</span><span class="ot">=</span> <span class="fl">74.922</span>,  <span class="st">&quot;Se&quot;</span><span class="ot">=</span><span class="fl">78.96</span>, <span class="st">&quot;Br&quot;</span><span class="ot">=</span> <span class="fl">79.904</span>, <span class="st">&quot;Kr&quot;</span><span class="ot">=</span> <span class="fl">83.80</span>, <span class="st">&quot;Rb&quot;</span><span class="ot">=</span> <span class="fl">85.468</span>, <span class="st">&quot;Sr&quot;</span><span class="ot">=</span> <span class="fl">87.62</span>,  <span class="st">&quot;Y&quot;</span><span class="ot">=</span> <span class="fl">88.906</span>, <span class="st">&quot;Zr&quot;</span><span class="ot">=</span> <span class="fl">91.224</span>, <span class="st">&quot;Nb&quot;</span><span class="ot">=</span> <span class="fl">92.906</span>, <span class="st">&quot;Mo&quot;</span><span class="ot">=</span> <span class="fl">95.94</span>,  <span class="st">&quot;Tc&quot;</span><span class="ot">=</span> <span class="fl">97.61</span>, <span class="st">&quot;Ru&quot;</span><span class="ot">=</span> <span class="fl">101.07</span>, <span class="st">&quot;Rh&quot;</span><span class="ot">=</span> <span class="fl">102.91</span>, <span class="st">&quot;Pd&quot;</span><span class="ot">=</span> <span class="fl">106.42</span>,  <span class="st">&quot;Ag&quot;</span><span class="ot">=</span> <span class="fl">107.87</span>, <span class="st">&quot;Cd&quot;</span><span class="ot">=</span> <span class="fl">112.41</span>, <span class="st">&quot;In&quot;</span><span class="ot">=</span> <span class="fl">114.82</span>, <span class="st">&quot;Sn&quot;</span><span class="ot">=</span> <span class="fl">118.71</span>,  <span class="st">&quot;Sb&quot;</span><span class="ot">=</span> <span class="fl">121.76</span>, <span class="st">&quot;Te&quot;</span><span class="ot">=</span> <span class="fl">127.60</span>, <span class="st">&quot;I&quot;</span><span class="ot">=</span> <span class="fl">126.90</span>, <span class="st">&quot;Xe&quot;</span><span class="ot">=</span> <span class="fl">131.29</span>,  <span class="st">&quot;Cs&quot;</span><span class="ot">=</span> <span class="fl">132.91</span>, <span class="st">&quot;Ba&quot;</span><span class="ot">=</span> <span class="fl">137.33</span>, <span class="st">&quot;La&quot;</span><span class="ot">=</span> <span class="fl">138.91</span>, <span class="st">&quot;Ce&quot;</span><span class="ot">=</span> <span class="fl">140.12</span>,  <span class="st">&quot;Pr&quot;</span><span class="ot">=</span> <span class="fl">140.91</span>, <span class="st">&quot;Nd&quot;</span><span class="ot">=</span> <span class="fl">144.24</span>, <span class="st">&quot;Pm&quot;</span><span class="ot">=</span> <span class="fl">145.0</span>, <span class="st">&quot;Sm&quot;</span><span class="ot">=</span> <span class="fl">150.36</span>, <span class="st">&quot;Eu&quot;</span><span class="ot">=</span> <span class="fl">151.96</span>,  <span class="st">&quot;Gd&quot;</span><span class="ot">=</span> <span class="fl">157.25</span>, <span class="st">&quot;Tb&quot;</span><span class="ot">=</span> <span class="fl">158.93</span>, <span class="st">&quot;Dy&quot;</span><span class="ot">=</span> <span class="fl">162.50</span>, <span class="st">&quot;Ho&quot;</span><span class="ot">=</span> <span class="fl">164.93</span>, <span class="st">&quot;Er&quot;</span><span class="ot">=</span> <span class="fl">167.26</span>,  <span class="st">&quot;Tm&quot;</span><span class="ot">=</span> <span class="fl">168.93</span>, <span class="st">&quot;Yb&quot;</span><span class="ot">=</span> <span class="fl">173.04</span>, <span class="st">&quot;Lu&quot;</span><span class="ot">=</span> <span class="fl">174.97</span>, <span class="st">&quot;Hf&quot;</span><span class="ot">=</span> <span class="fl">178.49</span>, <span class="st">&quot;Ta&quot;</span><span class="ot">=</span> <span class="fl">180.95</span>,  <span class="st">&quot;W&quot;</span><span class="ot">=</span> <span class="fl">183.84</span>, <span class="st">&quot;Re&quot;</span><span class="ot">=</span> <span class="fl">186.21</span>, <span class="st">&quot;Os&quot;</span><span class="ot">=</span> <span class="fl">190.23</span>, <span class="st">&quot;Ir&quot;</span><span class="ot">=</span> <span class="fl">192.22</span>, <span class="st">&quot;Pt&quot;</span><span class="ot">=</span> <span class="fl">196.08</span>,  <span class="st">&quot;Au&quot;</span><span class="ot">=</span> <span class="fl">196.08</span>, <span class="st">&quot;Hg&quot;</span><span class="ot">=</span> <span class="fl">200.59</span>, <span class="st">&quot;Tl&quot;</span><span class="ot">=</span> <span class="fl">204.38</span>, <span class="st">&quot;Pb&quot;</span><span class="ot">=</span> <span class="fl">207.2</span>, <span class="st">&quot;Bi&quot;</span><span class="ot">=</span> <span class="fl">208.98</span>,  <span class="st">&quot;Po&quot;</span><span class="ot">=</span> <span class="fl">209.0</span>, <span class="st">&quot;At&quot;</span><span class="ot">=</span> <span class="fl">210.0</span>, <span class="st">&quot;Rn&quot;</span><span class="ot">=</span> <span class="fl">222.0</span>, <span class="st">&quot;Fr&quot;</span><span class="ot">=</span> <span class="fl">223.0</span>, <span class="st">&quot;Ra&quot;</span><span class="ot">=</span> <span class="fl">226.0</span>,  <span class="st">&quot;Ac&quot;</span><span class="ot">=</span> <span class="fl">227.0</span>, <span class="st">&quot;Th&quot;</span><span class="ot">=</span> <span class="fl">232.04</span>, <span class="st">&quot;Pa&quot;</span><span class="ot">=</span> <span class="fl">231.04</span>, <span class="st">&quot;U&quot;</span><span class="ot">=</span> <span class="fl">238.03</span>, <span class="st">&quot;Np&quot;</span><span class="ot">=</span> <span class="fl">237.0</span>,  <span class="st">&quot;Pu&quot;</span><span class="ot">=</span> <span class="fl">244.0</span>, <span class="st">&quot;Am&quot;</span><span class="ot">=</span> <span class="fl">243.0</span>, <span class="st">&quot;Cm&quot;</span><span class="ot">=</span> <span class="fl">247.0</span>, <span class="st">&quot;Bk&quot;</span><span class="ot">=</span> <span class="fl">247.0</span>, <span class="st">&quot;Cf&quot;</span><span class="ot">=</span> <span class="fl">251.0</span>, <span class="st">&quot;Es&quot;</span><span class="ot">=</span> <span class="fl">252.0</span>,  <span class="st">&quot;Fm&quot;</span><span class="ot">=</span> <span class="fl">257.0</span>, <span class="st">&quot;Md&quot;</span><span class="ot">=</span> <span class="fl">258.0</span>, <span class="st">&quot;No&quot;</span><span class="ot">=</span> <span class="fl">259.0</span>, <span class="st">&quot;Lr&quot;</span><span class="ot">=</span> <span class="fl">262.0</span>, <span class="st">&quot;Rf&quot;</span><span class="ot">=</span> <span class="fl">261.0</span>, <span class="st">&quot;Db&quot;</span><span class="ot">=</span> <span class="fl">262.0</span>,<span class="st">&quot;Sg&quot;</span><span class="ot">=</span> <span class="fl">266.0</span>, <span class="st">&quot;Bh&quot;</span><span class="ot">=</span> <span class="fl">264.0</span>, <span class="st">&quot;Hs&quot;</span><span class="ot">=</span> <span class="fl">269.0</span>, <span class="st">&quot;Mt&quot;</span><span class="ot">=</span> <span class="fl">268.0</span>)</span>
+<span id="cb24-2"><a href="#cb24-2" tabindex="-1"></a></span>
+<span id="cb24-3"><a href="#cb24-3" tabindex="-1"></a><span class="co"># first, we have to define a function, which will be an element of a later &#39;parse&#39; function</span></span>
+<span id="cb24-4"><a href="#cb24-4" tabindex="-1"></a><span class="co"># this function would seek the closing parenthesis &#39;)&#39;</span></span>
+<span id="cb24-5"><a href="#cb24-5" tabindex="-1"></a></span>
+<span id="cb24-6"><a href="#cb24-6" tabindex="-1"></a>find_closing_paren <span class="ot">&lt;-</span> <span class="cf">function</span>(tokens) {</span>
+<span id="cb24-7"><a href="#cb24-7" tabindex="-1"></a>  <span class="co">#whenever this function starts, so does the counter (this helps the function assess when to stop)</span></span>
+<span id="cb24-8"><a href="#cb24-8" tabindex="-1"></a>  count <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb24-9"><a href="#cb24-9" tabindex="-1"></a>  <span class="co"># now we have to define that we should seek the &#39;)&#39; in the sequence provided from the variable &#39;tokens&#39;</span></span>
+<span id="cb24-10"><a href="#cb24-10" tabindex="-1"></a>  <span class="cf">for</span> (index <span class="cf">in</span> <span class="fu">seq_along</span>(tokens)) {</span>
+<span id="cb24-11"><a href="#cb24-11" tabindex="-1"></a>    tok <span class="ot">&lt;-</span> tokens[index]   <span class="co"># indexes inside &#39;tokens&#39; should be defined as &#39;tok&#39; for simplicity</span></span>
+<span id="cb24-12"><a href="#cb24-12" tabindex="-1"></a>    <span class="cf">if</span> (tok <span class="sc">==</span> <span class="st">&quot;)&quot;</span>) {</span>
+<span id="cb24-13"><a href="#cb24-13" tabindex="-1"></a>      count <span class="ot">&lt;-</span> count <span class="sc">-</span> <span class="dv">1</span>   <span class="co"># now reduce the counter to show the function it should stop working</span></span>
+<span id="cb24-14"><a href="#cb24-14" tabindex="-1"></a>      <span class="cf">if</span> (count <span class="sc">==</span> <span class="dv">0</span>) {    <span class="co"># so now, if the count is 0 the function can finish. If not, it means, that was a set of parenthesis inside of another parenthesis, like C(C(CO)2)2</span></span>
+<span id="cb24-15"><a href="#cb24-15" tabindex="-1"></a>        <span class="fu">return</span>(index)      <span class="co"># now to finish, show found indexes inside parenthesis | (OH)2 =&gt; index = OH</span></span>
+<span id="cb24-16"><a href="#cb24-16" tabindex="-1"></a>      }                    <span class="co"># else, if there&#39;s a new parenthesis open, understand it as a different one and seek another closing</span></span>
+<span id="cb24-17"><a href="#cb24-17" tabindex="-1"></a>    } <span class="cf">else</span> <span class="cf">if</span> (tok <span class="sc">==</span> <span class="st">&quot;(&quot;</span>) {</span>
+<span id="cb24-18"><a href="#cb24-18" tabindex="-1"></a>      count <span class="ot">&lt;-</span> count <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb24-19"><a href="#cb24-19" tabindex="-1"></a>    }</span>
+<span id="cb24-20"><a href="#cb24-20" tabindex="-1"></a>  }</span>
+<span id="cb24-21"><a href="#cb24-21" tabindex="-1"></a>  <span class="cn">NA</span></span>
+<span id="cb24-22"><a href="#cb24-22" tabindex="-1"></a>}</span>
+<span id="cb24-23"><a href="#cb24-23" tabindex="-1"></a></span>
+<span id="cb24-24"><a href="#cb24-24" tabindex="-1"></a>parse <span class="ot">&lt;-</span> <span class="cf">function</span>(tokens, stack, atomic_mass) {</span>
+<span id="cb24-25"><a href="#cb24-25" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">length</span>(tokens) <span class="sc">==</span> <span class="dv">0</span>) {</span>
+<span id="cb24-26"><a href="#cb24-26" tabindex="-1"></a>    <span class="fu">return</span>(<span class="fu">sum</span>(stack)) <span class="co"># if there are no tokens to parse, meaning if we take a blank input</span></span>
+<span id="cb24-27"><a href="#cb24-27" tabindex="-1"></a>  }</span>
+<span id="cb24-28"><a href="#cb24-28" tabindex="-1"></a>  tok <span class="ot">&lt;-</span> tokens[<span class="dv">1</span>] <span class="co"># now we go to divide tokens into fragments</span></span>
+<span id="cb24-29"><a href="#cb24-29" tabindex="-1"></a></span>
+<span id="cb24-30"><a href="#cb24-30" tabindex="-1"></a>  <span class="cf">if</span> (tok <span class="sc">==</span> <span class="st">&quot;(&quot;</span>) {</span>
+<span id="cb24-31"><a href="#cb24-31" tabindex="-1"></a>    end <span class="ot">&lt;-</span> <span class="fu">find_closing_paren</span>(tokens)   <span class="co"># whenever you find an open parenthesis, function should seek its end</span></span>
+<span id="cb24-32"><a href="#cb24-32" tabindex="-1"></a>    <span class="co"># if the end is found, next the tokens should be called, from the 2nd element (first chemical inside parenthesis. First element is = &#39;(&#39;))</span></span>
+<span id="cb24-33"><a href="#cb24-33" tabindex="-1"></a>    <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.na</span>(end)) {</span>
+<span id="cb24-34"><a href="#cb24-34" tabindex="-1"></a>      sub_tokens <span class="ot">&lt;-</span> tokens[<span class="dv">2</span><span class="sc">:</span>(end <span class="sc">-</span> <span class="dv">1</span>)] <span class="co"># atoms should be received until the last one (-1 because &#39;)&#39; is that last element</span></span>
+<span id="cb24-35"><a href="#cb24-35" tabindex="-1"></a>      sub_mass <span class="ot">&lt;-</span> <span class="fu">parse</span>(sub_tokens, <span class="fu">numeric</span>(<span class="dv">0</span>), atomic_mass) <span class="co"># take what you selected in the last line and now parse those found elements into numbers, taken from the atomic_mass vector</span></span>
+<span id="cb24-36"><a href="#cb24-36" tabindex="-1"></a>      stack <span class="ot">&lt;-</span> <span class="fu">c</span>(stack, sub_mass) <span class="co"># stack should be updated by the mass we obtained in sub_mass</span></span>
+<span id="cb24-37"><a href="#cb24-37" tabindex="-1"></a>      <span class="fu">return</span>(<span class="fu">parse</span>(tokens[(end <span class="sc">+</span> <span class="dv">1</span>)<span class="sc">:</span><span class="fu">length</span>(tokens)], stack, atomic_mass))</span>
+<span id="cb24-38"><a href="#cb24-38" tabindex="-1"></a>    } <span class="co"># else checks if the variable tok contains a string that consists only of digits (so if we have single chemical elements)</span></span>
+<span id="cb24-39"><a href="#cb24-39" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span> (<span class="fu">grepl</span>(<span class="st">&quot;^</span><span class="sc">\\</span><span class="st">d+$&quot;</span>, tok)) { </span>
+<span id="cb24-40"><a href="#cb24-40" tabindex="-1"></a>    stack[<span class="fu">length</span>(stack)] <span class="ot">&lt;-</span> stack[<span class="fu">length</span>(stack)] <span class="sc">*</span> <span class="fu">as.numeric</span>(tok)</span>
+<span id="cb24-41"><a href="#cb24-41" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb24-42"><a href="#cb24-42" tabindex="-1"></a>    stack <span class="ot">&lt;-</span> <span class="fu">c</span>(stack, atomic_mass[[tok]])</span>
+<span id="cb24-43"><a href="#cb24-43" tabindex="-1"></a>  }</span>
+<span id="cb24-44"><a href="#cb24-44" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">parse</span>(tokens[<span class="sc">-</span><span class="dv">1</span>], stack, atomic_mass))</span>
+<span id="cb24-45"><a href="#cb24-45" tabindex="-1"></a>}</span>
+<span id="cb24-46"><a href="#cb24-46" tabindex="-1"></a></span>
+<span id="cb24-47"><a href="#cb24-47" tabindex="-1"></a></span>
+<span id="cb24-48"><a href="#cb24-48" tabindex="-1"></a><span class="cf">while</span> (<span class="cn">TRUE</span>) {</span>
+<span id="cb24-49"><a href="#cb24-49" tabindex="-1"></a>  formula <span class="ot">&lt;-</span> <span class="fu">readline</span>(<span class="at">prompt =</span> <span class="st">&quot;Enter molecular formula: &quot;</span>)</span>
+<span id="cb24-50"><a href="#cb24-50" tabindex="-1"></a>  </span>
+<span id="cb24-51"><a href="#cb24-51" tabindex="-1"></a>  <span class="co"># our input formula will now be tokenized : changed into subscripts, which the computer will have to understand</span></span>
+<span id="cb24-52"><a href="#cb24-52" tabindex="-1"></a>  <span class="co"># we provide the regular expression in order to specify the pattern the computer should seek inside input</span></span>
+<span id="cb24-53"><a href="#cb24-53" tabindex="-1"></a>  <span class="co"># if the function regmatches() finds any other element - it won&#39;t be recognized</span></span>
+<span id="cb24-54"><a href="#cb24-54" tabindex="-1"></a>  </span>
+<span id="cb24-55"><a href="#cb24-55" tabindex="-1"></a>  tokens <span class="ot">&lt;-</span> <span class="fu">regmatches</span>(formula, <span class="fu">gregexpr</span>(<span class="st">&quot;[A-Z][a-z]*|</span><span class="sc">\\</span><span class="st">d+|</span><span class="sc">\\</span><span class="st">(|</span><span class="sc">\\</span><span class="st">)&quot;</span>, formula))[[<span class="dv">1</span>]]</span>
+<span id="cb24-56"><a href="#cb24-56" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">&quot;The molecular mass of&quot;</span>, formula, <span class="st">&quot;is&quot;</span>, <span class="fu">round</span>(<span class="fu">parse</span>(tokens, <span class="fu">numeric</span>(<span class="dv">0</span>), atomic_mass), <span class="dv">3</span>), <span class="st">&quot;</span><span class="sc">\n\n</span><span class="st">&quot;</span>)</span>
+<span id="cb24-57"><a href="#cb24-57" tabindex="-1"></a>}</span>
+<span id="cb24-58"><a href="#cb24-58" tabindex="-1"></a><span class="co"># function gregexp holds a regular expression like a string</span></span>
+<span id="cb24-59"><a href="#cb24-59" tabindex="-1"></a><span class="co"># and expects big letters first, then eventually lower case letters as well</span></span></code></pre></div>
+<p><br />
+<br />
+</p>
+<p>Inspect the last code snippet in detail. Read each comment and try to
+think of other examples in which you could use such statements.</p>
+<p><br />
+<br />
+</p>
+<hr />
+<p><br />
+<br />
+</p>
+</div>
+</div>
+<div id="exercises" class="section level1">
+<h1><em><span
+style="text-decoration:underline">Exercises</span></em></h1>
+<p><br />
+<br />
+</p>
+<p>Now, after inspecting several small programs, you’re ready to get
+creative!<br />
+</p>
+<p>Pick one program to prepare out of each collapsible card of Level 1,
+2 and 3 (3 programs total). Prepare the scripts in a new project,
+comment your code to show its purpose and make the program run in the
+console all the time (use while (TRUE) loop).<br />
+<br />
+If you’d rather only do two programs - simply choose one from the Level
+4 and then pick any from the other levels as the 2nd one.<br />
+<br />
+</p>
+<p>YOU CAN SUGGEST your idea of a program to create during classes to
+your teacher (<em>Klaudia Chmielewska</em>). The difficulty of the
+chosen program will define how many less programs from the collapsible
+buttons you have to prepare.<br />
+</p>
+<p>Finished programs should be sent in a zip file to <em><span
+style="text-decoration:underline"><a
+href="mailto:klaudia.chmielewska@ug.edu.pl"
+class="email">klaudia.chmielewska@ug.edu.pl</a></span></em><br />
+</p>
+<p>If you have any difficulties after class, feel free to send an email
+there or to step by during my office hours in G320.</p>
+<p><br />
+</p>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+.collapsible {
+  background-color: #073973;
+  color: #ffffff;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+
+.active, .collapsible:hover {
+  background-color: #073973;
+}
+
+.content {
+  padding: 0 18px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+  background-color: #2074d4;
+}
+</style>
+</head>
+<body>
+<button class="collapsible">
+Level 1
+</button>
+<div class="content">
+<p>
+<ul>
+<li><em>URL shortener</em></li>
+<li><em>email generator [considering name, surname, age]</em></li>
+<li><em>dice simulator</em></li>
+<li><em>leap year estimator</em>
+</p>
+</div>
+<button class="collapsible">
+Level 2
+</button>
+<div class="content">
+<p></li>
+<li><em>BMI calculator</em></li>
+<li><em>tic tac toe game</em></li>
+<li><em>grades calculator</em></li>
+<li><em>count-down clock / timer</em>
+</p></li>
+</ul>
+</div>
+<button class="collapsible">
+Level 3
+</button>
+<div class="content">
+<p>
+<ul>
+<li><em>Text-based adventure game with rolling dice simulation [like
+DnD!]</em></li>
+<li><em>Quiz with at least 8 questions with automatic grade assessment
+at the end</em></li>
+<li><em>Speed typing test [create 10 sentences total, during one run
+user should be shown 5 sentences (chosen automatically) to write as
+quickly as possible, a clock should count seconds and in the end a mean
+speed should be estimated]</em>
+</p>
+</div></li>
+</ul>
+<button class="collapsible">
+Level 4
+</button>
+<div class="content">
+<p>
+<ul>
+<li><em>Amino Acid Counter for Protein .fasta [program reading fasta and
+counting how many different amino acids it includes; output should be
+presented as a table with columns: aa 1 letter code, aa full name,
+count]</em></li>
+<li><em>Atom Counter from molecular formula as input [ understanding
+parentheses]</em></li>
+<li><em>Molecular Mass Calculator from SMILES</em>
+</p>
+</div></li>
+</ul>
+<script>
+var coll = document.getElementsByClassName("collapsible");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.maxHeight){
+      content.style.maxHeight = null;
+    } else {
+      content.style.maxHeight = content.scrollHeight + "px";
+    } 
+  });
+}
+</script>
+</body>
+</html>
+<p><br />
+<br />
+</p>
+<p>See you in the next lesson!</p>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

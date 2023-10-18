@@ -1,0 +1,1249 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Klaudia Chmielewska" />
+
+
+<title>Introduction to R</title>
+
+<script src="site_libs/header-attrs-2.21/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/darkly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">My Website</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore"><strong>Introduction to R</strong></h1>
+<h3 class="subtitle"><em>Lesson 1</em></h3>
+<h4 class="author"><strong><em>Klaudia Chmielewska</em></strong></h4>
+
+</div>
+
+
+<p><br />
+</p>
+<div id="how-do-i-start" class="section level1">
+<h1><em><span style="text-decoration:underline">How do I
+start?</span></em></h1>
+<p><br />
+</p>
+<div id="instalation" class="section level2">
+<h2>Instalation</h2>
+<p><br />
+</p>
+<ul>
+<li>First, you need to download R through one of the mirrors <a
+href="https://cran.r-project.org/mirrors.html"><em>here</em></a> or
+directly use the Polish mirror <a
+href="https://cran.mi2.ai"><em>here</em></a></li>
+</ul>
+<p><br />
+</p>
+<div class="float">
+<img src="R_download.png"
+alt="Fig. 1. A look inside the R download link." />
+<div class="figcaption"><strong><em>Fig. 1. A look inside the R download
+link.</em></strong></div>
+</div>
+<p><br />
+</p>
+<ul>
+<li>Now, we need to install IDE (integrated development environment)
+allowing us to send prompts to the computer, thus activating our code.
+That IDE in our case is <em>RStudio</em>, the most popular choice for
+handling R code. You can click <a
+href="https://posit.co/download/rstudio-desktop/"><em>here</em></a> to
+download RStudio for your operating system.<br />
+
+<ul>
+<li>RStudio can also be run online via <a
+href="https://rstudio.cloud/">RStudio Cloud</a>, although it’s a paid
+service</li>
+<li>You can also use an online sandbox service, although keep in mind
+that it will make your data public, so you should avoid that if the data
+belongs to a company, is supposed to be patented or simply is private to
+you.<br />
+</li>
+</ul></li>
+<li>IDE alternatives to RStudio: <a
+href="https://code.visualstudio.com">Visual Studio Code</a>, <a
+href="https://rkward.kde.org">RKWard</a></li>
+</ul>
+<p><br />
+<br />
+</p>
+<hr />
+</div>
+<div id="understanding-rstudio" class="section level2">
+<h2>Understanding RStudio</h2>
+<p><br />
+</p>
+<ul>
+<li>RStudio looks like a bunch of programs fused into one - hence you’ll
+have to get used to operating on its 4 different sections. For your
+convenience, a figure below explains what are those sections for.</li>
+</ul>
+<p><br />
+</p>
+<div class="float">
+<img src="RStudio_screen.png" alt="Fig. 2. A first glance at RStudio" />
+<div class="figcaption"><strong><em>Fig. 2. A first glance at
+RStudio</em></strong></div>
+</div>
+<p><br />
+</p>
+<hr />
+</div>
+<div id="setting-up-your-work" class="section level2">
+<h2>Setting up your work</h2>
+<p><br />
+</p>
+<ul>
+<li>First, we need to adjust RStudio to our needs. To do so, find Global
+Options and check what options are adjustable. Keep in mind that
+everyone has different preferences, hence you need to find what works
+best for you!</li>
+</ul>
+<p><br />
+</p>
+<div class="float">
+<img src="global_options.png"
+alt="Fig. 3. Adjust settings by clicking on Global Options " />
+<div class="figcaption"><strong><em>Fig. 3. Adjust settings by clicking
+on Global Options </em></strong></div>
+</div>
+<p><br />
+</p>
+<ul>
+<li><p>Now you can see General Options, which are the most
+crucial.<br />
+</p>
+<ul>
+<li><p>Here you can decide on where all your edited files should be
+saved to, unless otherwise stated (like inside a Project - we’ll go over
+them in minute!) - this is called a working directory, so a specified
+path you work in. <br> Further, you can decide whether the files you
+worked on last time you opened RStudio should reopen again for your
+convenience, or do you rather want to control it yourself!</p></li>
+<li><p>Next General Option is quite important for those who tend to
+forget about saving their files! You can make RStudio save files for you
+by clicking ‘Save workspace to .RData on exit:’ on either ‘Ask’ or
+‘Always’ (as Snape used to say)</p></li>
+</ul></li>
+</ul>
+<p><br />
+</p>
+<div class="float">
+<img src="global_options2.png" alt="Fig. 4. General Settings" />
+<div class="figcaption"><strong><em>Fig. 4. General
+Settings</em></strong></div>
+</div>
+<p><br />
+</p>
+<ul>
+<li>Another interesting thing you can adjust is how is the code
+presented in the console, so in that left-down corner of RStudio.
+<ul>
+<li>For your convenience, it’s possible to keep the code highlighted
+with colors, same as in the Code Editor window (left-up corner of
+RStudio).</li>
+<li>You can also decide on whether the error messages should be
+displayed in a different color (to allow you to spot them easily) or
+not.</li>
+<li>Another thing to change is limiting the output length. This is
+useful while working with huge sets of data. Think about it - if you had
+a data set from clinical trials, you’d have data on thousands of
+patients. If you were to open that data set for analysis in R with a
+command, the output in the console would not only be unreadable, but
+also would take a lot of time. Hence, you can decide on limiting the
+output length to for example 1000. This way, if you load a data set as a
+table and open it in the console, it will only print the result up until
+the 1000th line/row in the table. This can save you time in the
+future!</li>
+</ul></li>
+</ul>
+<p><br />
+</p>
+<div class="float">
+<img src="global_options3.png"
+alt="Fig. 5. Decide on console aesthetics" />
+<div class="figcaption"><strong><em>Fig. 5. Decide on console
+aesthetics</em></strong></div>
+</div>
+<p><br />
+</p>
+<ul>
+<li>Appearance changes are not a necessity, <em><span
+style="text-decoration:underline">but are something I very much
+recommend you to adjust!</span></em> <br> I myself prefer dark modes,
+with colors allowing me to easily distinguish the most important
+elements of the code. <br> You can also decide on the font type as well
+as size! The latter can be useful when you’re discussing your code in an
+online meeting and want your audience to focus on the code!</li>
+</ul>
+<p><br />
+</p>
+<div class="float">
+<img src="global_options4.png"
+alt="Fig. 6. Define Code Editor aesthetics" />
+<div class="figcaption"><strong><em>Fig. 6. Define Code Editor
+aesthetics</em></strong></div>
+</div>
+<p><br />
+</p>
+<ul>
+<li>Last, but not least, you can adjust <strong>RMarkdown</strong>
+settings!
+<ul>
+<li>RMarkdown (.Rmd) is a complex file type with text-based formatting,
+allowing the storage of the code in so called executable chunks and its
+comments, descriptions, outside, as a code that is not meant to be
+activated.</li>
+<li>RMarkdown files enable us to create dynamic documents with R.</li>
+<li><em><span style="text-decoration:underline">This page was first
+prepared as an RMarkdown file and later converted to
+HTML!</span></em></li>
+<li>R allows such conversion to .pdf or .docx as well, so R can allow
+you to create your student assignments in a great style!</li>
+</ul></li>
+</ul>
+<div class="float">
+<img src="global_options5.png"
+alt="Fig. 7. Define Code Editor aesthetics" />
+<div class="figcaption"><strong><em>Fig. 7. Define Code Editor
+aesthetics</em></strong></div>
+</div>
+<hr />
+<p><br />
+</p>
+</div>
+<div id="creating-your-first-project" class="section level2">
+<h2>Creating your first Project</h2>
+<p><br />
+</p>
+<ul>
+<li>First thing you need to do is set up a new project now. Treat a
+project as your organisational unit for the Project you work on - keep
+every file related to that project there! For example, if you wanted to
+create an R program, you could create a project to store the executable
+.R file, together with the .Rmd file, providing more insights into the
+work.</li>
+<li>This seems like a boring necessity now - you might feel the urge of
+skipping this part. Find the power within you to oppose that
+feeling!</li>
+</ul>
+<p><br />
+</p>
+<div class="row">
+<div class="col-md-6">
+<div class="float">
+<img src="Project11.png"
+alt="Fig. 8. Start a new project to work in!" />
+<div class="figcaption"><strong><em>Fig. 8. Start a new project to work
+in!</em></strong></div>
+</div>
+</div>
+<div class="col-md-6">
+<p>Being in a project helps you to be more organised! It’ll help you
+avoid loosing your files. If you earlier set Global Options to save your
+workspace after closing, your project will be updated automatically!</p>
+</div>
+</div>
+<p><br />
+</p>
+<div class="row">
+<div class="col-md-8">
+<div class="float">
+<img src="Project2.png" alt="Fig. 9. Pick the type of the project." />
+<div class="figcaption"><strong><em>Fig. 9. Pick the type of the
+project.</em></strong></div>
+</div>
+</div>
+<div class="col-md-4">
+<p>This might be more important when you’re more comfortable with
+R!<br />
+Not only can you create a project out of already existing directory, but
+also start a GitHub-related project - this might be useful if you wanted
+to create a small website with R!<br />
+You could link your project to a repository in GitHub and further render
+your RMarkdown file into HTML and publish it!<br />
+<em><span style="text-decoration:underline">Just as the site you see
+right now!</span></em></p>
+</div>
+</div>
+<br />
+<br />
+
+<div class="row">
+<div class="col-md-8">
+<div class="float">
+<img src="Project3.png" alt="Fig. 10. Pick the type of the project." />
+<div class="figcaption"><strong><em>Fig. 10. Pick the type of the
+project.</em></strong></div>
+</div>
+</div>
+<div class="col-md-4">
+<p>If you were to link your project to GitHub, next window you’d see
+would be asking you to put the link and the name of the repository
+related to this project. This allows you not only to have an online copy
+of your work, but also to create your GitHub Pages site.</p>
+</div>
+</div>
+<p><br />
+<br />
+</p>
+<hr />
+<p><br />
+<br />
+</p>
+</div>
+</div>
+<div id="lets-code" class="section level1">
+<h1><em><span style="text-decoration:underline">Let’s
+code!</span></em></h1>
+<div id="there-are-3-ways-to-run-your-r-code" class="section level2">
+<h2>There are 3 ways to run your R code</h2>
+<pre class="r"><code>#1. You can just type/paste it at the console and click Enter
+#2.1 Execute code from a source file: source(&quot;mycode.R&quot;)
+#2.2 Remember that the file will have to be in the working directory!
+#2.3 Else you&#39;ll have to further specify the adress
+#3.1 Highlight the desired part of the script and do &quot;Ctrl+Enter&quot;
+#3.2 Or simply click Run in the Code Editor in RStudio</code></pre>
+<p>##So with this knowledge you can now also set working directory with
+a command</p>
+<pre class="r"><code># setwd(&quot;C:/Users/~/Intro to R/R1&quot;)</code></pre>
+<p>#you can always check what is your current working directory:</p>
+<pre class="r"><code>getwd()</code></pre>
+<pre><code>## [1] &quot;/Users/klaudiachmielewska/Documents/R_KCH_GIT/RKCHUG&quot;</code></pre>
+<p>#If you don’t understand a given command in your script copied from
+the internet - simply add a question mark before it and run the
+line.</p>
+<pre class="r"><code>?help
+?download.file()
+?save
+?install.packages</code></pre>
+<p>#If you don’t know the specific name of a given function you want to
+use but know what it’s supposed to be doing, you can use
+help.search(““)</p>
+<pre class="r"><code>help.search(&quot;download&quot;)
+help.search(&quot;tidyverse&quot;)</code></pre>
+<p>#If you want to find out more resources or packages, check the
+website: <a href="https://www.r-project.org/search.html"
+class="uri">https://www.r-project.org/search.html</a></p>
+<p>#If you’re unsure which packages you do have installed and which
+not:</p>
+<pre class="r"><code>sessionInfo()</code></pre>
+<pre><code>## R version 4.2.3 (2023-03-15)
+## Platform: x86_64-apple-darwin17.0 (64-bit)
+## Running under: macOS Catalina 10.15.7
+## 
+## Matrix products: default
+## BLAS:   /System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libBLAS.dylib
+## LAPACK: /Library/Frameworks/R.framework/Versions/4.2/Resources/lib/libRlapack.dylib
+## 
+## locale:
+## [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+## 
+## attached base packages:
+## [1] stats     graphics  grDevices utils     datasets  methods   base     
+## 
+## other attached packages:
+## [1] rmarkdown_2.21
+## 
+## loaded via a namespace (and not attached):
+##  [1] digest_0.6.31   R6_2.5.1        lifecycle_1.0.3 jsonlite_1.8.4  magrittr_2.0.3  evaluate_0.20  
+##  [7] stringi_1.7.12  cachem_1.0.7    rlang_1.1.0     cli_3.6.1       rstudioapi_0.14 jquerylib_0.1.4
+## [13] bslib_0.4.2     vctrs_0.6.1     tools_4.2.3     stringr_1.5.0   glue_1.6.2      xfun_0.39      
+## [19] yaml_2.3.7      fastmap_1.1.1   compiler_4.2.3  htmltools_0.5.5 knitr_1.42      sass_0.4.5</code></pre>
+<p>#Which will print a big set of data in the Console for you to
+inspect.</p>
+<p>#If you don’t see a package you need loaded (but you now you have it)
+’ library ’ function loads packages to the working space</p>
+<pre class="r"><code>library(&quot;tidyverse&quot;)</code></pre>
+<pre><code>## ── Attaching core tidyverse packages ──────────────────────────────────────────────────── tidyverse 2.0.0 ──
+## ✔ dplyr     1.1.2     ✔ readr     2.1.4
+## ✔ forcats   1.0.0     ✔ stringr   1.5.0
+## ✔ ggplot2   3.4.2     ✔ tibble    3.2.1
+## ✔ lubridate 1.9.2     ✔ tidyr     1.3.0
+## ✔ purrr     1.0.1     
+## ── Conflicts ────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+## ✖ dplyr::filter() masks stats::filter()
+## ✖ dplyr::lag()    masks stats::lag()
+## ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+<p>#If you don’t have tidyverse installed you can do it with another
+function:</p>
+<pre class="r"><code># install.packages(&quot;tidyverse&quot;)</code></pre>
+<p>#you can use the right bottom Tab Packages to browse or search for
+packages</p>
+<p>#now if you do the “sessionInfo” again it will show a much more
+detailed data #and will show you loaded tidyverse</p>
+<p>##Let’s create the first variable!</p>
+<pre class="r"><code>new_variable &lt;- 5
+
+# &#39; &lt;- &#39; is an assignment operator, which means anything to the right will be assigned to the set or variable on the left, so the value of new_variable is now set to 5
+
+# &quot;name_of_variable_or_set_of_variables &lt;- data descriptors(like numbers)
+
+# Don&#39;t use spaces or dots in the names!!
+# Don&#39;t start with a number! (2x NO; x2 YES)
+# R differentiates between upper and lower case (&quot;W&quot; and &quot;w&quot;, respectively) [is case sensitive]
+# So remember a value &quot;new_variables&quot; will be different than &quot;New_Variables&quot;)
+#Do not use the function names! Remember that the name should be clear to you! It&#39;s not a good practice to name your variables &quot;x/y/z&quot; and such!</code></pre>
+<p>#Example 1</p>
+<pre class="r"><code>#Anna is 10. Define how old is Anna as a variable</code></pre>
+<p>#Answer:</p>
+<pre class="r"><code>Anna &lt;- 10</code></pre>
+<p>#If we had more data on age, we could make it into a list #Separate
+on age and separate on the names of the kids #Such could possibly be
+turned into a table with R. #We’ll do such analysis later on!</p>
+<p>#Use Environment Tab!</p>
+<pre class="r"><code>#If you run the line, you&#39;ll see that in the &#39;Environment&#39; Tab in the right-up part of RStudio
+#that a value with its name has been saved &#39;Environment&#39; Tab helps you navigate when you have much more
+#variables to consider!</code></pre>
+<p>#Unfinished variables</p>
+<pre class="r"><code>#If the next variable is &#39;new_variable2&quot;, you can write the start of the name &#39;new_&quot; and click Tab. You&#39;ll see the suggestions of what you could fill in. It is also useful with functions.
+
+#If you however not finish defining a given variable and click Run:
+new_variable2 &lt;- 
+#you&#39;ll notice that the console won&#39;t start with &quot; &gt; &quot; anymore! It starts with: &quot; + &quot; because the system is asking for the end of the line!
+  
+#If you now simply add the value, without repeating the whole line:
+4
+#...you&#39;ll notice that in &#39;Environment&#39; a new value had been added and console again has &quot; &gt; &quot; instead of &quot; + &quot;. If you accidentaly Run a given part of the script and you don&#39;t want to finish defining a variable - just click &quot;Esc&quot;. </code></pre>
+<p>#Printing the variable we want to set</p>
+<pre class="r"><code>#After you set a variable, it isn&#39;t automatically printed in the Console
+#If you do however want to see it in console while defining the variable - use parenthesis to call it (while defining a variable):
+
+(new_variable3 &lt;- 3)</code></pre>
+<pre><code>## [1] 3</code></pre>
+<pre class="r"><code># to see the value of a previously set variable, use a function:
+
+print(new_variable)</code></pre>
+<pre><code>## [1] 5</code></pre>
+<p>##Basic concepts in R - simple arithmetic</p>
+<pre class="r"><code>#You can do simple calculations in the console, simply run stuff like:
+
+5 + 13</code></pre>
+<pre><code>## [1] 18</code></pre>
+<pre class="r"><code>24 - 8</code></pre>
+<pre><code>## [1] 16</code></pre>
+<pre class="r"><code>24^2</code></pre>
+<pre><code>## [1] 576</code></pre>
+<pre class="r"><code>24*2</code></pre>
+<pre><code>## [1] 48</code></pre>
+<pre class="r"><code>35/5</code></pre>
+<pre><code>## [1] 7</code></pre>
+<pre class="r"><code>#R respects order of equations in math, so you canbut you don&#39;t need
+#to use parenthesis everywhere
+
+#Of course, you can also do math on the variables you created:
+
+new_variable*2</code></pre>
+<pre><code>## [1] 10</code></pre>
+<pre class="r"><code>new_variable/2</code></pre>
+<pre><code>## [1] 2.5</code></pre>
+<pre class="r"><code>new_variable/new_variable2</code></pre>
+<pre><code>## [1] 1.25</code></pre>
+<p>##Example 2</p>
+<pre class="r"><code>#What is the value of &#39;var_index&#39; after running 
+# all the next 4 lines and why?
+
+new_variable &lt;- 5
+(var_index &lt;- new_variable / 2)</code></pre>
+<pre><code>## [1] 2.5</code></pre>
+<pre class="r"><code>new_variable &lt;- 10
+(var_index &lt;- new_variable / 2)</code></pre>
+<pre><code>## [1] 5</code></pre>
+<p>###Answer</p>
+<pre class="r"><code>#If we overwrite the value of &#39;new_variable&#39; it will now forget the old value.
+#This is important when we have a lot of values to consider.</code></pre>
+<p>##However, not all math can be done so easily!</p>
+<p>#Sometimes we need to call a function which will allow us to do
+several operations at once! #In the directory you should have the script
+“Functions.R” to help you out with the basic functions!</p>
+<p>##Example 3</p>
+<pre class="r"><code># Define math equations proposed in &quot;R1_math_example.pdf&quot;
+# Calculate them and write down the results.
+#Find the right function for example 2.</code></pre>
+<p>###Answer</p>
+<pre class="r"><code>x &lt;- 2
+y &lt;- 49
+
+
+#1
+2*y/x</code></pre>
+<pre><code>## [1] 49</code></pre>
+<pre class="r"><code>#2
+2*sqrt(y)/x^3</code></pre>
+<pre><code>## [1] 1.75</code></pre>
+<pre class="r"><code>#3
+(y+1)/x #GOOD</code></pre>
+<pre><code>## [1] 25</code></pre>
+<pre class="r"><code>y+1/x #BAD</code></pre>
+<pre><code>## [1] 49.5</code></pre>
+</div>
+<div id="example-4" class="section level2">
+<h2>Example 4</h2>
+<pre class="r"><code>#Difference between &#39;round&#39; and &#39;signif&#39;
+
+x &lt;- 23.45
+
+
+round(x)              #23 rounds up to the next natural number </code></pre>
+<pre><code>## [1] 23</code></pre>
+<pre class="r"><code>round(x, digits = 0)  #23</code></pre>
+<pre><code>## [1] 23</code></pre>
+<pre class="r"><code>round(x, digits = 1)  #23.4 rounds up until first place after &quot;.&quot;</code></pre>
+<pre><code>## [1] 23.4</code></pre>
+<pre class="r"><code>round(x, digits = 2)  #23.45 rounds up until 2nd place</code></pre>
+<pre><code>## [1] 23.45</code></pre>
+<pre class="r"><code>signif(x, 1) #20 full digits</code></pre>
+<pre><code>## [1] 20</code></pre>
+<pre class="r"><code>signif(x, 2) #23</code></pre>
+<pre><code>## [1] 23</code></pre>
+<pre class="r"><code>signif(x, 3) #23.4 until 0.1 (23.4)</code></pre>
+<pre><code>## [1] 23.4</code></pre>
+<pre class="r"><code>signif(x, 4) #23.45</code></pre>
+<pre><code>## [1] 23.45</code></pre>
+<p>###Perform the same test for the variable ‘y’. How were the numbers
+rounded?</p>
+<p>y = -23.54</p>
+<p>###Answer</p>
+<pre class="r"><code>y &lt;- -23.54
+
+round(y)              # -24 </code></pre>
+<pre><code>## [1] -24</code></pre>
+<pre class="r"><code>round(y, digits = 0)  # -24</code></pre>
+<pre><code>## [1] -24</code></pre>
+<pre class="r"><code>round(y, digits = 1)  # -23.5</code></pre>
+<pre><code>## [1] -23.5</code></pre>
+<pre class="r"><code>round(y, digits = 2)  # -23.54</code></pre>
+<pre><code>## [1] -23.54</code></pre>
+<pre class="r"><code>signif(y, 1) # -20 </code></pre>
+<pre><code>## [1] -20</code></pre>
+<pre class="r"><code>signif(y, 2) # -24</code></pre>
+<pre><code>## [1] -24</code></pre>
+<pre class="r"><code>signif(y, 3) # -23.5</code></pre>
+<pre><code>## [1] -23.5</code></pre>
+<pre class="r"><code>signif(y, 4) # -23.54</code></pre>
+<pre><code>## [1] -23.54</code></pre>
+<p>##Vectors</p>
+<pre class="r"><code>#A function can also combine arguments into a list or a vector:
+
+# c(value1, value2, ...)
+
+## c() is actually nesting our list into 1 variable
+#This allows us to assign a series of values to a given vector.
+value1 &lt;- 1
+value2 &lt;- 2
+vector1 &lt;- c(value1, value2)
+
+
+#Vector can be represented by numbers and/or characters.</code></pre>
+<p>#Let’s set a new variable:</p>
+<pre class="r"><code>grades &lt;- c(4, 5.0, 3, 4, 3)
+
+#now if you call:
+
+grades</code></pre>
+<pre><code>## [1] 4 5 3 4 3</code></pre>
+<pre class="r"><code>#you&#39;ll see the values of the set
+#you can also make lists from characters.
+
+#Run next 2 lines (SEPARATELY)!
+#Look at the error occurring after you run the 2nd line
+
+students &lt;- c(&quot;Anna&quot;, &quot;Martin&quot;, &quot;Cassidy&quot;, &quot;Elle&quot;, &quot;Peter&quot;) #GOOD
+# students &lt;- c(Martin, Cassidy, Elle, Peter)                 #BAD
+
+#If you&#39;re unsure whether the list/vector is numeric or character based
+
+class(grades)     #should be &quot;numeric&quot;</code></pre>
+<pre><code>## [1] &quot;numeric&quot;</code></pre>
+<pre class="r"><code>class(students)   #should be &quot;character&quot;</code></pre>
+<pre><code>## [1] &quot;character&quot;</code></pre>
+<pre class="r"><code>#You can also both visualize the first records in a given list,
+#together with the information on whether it&#39;s numeric/character
+#and how many elements does the list/vector have
+
+#Try running:
+
+str(grades)</code></pre>
+<pre><code>##  num [1:5] 4 5 3 4 3</code></pre>
+<pre class="r"><code>str(students)</code></pre>
+<pre><code>##  chr [1:5] &quot;Anna&quot; &quot;Martin&quot; &quot;Cassidy&quot; &quot;Elle&quot; &quot;Peter&quot;</code></pre>
+<pre class="r"><code>#It is useful when dealing with large sets of data.
+#You can see the same type of data presentation in the Environment Tab
+
+
+###If you want to call the name &#39;Martin&#39; out from the list of &#39;students&#39;:
+
+students[c(2)]</code></pre>
+<pre><code>## [1] &quot;Martin&quot;</code></pre>
+<pre class="r"><code>#If you run this you&#39;ll see that the name we obtained is &quot;Martin&quot;, not &quot;Cassidy&quot;
+#It is because R indices start at 1, same as in Fortran.
+#IT IS DIFFERENT THAN IN PYTHON! Because Python, same as other languages in
+#the C family, starts with 0!</code></pre>
+</div>
+</div>
+<div id="example-5" class="section level1">
+<h1>Example 5</h1>
+<p>#How would you ask the program to print you “Anna” from the list of
+students? ##Answer:</p>
+<pre class="r"><code>students[c(1)]</code></pre>
+<pre><code>## [1] &quot;Anna&quot;</code></pre>
+<div id="you-can-also-add-information-to-already-existing-vector-with-c"
+class="section level3">
+<h3>You can also add information to already existing vector with
+c()!</h3>
+<pre class="r"><code>grades &lt;- c(grades, 3.5) #to add the grade to the END of the list
+grades &lt;- c(5, grades) #to add to the BEGGINING of the list
+
+#Look at the Environment Tab to check if the changes are done.
+#Eventually you can just call the variable. Do you remember how can you do it? This addition commands are very useful when we deal with huge systems.</code></pre>
+<p>###Conditional subsetting</p>
+<pre class="r"><code>#We can use a logical operator (Boolean value TRUE or FALSE) to determine whether a given value was enough to meet our requirements. It&#39;s usually a value estimated by the function, not us, because it would be inconvenient to call out the value one by one. However in QSAR, there are requirements a given substance have to meet in order to be able to possess a given activity.
+
+#For example, in cancer drug in vitro testing, a substance has to kill at least 50% of cancer cell population in a test in order to be potentially useful as cancer drugs.
+#If we were preparing a meta-analysis, we could upload the data from many publications and put it all into one data set, out of which we can call a function stating that if a substance was killing more than 50% of cells, it can have the TRUE value and be attributed to the next tests.</code></pre>
+<p>###Example 6</p>
+<pre class="r"><code>#Consider an MTT cytotoxicity test for 5 proposed anticancer substances. 
+#Let&#39;s suppose a given substance has to kill at least 50% of cell population
+#in order to be effective enough, as stated above.
+#The data we have in our data set is composed of % of cells remaining in the well
+#after the administration of the drug.
+#5 substances were checked, hence we have 5 records on the list.
+#If a drug left 30% of cells intact, then it killed more than 50%
+#and according to our delimiters, is supposedly useful against cancer.</code></pre>
+<pre class="r"><code>anticancer_substances &lt;- c(20, 39, 56, 70, 45)</code></pre>
+<p>#6.1 Which the substances meet the requirement of killing at least
+50% of cells? #Use function calling out boolean values.</p>
+<pre class="r"><code>anticancer_substances &lt; 50</code></pre>
+<pre><code>## [1]  TRUE  TRUE FALSE FALSE  TRUE</code></pre>
+<pre class="r"><code>#You&#39;ll see a TRUE if the substance killed at least 50% of cell population
+#and FALSE if the substance didn&#39;t kill enough cells to call it effective enough.</code></pre>
+<p>#6.2 List only the data lower than 50%.</p>
+<pre class="r"><code>anticancer_substances[anticancer_substances&lt;50]</code></pre>
+<pre><code>## [1] 20 39 45</code></pre>
+<p>#6.3 List only data lower than 35% OR higher than 56% (not equal
+to!)</p>
+<pre class="r"><code>anticancer_substances[anticancer_substances &lt;35 | anticancer_substances &gt; 56]</code></pre>
+<pre><code>## [1] 20 70</code></pre>
+<p>#6.4 or higher or equal to 19% AND lower or equal than 56%</p>
+<pre class="r"><code>anticancer_substances[anticancer_substances &gt;= 19 &amp; anticancer_substances &lt;= 56]</code></pre>
+<pre><code>## [1] 20 39 56 45</code></pre>
+<pre class="r"><code># acknowledge that &#39; &gt;= &#39; means higher or equal
+#             and  &#39; &lt;= &#39; means lower or equal</code></pre>
+<p>#Remember than if none of the data fits the requirement, you’ll
+obtain ’numeric(0)” in the console.</p>
+<p>anticancer_substances[anticancer_substances &lt; 20 &amp;
+anticancer_substances &gt; 56]</p>
+<p>#6.5 List only measurement that fit the delimiters of “less than 39”
+and “less than 56</p>
+<pre class="r"><code>anticancer_substances[anticancer_substances &lt; 39 &amp; anticancer_substances &lt; 56]</code></pre>
+<pre><code>## [1] 20</code></pre>
+<p>#6.6 Round the % to the full digits ```{r]}
+signif(anticancer_substances, 1)</p>
+<p>#Notice that in the Environment Tab the data set wasn’t changed!</p>
+<pre><code>
+
+#6.7 If you wanted to round the % and save it as a new list:
+
+```r
+anticancer_substances_fulldigits &lt;-  signif(anticancer_substances, 1) </code></pre>
+</div>
+<div id="example-7" class="section level3">
+<h3>Example 7</h3>
+<pre class="r"><code>#pH was measured for several solutions.
+#pH=7 was attributed to 0
+#pH&lt;7 was flagged as 1:7, meaning pH=8 is 1, pH=10 is 3
+#pH&gt;7 was flagged as (-1):(-7) meaning pH=6 is -1 pH=3 is -4</code></pre>
+<p>#7.1 Create a list ‘pH_data’ containing the data as follows:</p>
+<pre class="r"><code>#pH of sea water = 8
+#pH of soap = 10
+#pH of Ca(OH)2 solution = 12
+#pH of coffee = 5
+#pH of beer = 4
+#pH of wine = 4
+#pH of baking soda solution = 9
+#pH of blood = 8</code></pre>
+<p>#Answer:</p>
+<pre class="r"><code>pH_data &lt;- c(1, 3, 5, -2, -3, -3, 2, 1)</code></pre>
+<p>#7.2 Prove (check by a command) whether our measurement data is
+numeric or character-based</p>
+<pre class="r"><code>class(pH_data)</code></pre>
+<pre><code>## [1] &quot;numeric&quot;</code></pre>
+<pre class="r"><code>#or eventually
+
+str(pH_data)</code></pre>
+<pre><code>##  num [1:8] 1 3 5 -2 -3 -3 2 1</code></pre>
+<p>#7.3 Without counting yourself, how can you measure how many
+measurements were taken?</p>
+<pre class="r"><code>length(pH_data)</code></pre>
+<pre><code>## [1] 8</code></pre>
+<p>#7.4 Additional measurement was taken (pH=6). Add it to the end of
+the pH_data.</p>
+<pre class="r"><code>pH_data &lt;- c(pH_data, -1)</code></pre>
+<p>#7.5 Call out the 3rd measurment from ‘pH_data’. What is its pH?</p>
+<pre class="r"><code>students[c(2)]</code></pre>
+<pre><code>## [1] &quot;Martin&quot;</code></pre>
+<p>#7.6 List out only the data for basic (not acidic) substances</p>
+<pre class="r"><code>pH_data[pH_data &gt; 0]</code></pre>
+<pre><code>## [1] 1 3 5 2 1</code></pre>
+<p>#7.7 Are there any the basic substances with pH=11 or more? call out
+with a function.</p>
+<pre class="r"><code>pH_data &gt;=4 #3rd argument meets the requirement</code></pre>
+<pre><code>## [1] FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE</code></pre>
+<p>#7.8 Do any data differs from pH=7 of more than 4 pH points?</p>
+<pre class="r"><code>abs(pH_data &gt;=4) #0 no 1 yes</code></pre>
+<pre><code>## [1] 0 0 1 0 0 0 0 0 0</code></pre>
+<p>#7.8 Do any data meet the requirement of pH=4?</p>
+<pre class="r"><code>pH_data == -3 # double &#39;=&#39; means &#39;exactly&#39;</code></pre>
+<pre><code>## [1] FALSE FALSE FALSE FALSE  TRUE  TRUE FALSE FALSE FALSE</code></pre>
+<pre class="r"><code># so that statement means &quot;show values from &#39;pH_data&#39; which have the value of -3.</code></pre>
+</div>
+<div id="missing-data" class="section level3">
+<h3>Missing data</h3>
+<pre class="r"><code>#A great aspect of R is that differently than many other languages
+#it accepts the occurrence of missing data
+#this is very important in the concept of meta-analysis and QSAR!
+#Because many times, when we gather data from publications, 
+#They do not give the same types of data
+#Hence we may find a publication with enzymatic activity data
+#But not cytotoxicity data</code></pre>
+<p>#Example 8 Missing data #Consider that a group of students performed
+a chemical synthesis during classes #Although 6 students attend this
+class, only 5 of them finished the synthesis #during classes. #The yield
+% results were put into a variable:</p>
+<pre class="r"><code>synthesis_yield &lt;- c(70, 80, 65, NA, 73, 79)</code></pre>
+<p>#Definition of NA</p>
+<pre class="r"><code>?NA
+
+#simply, it is &quot;Data Not Available&#39; Sign</code></pre>
+<p>#We can ignore that NA value for calculations, by telling the
+computer to do so #with an argument ’ na.rm = TRUE ’</p>
+<pre class="r"><code>mean(synthesis_yield) # BAD : this will print &#39;NA&#39; in the console</code></pre>
+<pre><code>## [1] NA</code></pre>
+<pre class="r"><code>mean(synthesis_yield, na.rm = NA) # GOOD</code></pre>
+<pre><code>## [1] NA</code></pre>
+<p>#If we want to extract elements which are NOT missing values (not
+NA):</p>
+<pre class="r"><code>synthesis_yield[!is.na(synthesis_yield)]</code></pre>
+<pre><code>## [1] 70 80 65 73 79</code></pre>
+<p>#This function can be useful when we deal with lists of data where a
+char value is attributed to a given numeric and we want to create a
+loop, where if a value is not a number but a char - it should be encoded
+into a number attributed to it in the list.</p>
+<p>#What I mean by that is[do not run this!]: #
+if(is.na(as.numeric(x))){ # and then do something I write here # } ##so
+by ‘is.na(as.numeric(x))’ we mean that as.numeric checks whether a given
+char has an attributed num or not and if so, we then call a function
+‘is.na’ to check whether we have that number for said char value or
+not.</p>
+<p>#and if we want to extract ONLY the missing values, to see how many
+of them we have:</p>
+<pre class="r"><code>synthesis_yield[is.na(synthesis_yield)]</code></pre>
+<pre><code>## [1] NA</code></pre>
+<p>#Again, counting all records, so here, the number of students:</p>
+<pre class="r"><code>length(synthesis_yield)</code></pre>
+<pre><code>## [1] 6</code></pre>
+<p>#But if we wanted to exclude NA (missing values) we can use ‘is.na’
+again!</p>
+<pre class="r"><code>length(synthesis_yield[!is.na(synthesis_yield)])</code></pre>
+<pre><code>## [1] 5</code></pre>
+<p>#in the same manner we can count how many NA we have in the list</p>
+<pre class="r"><code>length(synthesis_yield[is.na(synthesis_yield)])</code></pre>
+<pre><code>## [1] 1</code></pre>
+<p>#We can also use ‘na.omit’ to ommit/not count the NAs or
+‘complete.cases’</p>
+<pre class="r"><code>length(synthesis_yield[na.omit(synthesis_yield)])</code></pre>
+<pre><code>## [1] 5</code></pre>
+<pre class="r"><code>length(synthesis_yield[complete.cases(synthesis_yield)])</code></pre>
+<pre><code>## [1] 5</code></pre>
+</div>
+</div>
+<div id="how-many-students-obtained-more-than-75-yield"
+class="section level1">
+<h1>How many students obtained more than 75% yield?</h1>
+<pre class="r"><code>synthesis_no_na &lt;- synthesis_yield[!is.na(synthesis_yield)]
+synthesis_75 &lt;- synthesis_no_na[synthesis_no_na&gt;75]
+length(synthesis_75)</code></pre>
+<pre><code>## [1] 2</code></pre>
+<div id="matrices-and-creating-tables-and-data-frames"
+class="section level3">
+<h3>Matrices and creating tables and data frames</h3>
+<p>#Example 9</p>
+<p>#To convert a vector into a matrix we can use a ‘dim()’ function.
+This also means we obtain a table of data represented in a given
+variable. Let’s again consider the set from example 7:</p>
+<pre class="r"><code>pH_data &lt;- c(1, 3, 5, -2, -3, -3, 2, 1)</code></pre>
+<p>#Let’s convert it into a table/matrix!</p>
+<pre class="r"><code>dim(pH_data) &lt;-c(8,1)</code></pre>
+<p>#Double-click on the name of the variable in the Environment Tab.
+Look at the created table. It has 1 column and 8 rows, for 8 records. As
+we know the data in our set are being the same descriptor, hence they
+shall create 1 column only, But in case you needed the opposite - just
+reverse the numbers in parenthesis.</p>
+<p>#Now we should state which data belongs to which tested probe! Hence
+we should create a new variable which will be the list of substances for
+which the pH was measured:</p>
+<pre class="r"><code>pH_names &lt;- c(&quot;sea water&quot;, &quot;soap&quot;, &quot;Ca(OH)2&quot;, &quot;coffee&quot;, &quot;beer&quot;, &quot;wine&quot;, &quot;baking soda&quot;, &quot;blood&quot;)</code></pre>
+<p>#Now after we set said variable, let’s bind it to our previously
+created table! #First we use dim function to transfer ‘pH_names’ into a
+function, same as we did with the pH_data.</p>
+<pre class="r"><code>dim(pH_names) &lt;- c(8,1)</code></pre>
+<p>#Now we bind it together into a new variable we call ‘pH_table’:</p>
+<pre class="r"><code>pH_table &lt;- cbind(pH_names, pH_data)</code></pre>
+<p>#‘cbind’ works for binding COLUMNS #to bind ROWS use ‘rbind’ in the
+same manner</p>
+<p>#To see the table you created by combining 2 columns, simply look it
+up at the Environment Tab and click on its name and the file will open
+in the code editor tab.</p>
+<p>#If you however want to see it in the console, you need to transform
+it into a data frame with a function:</p>
+<pre class="r"><code>data.frame(pH_table)</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["X1"],"name":[1],"type":["chr"],"align":["left"]},{"label":["X2"],"name":[2],"type":["chr"],"align":["left"]}],"data":[{"1":"sea water","2":"1"},{"1":"soap","2":"3"},{"1":"Ca(OH)2","2":"5"},{"1":"coffee","2":"-2"},{"1":"beer","2":"-3"},{"1":"wine","2":"-3"},{"1":"baking soda","2":"2"},{"1":"blood","2":"1"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<pre class="r"><code>#Now if you execute &#39;data.frame()&#39; you will see the created data frame in the console. Let&#39;s save it as a new variable
+
+pH_frame &lt;- data.frame(pH_table)</code></pre>
+<p>#Look at the Environment Tab. You can see that the new variable has
+been added and there is a small arrow pointing dow, on the left. If you
+click on it, you’ll see how many variables and 8 data points, you also
+have the names of columns (now X1 and X2) which are in that data frame,
+as well as first arguments.</p>
+<p>#We do however not want the names of the columns to be X1 and X2!
+Let’s go with something more descriptive!</p>
+<pre class="r"><code>names(pH_frame) &lt;- c(&quot;Substances&quot;, &quot;converted pH&quot;)</code></pre>
+<p>#Notice the names had to be done in “” ! #If instead of columns we
+wanted to name rows:</p>
+<pre class="r"><code>row.names(pH_frame) &lt;- c(&quot;Substance 1&quot;, &quot;Substance 2&quot;,&quot;Substance 3&quot;,&quot;Substance 4&quot;,&quot;Substance 5&quot;,&quot;Substance 6&quot;,&quot;Substance 7&quot;,&quot;Substance 8&quot;)</code></pre>
+<p>#Notice that the number of row names has to be equal to the total
+number of rows. Same goes with the columns.</p>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
